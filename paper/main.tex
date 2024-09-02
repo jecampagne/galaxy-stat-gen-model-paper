@@ -77,7 +77,7 @@
 
 
 
-\title{Denoising: from classical methods to Deep CNNs}
+\title{Galaxy image statistical generator: how to be confident?}
 \author{Jean-Eric Campagne}
 \address{Université Paris-Saclay, CNRS/IN2P3, IJCLab, 91405 Orsay, France
 }
@@ -99,13 +99,20 @@ blabla
 
 \section{Introduction}
 \label{sec:Intro}
+Image generation in Machine Learning is a challenging task that has made a dramatic rise in quality recently thanks to the large scale statistical model architectures as for instance \texttt{DALL-E 2} \citep{ramesh2022}, \texttt{Midjourney} \citep{Oppenlaender2022} and \texttt{StableDiffusion} \citep{Rombach2022} which use \textit{stochastic diffusion processes}. Such models have replaced the previous generation based on \textit{variational adversarial encoder} (aka VAE and GAN) as in \citep{KarrasALL18} or \textit{normalizing flows} such as in \texttt{Glow} \citep{Kingma2018}. Such models are generally trained using high resolution RGB images as \texttt{CelebA} dataset \citep{Liu2015} and \texttt{LSUN} bedroom dataset \citep{Yu2015}. 
 
-\begin{figure}
-\centering
-\includegraphics[width=0.4\columnwidth]{filtreDb4.png}
-\caption{Coverage of the Fourier domain without gap by a low-pass filter and a collection of band-pass filters.}
-\label{fig-Daubechies-db4}
-\end{figure}
+
+The ability of such models have been rapidly adopted in many Physics domains. Concerning 
+Astrophysics the generative models are used to create galaxy images of complex morphologies going beyond parametrized analytic light profile simulations (eg. \texttt{GALSIM} by \cite{ROWE2015121}). Along this line \cite{Lanusse2021} explore the use of generative models for instance to augment a galaxy image datasets \citep{ Fussell2019}, to improve deblending task \citep{Hemmati_2022,Arcelin2020}, or beeing used in a  Bayesian hierarchical pipeline providing a physical model for the point spread function and noise properties of individual observation and propose an hybrid VAE-Normalizing Flow architecture. Such generator can aid in cosmology the calibration of shape measurements for weak lensing in the context of large galaxy survey.
+
+
+
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.4\columnwidth]{filtreDb4.png}
+%\caption{Coverage of the Fourier domain without gap by a low-pass filter and a collection of band-pass filters.}
+%\label{fig-Daubechies-db4}
+%\end{figure}
 
 
 \section{Summary}
