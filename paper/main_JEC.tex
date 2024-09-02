@@ -1,0 +1,127 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsaddr}
+\usepackage{mathtools}
+\usepackage{aas_macros} % macro pour Bibtex
+\usepackage{hyperref}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsthm}
+\usepackage{amsmath}
+% \usepackage{makecell}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{pifont}
+\usepackage{natbib,fancyhdr} %new
+%\usepackage{mathtools} % psmallmatrix
+
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+\setlength{\heavyrulewidth}{3\lightrulewidth}
+\setlength{\abovetopsep}{1ex}
+
+\usepackage[top=3cm, bottom=2cm, left=3cm, right=2cm]{geometry} %margins
+
+% \usepackage{geometry}
+%  \geometry{
+%  a4paper,
+%  left=25mm,
+%  }
+
+\newcommand{\jessa}[1]{{\color{red} #1}}
+\newcommand{\field}[1]{\mathbf{#1}}
+\newcommand{\nn}{\nonumber}
+
+
+% My definitions:
+\def\U{\mathcal U}
+\def\LL{\mathcal L}
+\def\P{\mathcal P}
+\def\D{\mathcal D}
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% My packages:
+\usepackage{algorithmic}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{xcolor}
+\usepackage{multicol} 
+\usepackage{enumitem}
+\newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{blue}{#1}}
+\SetCommentSty{mycommfont}
+\newcommand{\bl}[1]{{\color{blue} #1}}
+\newcommand{\rd}[1]{{\color{red} #1}}
+
+
+% Alternative Assumption!
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{definition}{Definition}
+
+% New environment
+\newenvironment{assumptionp}[1]{
+  \renewcommand\theassumptionalt{#1}
+  \assumptionalt
+}{\endassumptionalt}
+
+\graphicspath{{./figures}}
+\usepackage[margin=1cm]{caption}
+
+
+
+\title{Denoising: from classical methods to Deep CNNs}
+\author{Jean-Eric Campagne}
+\address{Université Paris-Saclay, CNRS/IN2P3, IJCLab, 91405 Orsay, France
+}
+\email{jean-eric.campagne@ijclab.in2p3.fr}
+\date{\today}
+
+\begin{document}
+\maketitle
+%\renewcommand{\baselinestretch}{0.75}\normalsize
+%\tableofcontents
+%\renewcommand{\baselinestretch}{1.0}\normalsize
+%
+\begin{abstract}
+blabla
+\\
+\smallskip
+\noindent \textbf{Keywords.} diffusion models, U-Net
+\end{abstract}
+
+\section{Introduction}
+\label{sec:Intro}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.4\columnwidth]{filtreDb4.png}
+\caption{Coverage of the Fourier domain without gap by a low-pass filter and a collection of band-pass filters.}
+\label{fig-Daubechies-db4}
+\end{figure}
+
+
+\section{Summary}
+
+
+\section*{Acknowledgements}
+
+\section*{Codes}
+
+
+%%%%%%%%%%
+\addcontentsline{toc}{section}{References}
+% Put your bibiliography file here
+%\section{Bibliography}
+\bibliographystyle{elsarticle-harv} %aa
+\bibliography{refs.bib}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
