@@ -14,6 +14,7 @@
 \usepackage{booktabs}
 \usepackage{pifont}
 \usepackage{natbib,fancyhdr} %new
+
 %\usepackage{mathtools} % psmallmatrix
 
 \newcommand{\cmark}{\ding{51}}%
@@ -99,12 +100,17 @@ blabla
 
 \section{Introduction}
 \label{sec:Intro}
-Image generation in Machine Learning is a challenging task that has made a dramatic rise in quality recently thanks to the large scale statistical model architectures as for instance \texttt{DALL-E 2} \citep{ramesh2022}, \texttt{Midjourney} \citep{Oppenlaender2022} and \texttt{StableDiffusion} \citep{Rombach2022} which use \textit{stochastic diffusion processes}. Such models have replaced the previous generation based on \textit{variational adversarial encoder} (aka VAE and GAN) as in \citep{KarrasALL18} or \textit{normalizing flows} such as in \texttt{Glow} \citep{Kingma2018}. Such models are generally trained using high resolution RGB images as \texttt{CelebA} dataset \citep{Liu2015} and \texttt{LSUN} bedroom dataset \citep{Yu2015}. 
+Image generation in Machine Learning is a challenging task that has made a dramatic rise in quality recently thanks to the large scale statistical model architectures as for instance \texttt{DALL-E 2} \citep{ramesh2022}, \texttt{Midjourney} \citep{Oppenlaender2022} and \texttt{StableDiffusion} \citep{Rombach2022} which use \textit{stochastic diffusion processes}. Such models have replaced the previous generation based on \textit{variational auto encoder} (aka VAE) \citep{Kingma2014} and  \textit{adversarial networks} (aka GAN) \citep{goodfellow2014generative} as in \citep{KarrasALL18}, or \textit{normalizing flows} (hereafter nicknamed NF) such as in \texttt{Glow} \citep{Kingma2018}. 
 
 
-The ability of such models have been rapidly adopted in many Physics domains. Concerning 
-Astrophysics the generative models are used to create galaxy images of complex morphologies going beyond parametrized analytic light profile simulations (eg. \texttt{GALSIM} by \cite{ROWE2015121}). Along this line \cite{Lanusse2021} explore the use of generative models for instance to augment a galaxy image datasets \citep{ Fussell2019}, to improve deblending task \citep{Hemmati_2022,Arcelin2020}, or beeing used in a  Bayesian hierarchical pipeline providing a physical model for the point spread function and noise properties of individual observation and propose an hybrid VAE-Normalizing Flow architecture. Such generator can aid in cosmology the calibration of shape measurements for weak lensing in the context of large galaxy survey.
+The ability of generative models have been rapidly adopted in many domains. For instance, in High Energy Physics the reader may be interested by the review \cite{PhysRevD.107.076017}. Concerning Astrophysics and Cosmology the generative models are used in different tasks (eg. deblending \citep{Hemmati_2022,Arcelin2020} {\color{red} à compléter}) and especially to create synthetic galaxy images of complex morphologies going beyond parametrized analytic light profile simulations (eg. \texttt{GalSim} by \cite{ROWE2015121}). Along this line \citep{ravanbakhsh2016,Fussell2019} use GAN models, \cite{Lanusse2021} propose an hybrid VAE-Normalizing Flow architecture and \cite{smith2021} use a denoising stochastic diffusion model (hereafter nicknamed DSDM). 
 
+Despite the impressive image quality of these generative models that are nowadays well diffused in the general public, many questions arise from mathematical and usage point of views. Notably, one may ask for what is really learned by the generative models and what are the statistical properties of the generated samples. In a general manner \cite{Hataya2023} ask if the image generated can corrupt the future datasets. However, the study is devoted  to the large scale statistical models mentioned above that are trained usually with billion-scale data extracted from the Internet, and so in turn can be contaminated by the images shared by many users. Concerning galaxy image generation the datasets are much more modest for the time being (i.e $O(10^5)$) collected from optical surveys (eg. COSMOS HST Advanced Camera for Surveys, \cite{mandelbaum_2019_3242143},  Sloan Digital Sky Survey \citep[SDSS;][]{sdss} Data Release 7 \citep{sdssdr7}) and used by a rather small community compared to social network followers which certainly  limits the datasets corruption. So, besides image corruption, \cite{HACKSTEIN2023100685,janulewicz2024assessing} have investigated different metrics to address the question of fidelity of the generated galaxy images and morphological properties compared to the original dataset.
+
+\cite{kadkhodaie2024generalization} address more mathematically oriented questions and demonstrate the passage between memorization to generalization of  diffusion generative models when the dataset size increases. The authors uses \textit{denoiser} architectures as \texttt{UNet} \citep{2015arXiv150504597R} and \textt{BF-CNN} networks \citep{Mohan2020Robust} trained \texttt{CelebA} \citep{Liu2015} and \texttt{LSUN} bedroom  \citep{Yu2015} reduced datasets of $O(10^5)$ images resized to $80\times 80$ pixels (grayscale). The method and image dataset characteristics are the starting point to investigate how the \texttt{Glow} normalizing flow based model compare to denoiser based diffusion model. 
+
+
+In the following sections, first we briefly describe the different kind of generative models and we show the outcome of the conducted numerical experiment before drawing some guide lines. 
 
 
 %\begin{figure}
@@ -127,7 +133,7 @@ Astrophysics the generative models are used to create galaxy images of complex m
 \addcontentsline{toc}{section}{References}
 % Put your bibiliography file here
 %\section{Bibliography}
-\bibliographystyle{elsarticle-harv} %aa
+\bibliographystyle{elsarticle-harv}%{aa}
 \bibliography{refs.bib}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
