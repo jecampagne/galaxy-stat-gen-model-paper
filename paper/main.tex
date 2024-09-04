@@ -24,8 +24,8 @@
 \setlength{\heavyrulewidth}{3\lightrulewidth}
 \setlength{\abovetopsep}{1ex}
 
-\newcommand{\Ex}[0]{\ensuremath{\mathbb{E}}}
-\newcommand{\Dist}[0]{\ensuremath{\mathbb{D}_{\mathsf{KL}}}}
+\newcommand{\Esp}[0]{\ensuremath{\mathbb{E}}}
+\newcommand{\DKL}[0]{\ensuremath{\mathbb{D}_{\mathsf{KL}}}}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -122,7 +122,33 @@ In the following sections, first we briefly describe the different kind of gener
 %
 \section{Generative Models}
 %
-The generative models assume that the observations $\bm{x}$ are described by a probability distribution $\bm{p(x)}$ and aim to give a certain representation and leads to different strategies.
+The generative models assume that the observations $\bm{x}$ are described by a probability distribution $p(\bm{x})$ (\textit{pdf}) and aim to give a representation and leads to different strategies.
+%
+\subsection{Variational Auto-Encoder}
+%
+Using \texttt{VAE} means that it is assumed that there exists an underlying unobservable stochastic variable $\bm{z}$  (\textit{latent variable}) whose \textit{a priori} known $\pi(\bm{z})$ \textit{pdf} such that $p(\bm{x}) = p(\bm{x}|\bm{z})\pi(\bm{z})$. Although, the likelihood  $p(\bm{x}|\bm{z})$ is unknown and one introduces a parametrized version $p_{\bm{\theta}}(\bm{x}|\bm{z})$ and the parameters $\bm{\theta}$ might be adjusted in such a way that  $p_{\bm{\theta}}(x)$ matches the empirical distribution of the $n$ data samples ($\{\bm{x}^{i}\}_{i\leq n}$). The best solution $\bm{\theta}_{ML}$ is the maximum of $p_{\bm{\theta}}(x)$ but in practice this leads to  intractable problem (analytical or numerical) as one should evaluate the gradient with respect to $\bm{\theta}$ of the integral 
+$\int\ p_{\bm{\theta}}(\bm{x}|\bm{z})\pi(\bm{z}) dz$. To overcome such problem, one uses first the Bayes relation
+\begin{equation}
+p_{\bm{\theta}}(x) p(\bm{z}|\bm{x}) = p_{\bm{\theta}}(\bm{x}|\bm{z}) \pi(\bm{z})
+\end{equation}
+and second a parametrized version of the unknown true \textit{a posteriori} distribution as $p_{\bm{\phi}}(\bm{z}|\bm{x})$. If one introduces the Kullback-Leibler divergence $\DKL(p\| q)=\Esp_{x\sim p}[\log(p(x)/q(x))]$, then taking the expected value according to $\bm{z}\sim p_{\bm{\phi}}(\bm{z}|\bm{x})$ of the both sides of the following expression
+\begin{align}
+\log p(\bm{x}) = \log p_{\bm{\theta},\bm{\phi}}(x) &= \log p_{\bm{\theta}}(\bm{x}|\bm{z}) + \log \pi(\bm{z}) - \log p(\bm{z}|\bm{x}) + \log p_{\bm{\phi}}(\bm{z}|\bm{x}) - \log p_{\bm{\phi}}(\bm{z}|\bm{x})
+\end{align}
+yields 
+\begin{align}
+\log p(\bm{x})  &= \Esp_{z\sim p_{\bm{\phi}}}[\log p_{\bm{\theta}}(\bm{x}|\bm{z})] - \DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| \pi(\bm{z})) + \DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| p(\bm{z}|\bm{x}))
+&\geq \matcal{L}(\bm{x};\{\bm{\theta},\bm{\phi}\})
+\end{align}
+where we have emphasize the \textit{evidence lower bound} (aka ELBO)
+\begin{equation}
+\matcal{L}(\bm{x};\{\bm{\theta},\bm{\phi}\}) = \Esp_{z\sim p_{\bm{\phi}}}[\log p_{\bm{\theta}}(\bm{x}|\bm{z})] - \DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| \pi(\bm{z}))
+\end{equation}
+and use the positiveness property of the $\DKL$ divergence. Maximizing with respect to 
+$\{\bm{\theta},\bm{\phi}\}$ the ELBO is now tractable as it is free of the unknown distributions $p(\bm{x})$ and $p(\bm{z}|\bm{x})$.
+
+It is usual to call $p_{\bm{\theta}}(\bm{x}|\bm{z})$ the \textit{decoder} part of the whole model while $p_{\bm{\phi}}(\bm{z}|\bm{x})$ is the \textit{encoder} part. Once the optimization is done, then decoder is used as a $\bm{x}$ sample generator when it is fed with $\bm{z}$ samples according to $\bm{z}\sim\pi(\bm{z})$.
+
 
 
 %
