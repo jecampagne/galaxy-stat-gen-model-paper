@@ -14,6 +14,7 @@
 \usepackage{booktabs}
 \usepackage{pifont}
 \usepackage{natbib,fancyhdr} %new
+\usepackage{bm}
 
 %\usepackage{mathtools} % psmallmatrix
 
@@ -22,6 +23,13 @@
 
 \setlength{\heavyrulewidth}{3\lightrulewidth}
 \setlength{\abovetopsep}{1ex}
+
+\newcommand{\Ex}[0]{\ensuremath{\mathbb{E}}}
+\newcommand{\Dist}[0]{\ensuremath{\mathbb{D}_{\mathsf{KL}}}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
 
 \usepackage[top=3cm, bottom=2cm, left=3cm, right=2cm]{geometry} %margins
 
@@ -113,6 +121,10 @@ Despite the impressive image quality of these generative models that are nowaday
 In the following sections, first we briefly describe the different kind of generative models and we show the outcome of the conducted numerical experiment before drawing some guide lines. Appendix gives more details on the dataset used.
 %
 \section{Generative Models}
+%
+The generative models assume that the observations $\bm{x}$ are described by a probability distribution $\bm{p(x)}$ and aim to give a certain representation and leads to different strategies.
+
+
 %
 \section{Experiment}
 
