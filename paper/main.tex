@@ -92,6 +92,7 @@
 }
 \email{jean-eric.campagne@ijclab.in2p3.fr}
 \date{\today}
+\calclayout  % switch off left right margin different even/odd pages.
 
 \begin{document}
 \maketitle
@@ -108,10 +109,10 @@ blabla
 
 \section{Introduction}
 \label{sec:Intro}
-Image generation in Machine Learning is a challenging task that has made a dramatic rise in quality recently thanks to the large scale statistical model architectures as for instance \texttt{DALL-E 2} \citep{ramesh2022}, \texttt{Midjourney} \citep{Oppenlaender2022} and \texttt{StableDiffusion} \citep{Rombach2022} which use \textit{stochastic diffusion processes}. Such models have replaced the previous generation based on \textit{variational auto encoder} (aka VAE) \citep{Kingma2014} and  \textit{adversarial networks} (aka GAN) \citep{goodfellow2014generative} as in \citep{KarrasALL18}, or \textit{normalizing flows} (hereafter nicknamed NF) such as in \texttt{Glow} \citep{Kingma2018}. 
+Image generation in Machine Learning (ML) is a challenging task that has made a dramatic rise in quality recently thanks to the large scale statistical model architectures as for instance \texttt{DALL-E 2} \citep{ramesh2022}, \texttt{Midjourney} \citep{Oppenlaender2022} and \texttt{StableDiffusion} \citep{Rombach2022} which use \textit{stochastic diffusion processes}. Such models have replaced the previous generation based on \textit{variational auto encoder} (aka VAE) \citep{Kingma2014} and  \textit{adversarial networks} (aka GAN) \citep{goodfellow2014generative} as in \citep{KarrasALL18,brock2018large}, or \textit{normalizing flows} (hereafter nicknamed NF) such as in \texttt{Glow} \citep{DinhKB14, DinhSB17, Kingma2018}. 
 
 
-The ability of generative models have been rapidly adopted in many domains. For instance, in High Energy Physics the reader may be interested by the review \cite{PhysRevD.107.076017}. Concerning Astrophysics and Cosmology the generative models are used in different tasks (eg. deblending \citep{Hemmati_2022,Arcelin2020} {\color{red} à compléter}) and especially to create synthetic galaxy images of complex morphologies going beyond parametrized analytic light profile simulations (eg. \texttt{GalSim} by \cite{ROWE2015121}). Along this line \citep{ravanbakhsh2016,Fussell2019} use GAN models, \cite{Lanusse2021} propose an hybrid VAE-Normalizing Flow architecture and \cite{smith2021} use a denoising stochastic diffusion model (hereafter nicknamed DSDM). 
+The ability of generative models have been rapidly adopted in many domains. For instance, in High Energy Physics the reader may be interested by the review \cite{PhysRevD.107.076017}. Concerning Astrophysics and Cosmology the generative models are used in different tasks (e.g. deblending \citep{Hemmati_2022,Arcelin2020} {\color{red} à compléter}) and especially to create synthetic galaxy images of complex morphologies going beyond parametrized analytic light profile simulations (eg. \texttt{GalSim} by \cite{ROWE2015121}). Along this line \citep{ravanbakhsh2016,Fussell2019} use GAN models, \cite{Lanusse2021} propose an hybrid VAE-Normalizing Flow architecture and \cite{smith2021} use a denoising stochastic diffusion model (hereafter nicknamed DSDM). 
 
 Despite the impressive image quality of these generative models that are nowadays well diffused in the general public, many questions arise from mathematical and usage point of views. Notably, one may ask for what is really learned by the generative models and what are the statistical properties of the generated samples. In a general manner \cite{Hataya2023} ask if the image generated can corrupt the future datasets. However, the study is devoted  to the large scale statistical models mentioned above that are trained usually with billion-scale data extracted from the Internet, and so in turn can be contaminated by the images shared by many users. Concerning galaxy image generation the datasets are much more modest for the time being (i.e $O(10^5)$) collected from optical surveys (eg. COSMOS HST Advanced Camera for Surveys, \cite{mandelbaum_2019_3242143},  Sloan Digital Sky Survey \citep[SDSS;][]{sdss} Data Release 7 \citep{sdssdr7}) and used by a rather small community compared to social network followers which certainly  limits the datasets corruption. So, besides image corruption, \cite{HACKSTEIN2023100685,janulewicz2024assessing} have investigated different metrics to address the question of fidelity of the generated galaxy images and morphological properties compared to the original dataset.
 
@@ -122,11 +123,11 @@ In the following sections, first we briefly describe the different kind of gener
 %
 \section{Generative Models}
 %
-The generative models assume that the observations $\bm{x}$ are described by a probability distribution $p(\bm{x})$ (\textit{pdf}) and aim to give a representation and leads to different strategies.
+The generative models assume that the observations $\bm{x}$ are described by a probability distribution $p(\bm{x})$ (\textit{pdf}) and aim to give a representation of such distribution.  It is not the intention to describe in high details the different  strategies and their implementations but rather to give some guide lines.
 %
 \subsection{Variational Auto-Encoder}
 %
-Using \texttt{VAE} means that it is assumed that there exists an underlying unobservable stochastic variable $\bm{z}$  (\textit{latent variable}) whose \textit{a priori} known $\pi(\bm{z})$ \textit{pdf} such that $p(\bm{x}) = p(\bm{x}|\bm{z})\pi(\bm{z})$. Although, the likelihood  $p(\bm{x}|\bm{z})$ is unknown and one introduces a parametrized version $p_{\bm{\theta}}(\bm{x}|\bm{z})$ and the parameters $\bm{\theta}$ might be adjusted in such a way that  $p_{\bm{\theta}}(x)$ matches the empirical distribution of the $n$ data samples ($\{\bm{x}^{i}\}_{i\leq n}$). The best solution $\bm{\theta}_{ML}$ is the maximum of $p_{\bm{\theta}}(x)$ but in practice this leads to  intractable problem (analytical or numerical) as one should evaluate the gradient with respect to $\bm{\theta}$ of the integral 
+Using \texttt{VAE} \citep{Kingma2014} means that it is assumed that there exists an underlying unobservable stochastic variable $\bm{z}$  (aka \textit{latent variable}) whose\textit{pdf} is chosen \textit{a priori}  such  a Gaussian distribution $\pi(\bm{z})=\mathcal{N}(\bm{z},\bm{0},\bm{1})$). In general the latent space has a much lower dimensionality than the data space which imply a information compression. Then, it yields $p(\bm{x}) = p(\bm{x}|\bm{z})\pi(\bm{z})$. However, the likelihood  $p(\bm{x}|\bm{z})$ is unknown and one introduces a parametrized version $p_{\bm{\theta}}(\bm{x}|\bm{z})$ where the parameters $\bm{\theta}$ might be adjusted in such a way that  $p_{\bm{\theta}}(x)$ matches the empirical distribution of the $n$ data samples ($\{\bm{x}^{i}\}_{i\leq n}$). The best solution $\bm{\theta}_{ML}$ is the maximum of $p_{\bm{\theta}}(x)$ but in practice this leads to  intractable problem (either analytical or numerical) as one should evaluate the gradient with respect to $\bm{\theta}$ of the integral 
 $\int\ p_{\bm{\theta}}(\bm{x}|\bm{z})\pi(\bm{z}) dz$. To overcome such problem, one uses first the Bayes relation
 \begin{equation}
 p_{\bm{\theta}}(x) p(\bm{z}|\bm{x}) = p_{\bm{\theta}}(\bm{x}|\bm{z}) \pi(\bm{z})
@@ -138,17 +139,35 @@ and second a parametrized version of the unknown true \textit{a posteriori} dist
 yields 
 \begin{align}
 \log p(\bm{x})  &= \Esp_{z\sim p_{\bm{\phi}}}[\log p_{\bm{\theta}}(\bm{x}|\bm{z})] - \DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| \pi(\bm{z})) + \DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| p(\bm{z}|\bm{x}))
-&\geq \matcal{L}(\bm{x};\{\bm{\theta},\bm{\phi}\})
+&\geq \mathcal{L}(\bm{x};\{\bm{\theta},\bm{\phi}\})
 \end{align}
-where we have emphasize the \textit{evidence lower bound} (aka ELBO)
+where we have emphasized the \textit{evidence lower bound} (aka ELBO)
 \begin{equation}
-\matcal{L}(\bm{x};\{\bm{\theta},\bm{\phi}\}) = \Esp_{z\sim p_{\bm{\phi}}}[\log p_{\bm{\theta}}(\bm{x}|\bm{z})] - \DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| \pi(\bm{z}))
+\mathcal{L}(\bm{x};\{\bm{\theta},\bm{\phi}\}) = \Esp_{z\sim p_{\bm{\phi}}}[\log p_{\bm{\theta}}(\bm{x}|\bm{z})] - \DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| \pi(\bm{z}))
 \end{equation}
 and use the positiveness property of the $\DKL$ divergence. Maximizing with respect to 
-$\{\bm{\theta},\bm{\phi}\}$ the ELBO is now tractable as it is free of the unknown distributions $p(\bm{x})$ and $p(\bm{z}|\bm{x})$.
+$\{\bm{\theta},\bm{\phi}\}$ the ELBO is now tractable as it is free of the unknown distributions $p(\bm{x})$ and $p(\bm{z}|\bm{x})$. However, the gradient with respect to $\phi$ may experience large variance, so \cite{Kingma2014} have introduced an auxiliary noise variable $\varepsilon$ such that $\bm{z}\sim p_{\bm{\phi}}(\bm{z}|\bm{x})$ is replaced by $\bm{z} = g_{\bm{\phi}}(\bm{\varepsilon},\bm{x})$ with $\bm{\varepsilon} \sim p(\bm{\varepsilon})$ and $g_{\bm{\phi}}(\bm{\varepsilon},\bm{x})$ a differentiable function with respected to $\phi$. 
 
-It is usual to call $p_{\bm{\theta}}(\bm{x}|\bm{z})$ the \textit{decoder} part of the whole model while $p_{\bm{\phi}}(\bm{z}|\bm{x})$ is the \textit{encoder} part. Once the optimization is done, then decoder is used as a $\bm{x}$ sample generator when it is fed with $\bm{z}$ samples according to $\bm{z}\sim\pi(\bm{z})$.
-
+It is usual to call $p_{\bm{\theta}}(\bm{x}|\bm{z})$ the \textit{decoder} part of the whole model while $p_{\bm{\phi}}(\bm{z}|\bm{x})$ is the \textit{encoder} part. Once the optimization is done, then the \textit{decoder} is used as a $\bm{x}$ generator by feeding with $\bm{z}$ samples obtained by sampling $p(\bm{\varepsilon})$ and using $g_{\bm{\phi}}(\bm{\varepsilon},\bm{x})$. It turns out that simple VAE tends to generate blurry images and may  suffer from the problem of posterior collapse which motivate active ML researches \citep[e.g.][]{engel2018latent,Takida2022} and modified VAE versions to overcome this issue as for instance in \cite{Lanusse2021}. 
+%
+\subsection{Generative Adversarial Networks}
+%
+The vanilla GAN \citep{goodfellow2014generative} shares with VAE the target to optimize a \textit{generator} network ($\bm{G}$) to get $\bm{x}$ samples from a latent variable $\bm{z}$ such that  $\bm{x} = \bm{G}(\bm{z})$ with $\bm{z}$ \textit{prior} \textit{pdf} $\pi(\bm{z})$ is for instance a Gaussian distribution $\mathcal{N}(\bm{z},\bm{0},\bm{1})$. To do so, a second network ($\bm{D}$) acts as a \textit{discriminator} which aims to state if a sample $\bm{x}$ is from the model distribution or the data distribution. To reach that goal one solves the \texttt{min-max} problem
+\begin{equation}
+\min_{\bm{G}} \max_{\bm{D}}\left\{ \Esp_{\bm{x}\sim p_{data}(\bm{x})}[\log \bm{D}(\bm{x})] + \Esp_{\bm{z}\sim \pi(\bm{z})}[\log(1-\bm{D}(\bm{G}(\bm{z})))] \right\}
+\end{equation} 
+where $p_{data}$ is the data generating distribution. Both the  $\bm{G}$ and $\bm{D}$ are parametrized networks. Notice that at parameter of $\bm{G}$ fixed, the optimal \textit{discriminator} $\bm{D}^\ast$ has the following expression
+\begin{equation}
+\bm{D}^\ast(\bm{x}) = \frac{p_{data}(\bm{x})}{p_{data}(\bm{x}) + p_{\bm{G}}(\bm{x})}
+\end{equation}
+with $p_{\bm{G}}(\bm{x}) = \pi(\bm{z})\|\det J_{\bm{G}} \|^{-1}$ using the Jacobian of the \textit{generator}, leading to a reformulation of the \texttt{min-max} problem as followed
+\begin{equation}
+\min_G \left\{ \DKL{\left( p_{data} \left\| \frac{p_{data} + p_{\bm{G}}}{2}\right. \right) }  + \DKL{\left(p_{\bm{G}} \left\| \frac{p_{data} + p_{\bm{G}}}{2} \right. \right)} \right\}
+\end{equation}
+leading to the optimal solution $p_{\bm{G}} = p_{data}$ yielding a perfect matching of the data distribution. 
+%
+\subsection{Normalizing Flow}
+%
 
 
 %
@@ -173,7 +192,7 @@ It is usual to call $p_{\bm{\theta}}(\bm{x}|\bm{z})$ the \textit{decoder} part o
 \addcontentsline{toc}{section}{References}
 % Put your bibiliography file here
 %\section{Bibliography}
-\bibliographystyle{elsarticle-harv}%{aa}
+\bibliographystyle{aa}%{elsarticle-harv}%%{mnras}
 \bibliography{refs.bib}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \appendix
