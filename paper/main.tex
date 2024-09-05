@@ -160,7 +160,7 @@ where $p_{data}$ is the data generating distribution. Both the  $\bm{G}$ and $\b
 \begin{equation}
 \bm{D}^\ast(\bm{x}) = \frac{p_{data}(\bm{x})}{p_{data}(\bm{x}) + p_{\bm{G}}(\bm{x})}
 \end{equation}
-with $p_{\bm{G}}(\bm{x}) = \pi(\bm{z})\|\det J_{\bm{G}} \|^{-1}$ using the Jacobian of the \textit{generator}, leading to a reformulation of the \texttt{min-max} problem as followed
+with $p_{\bm{G}}(\bm{x}) = \pi(\bm{z})|\det J_{\bm{G}} |^{-1}$ using the Jacobian of the \textit{generator}, leading to a reformulation of the \texttt{min-max} problem as followed
 \begin{equation}
 \min_G \left\{ \DKL{\left( p_{data} \left\| \frac{p_{data} + p_{\bm{G}}}{2}\right. \right) }  + \DKL{\left(p_{\bm{G}} \left\| \frac{p_{data} + p_{\bm{G}}}{2} \right. \right)} \right\}
 \end{equation}
