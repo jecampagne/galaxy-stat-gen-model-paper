@@ -11,10 +11,33 @@
 \usepackage{enumitem}
 \usepackage{color}
 \usepackage{subcaption}
+
+
+
 \usepackage{booktabs}
 \usepackage{pifont}
 \usepackage{natbib,fancyhdr} %new
 \usepackage{bm}
+
+%%%
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{automata}
+\usetikzlibrary{positioning}  %                 ...positioning nodes
+\usetikzlibrary{arrows}   
+\tikzset{stretch/.initial=1}    %                 ...customizing arrows
+\newcommand\drawloop[4][]%
+   {\draw[shorten <=0pt, shorten >=0pt,#1]
+      ($(#2)!\pgfkeysvalueof{/tikz/stretch}!(#2.#3)$)
+      let \p1=($(#2.center)!\pgfkeysvalueof{/tikz/stretch}!(#2.north)-(#2)$),
+          \n1= {veclen(\x1,\y1)*sin(0.5*(#4-#3))/sin(0.5*(180-#4+#3))}
+      in arc [start angle={#3-90}, end angle={#4+90}, radius=\n1]%
+   }
+\usepackage{tikz-cd}
+\usetikzlibrary{cd}
+%
+%%%
+
 
 %\usepackage{mathtools} % psmallmatrix
 
@@ -123,23 +146,24 @@ In the following sections, first we briefly describe the different kind of gener
 %
 \section{Generative Models}
 %
-The generative models assume that the observations $\bm{x}$ are described by a probability distribution $p(\bm{x})$ (\textit{pdf}) and aim to give a representation of such distribution.  It is not the intention to describe in high details the different  strategies and their implementations but rather to give some guide lines.
+The generative models assume that the observations $\bm{x}$ are described by a probability distribution $p(\bm{x})$ and aim to give a representation of such distribution.  It is also assumed that the data are i.i.d samples of $p(\bm{x})$.  In the following, it is not the intention to describe in high details the different  strategies and their implementations but rather {\color{red} to give some guide lines (à modifier)}.
 %
 \subsection{Variational Auto-Encoder}
 %
-Using \texttt{VAE} \citep{Kingma2014} means that it is assumed that there exists an underlying unobservable stochastic variable $\bm{z}$  (aka \textit{latent variable}) whose\textit{pdf} is chosen \textit{a priori}  such  a Gaussian distribution $\pi(\bm{z})=\mathcal{N}(\bm{z},\bm{0},\bm{1})$). In general the latent space has a much lower dimensionality than the data space which imply a information compression. Then, it yields $p(\bm{x}) = p(\bm{x}|\bm{z})\pi(\bm{z})$. However, the likelihood  $p(\bm{x}|\bm{z})$ is unknown and one introduces a parametrized version $p_{\bm{\theta}}(\bm{x}|\bm{z})$ where the parameters $\bm{\theta}$ might be adjusted in such a way that  $p_{\bm{\theta}}(x)$ matches the empirical distribution of the $n$ data samples ($\{\bm{x}^{i}\}_{i\leq n}$). The best solution $\bm{\theta}_{ML}$ is the maximum of $p_{\bm{\theta}}(x)$ but in practice this leads to  intractable problem (either analytical or numerical) as one should evaluate the gradient with respect to $\bm{\theta}$ of the integral 
+Using \texttt{VAE} \citep{Kingma2014} means that it is assumed that there exists an underlying unobservable stochastic variable $\bm{z}$  (aka \textit{latent variable}) whose distribution is chosen \textit{a priori}  such  a Gaussian distribution $\pi(\bm{z})=\mathcal{N}(\bm{z},\bm{0},\bm{1})$). In general the latent space has a much lower dimensionality than the data space which imply a information compression. Then, it yields $p(\bm{x}) = p(\bm{x}|\bm{z})\pi(\bm{z})$. However, the likelihood  $p(\bm{x}|\bm{z})$ is unknown and one introduces a parametrized version $p_{\bm{\theta}}(\bm{x}|\bm{z})$ where the parameters $\bm{\theta}$ might be adjusted in such a way that  $p_{\bm{\theta}}(x)$ matches the empirical distribution of the $N$ data samples ($\{\bm{x}^{i}\}_{i<N}$). The best solution $\bm{\theta}_{ML}$ is the maximum of $p_{\bm{\theta}}(x)$ but in practice this leads to  intractable problem (either analytical or numerical) as one should evaluate the gradient with respect to $\bm{\theta}$ of the integral 
 $\int\ p_{\bm{\theta}}(\bm{x}|\bm{z})\pi(\bm{z}) dz$. To overcome such problem, one uses first the Bayes relation
 \begin{equation}
 p_{\bm{\theta}}(x) p(\bm{z}|\bm{x}) = p_{\bm{\theta}}(\bm{x}|\bm{z}) \pi(\bm{z})
 \end{equation}
 and second a parametrized version of the unknown true \textit{a posteriori} distribution as $p_{\bm{\phi}}(\bm{z}|\bm{x})$. If one introduces the Kullback-Leibler divergence $\DKL(p\| q)=\Esp_{x\sim p}[\log(p(x)/q(x))]$, then taking the expected value according to $\bm{z}\sim p_{\bm{\phi}}(\bm{z}|\bm{x})$ of the both sides of the following expression
 \begin{align}
-\log p(\bm{x}) = \log p_{\bm{\theta},\bm{\phi}}(x) &= \log p_{\bm{\theta}}(\bm{x}|\bm{z}) + \log \pi(\bm{z}) - \log p(\bm{z}|\bm{x}) + \log p_{\bm{\phi}}(\bm{z}|\bm{x}) - \log p_{\bm{\phi}}(\bm{z}|\bm{x})
+\log p_{\bm{\theta}}(x) &= \log p_{\bm{\theta}}(\bm{x}|\bm{z}) + \log \pi(\bm{z}) - \log p(\bm{z}|\bm{x}) + \log p_{\bm{\phi}}(\bm{z}|\bm{x}) - \log p_{\bm{\phi}}(\bm{z}|\bm{x})
 \end{align}
 yields 
 \begin{align}
-\log p(\bm{x})  &= \Esp_{z\sim p_{\bm{\phi}}}[\log p_{\bm{\theta}}(\bm{x}|\bm{z})] - \DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| \pi(\bm{z})) + \DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| p(\bm{z}|\bm{x}))
-&\geq \mathcal{L}(\bm{x};\{\bm{\theta},\bm{\phi}\})
+\log p_{\bm{\theta}}(x)  &= \Esp_{z\sim p_{\bm{\phi}}}[\log p_{\bm{\theta}}(\bm{x}|\bm{z})] - \DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| \pi(\bm{z})) + \DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| p(\bm{z}|\bm{x}))
+\geq \mathcal{L}(\bm{x};\{\bm{\theta},\bm{\phi}\})
+\label{eq-VAE-ELBO}
 \end{align}
 where we have emphasized the \textit{evidence lower bound} (aka ELBO)
 \begin{equation}
@@ -152,7 +176,7 @@ It is usual to call $p_{\bm{\theta}}(\bm{x}|\bm{z})$ the \textit{decoder} part o
 %
 \subsection{Generative Adversarial Networks}
 %
-The vanilla GAN \citep{goodfellow2014generative} shares with VAE the target to optimize a \textit{generator} network ($\bm{G}$) to get $\bm{x}$ samples from a latent variable $\bm{z}$ such that  $\bm{x} = \bm{G}(\bm{z})$ with $\bm{z}$ \textit{prior} \textit{pdf} $\pi(\bm{z})$ is for instance a Gaussian distribution $\mathcal{N}(\bm{z},\bm{0},\bm{1})$. To do so, a second network ($\bm{D}$) acts as a \textit{discriminator} which aims to state if a sample $\bm{x}$ is from the model distribution or the data distribution. To reach that goal one solves the \texttt{min-max} problem
+The vanilla GAN \citep{goodfellow2014generative} shares with VAE the target to optimize a \textit{generator} network ($\bm{G}$) to get $\bm{x}$ samples from a latent variable $\bm{z}$ such that  $\bm{x} = \bm{G}(\bm{z})$ with $\bm{z}$ \textit{prior} $\pi(\bm{z})$ is for instance a Gaussian distribution $\mathcal{N}(\bm{z},\bm{0},\bm{1})$. To do so, a second network ($\bm{D}$) acts as a \textit{discriminator} which aims to state if a sample $\bm{x}$ is from the model distribution or the data distribution. To reach that goal one solves the \texttt{min-max} problem
 \begin{equation}
 \min_{\bm{G}} \max_{\bm{D}}\left\{ \Esp_{\bm{x}\sim p_{data}(\bm{x})}[\log \bm{D}(\bm{x})] + \Esp_{\bm{z}\sim \pi(\bm{z})}[\log(1-\bm{D}(\bm{G}(\bm{z})))] \right\}
 \end{equation} 
@@ -166,10 +190,67 @@ with $p_{\bm{G}}(\bm{x}) = \pi(\bm{z})|\det J_{\bm{G}} |^{-1}$ using the Jacobia
 \end{equation}
 leading to the optimal solution $p_{\bm{G}} = p_{data}$ yielding a perfect matching of the data distribution. 
 %
-\subsection{Normalizing Flow}
+\subsection{Normalizing Flows}
+%
+Looking at Equation \ref{eq-VAE-ELBO}, one notices that the optimal solution is reached in case of $\DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| p(\bm{z}|\bm{x}))=0$ which is true iif $p_{\bm{\phi}}(\bm{z}|\bm{x}) = p(\bm{z}|\bm{x})$. But this situation cannot be true in general as typical $p_{\bm{\phi}}$ parametrizations involve for instance independent Gaussian distributions. The limited choices of the parametrization is one of the limitation of VAE. So, one motivates the use of normalizing flows (NF) to allow for more flexibility in the distribution family design to hope that the true posterior is member of such family \citep{Tabak2010, Tabak2013a, Rezende2015}. 
+
+Independently of the VAE context, a flow $T$ is defined as diffeomorphism (aka bijector) between the data space and a latent space such that
+\begin{align}
+\bm{x} = T(\bm{z}) & \quad \Leftrightarrow \quad \bm{z} = T^{-1}(\bm{x})
+\end{align}
+So, if $\bm{z}$ distribution is $\pi(\bm{z})$ (e.g. $\mathcal{N}(\bm{z},\bm{0},\bm{1})$) then the following relation apply
+\begin{equation}
+p(\bm{x}) =  \pi(\bm{z})|\det J_T(\bm{z})|^{-1} = \pi(T^{-1}(\bm{x}))|\det J_{T^{-1}}(\bm{x})|
+\end{equation}
+Contrary to VAE and GAN the latent and data space dimensionalities are the same. The flow $T$ is in general a composition of several individual flows $\{T_i\}_{i<n}$ in such a way that
+\begin{align}
+T=T_1\circ T_2\circ \dots \circ T_n & \quad \Leftrightarrow \quad 
+T^{-1}=T_n^{-1}\circ T_{n-1}^{-1}\circ \dots \circ T_1^{-1}
+\end{align}
+If one notes $\bm{z}_i = T_i(\bm{z}_{i-1})$ for all $i<n$  (using $\bm{z}_0=\bm{z}$, $\bm{z}_n=\bm{x}$) then
+\begin{equation}
+\log |\mathrm{det} J_T| = \sum_{i=0}^{n-1} \log |\det J_{T_i}(\bm{z}_{i-1})|
+\end{equation}
+So, if the flows are well chosen, one can sample $\bm{x}$ with potentially complex (multi-modes) density distribution from a simple spherical multivariate Gaussian distribution. Figure \ref{fig-normflow} represents a schematic views of the \textit{forward} or \textit{generative} direction and the \textit{backward} or \textit{training} direction. 
+%
+\begin{figure}
+\resizebox{\columnwidth}{!}{%
+%\begin{center}
+\begin{tikzpicture}[
+node distance = 1cm, 
+distrib/.style={rectangle},
+]
+
+\node[state] (s0) {$z$};
+\node[distrib, above=0.1cm of s0] (img0) {\includegraphics[height=1cm]{fig-nf-z.png}}; 
+\node[state, right = of s0] (s1) {$z_1$};
+\node[state, right = of s1] (sim1) {$z_{i-1}$};
+\node[state, right = of sim1] (si) {$z_{i}$};
+\node[distrib, above=0.1cm of si] (imgi) {\includegraphics[height=1cm]{fig-nf-zi.png}}; 
+\node[state, right = of si] (snm1) {$z_{n-1}$};
+\node[state, right = of snm1] (sn) {$x$};
+\node[distrib, above=0.1cm of sn] (imgx) {\includegraphics[height=1cm]{fig-nf-x.png}}; 
+
+\path[-Stealth]
+	(s0) edge[bend left] node [above] {$T_1$} (s1)
+	(s1) edge[bend left] node [below] {$T_1^{-1}$} (s0)
+	(s1) edge[dotted, ultra thick,-] (sim1)
+	(sim1) edge[bend left] node [above] {$T_i$}  (si) 
+	(si) edge[bend left] node [below] {$T_i^{-1}$}  (sim1) 
+	(si) edge[dotted, ultra thick,-](snm1)
+	(snm1) edge[bend left] node [above] {$T_n$}  (sn)
+	(sn) edge[bend left] node [below] {$T_n^{-1}$}  (snm1); 
+
+\end{tikzpicture}}
+\caption{Schematic Normalizing Flow scheme inspired by \cite{weng2018flow}. On the top the \textit{forward} or \textit{generative} direction from a simple $\bm{z}$ distribution to a more complex one for $\bm{x}$. On the bottom the \textit{backward}  or \textit{training} direction from complex to simple distributions.}
+\label{fig-normflow}
+\end{figure}
 %
 
-
+The computation of the $\{J_{T_i}\}_{i<n}$ determinants may be challenging except if there are triangular matrices which is the case for some generic flows as . \cite{Papamakarios2021} propose a detailed review on the different architectures  of normalizing flows. 
+%
+\subsection{Differences between the models}
+%
 %
 \section{Experiment}
 
