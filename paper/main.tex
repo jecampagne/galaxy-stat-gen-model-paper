@@ -52,7 +52,7 @@
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
-
+\DeclareMathOperator{\diag}{diag}
 
 \usepackage[top=3cm, bottom=2cm, left=3cm, right=2cm]{geometry} %margins
 
@@ -132,7 +132,7 @@ blabla
 
 \section{Introduction}
 \label{sec:Intro}
-Image generation in Machine Learning (ML) is a challenging task that has made a dramatic rise in quality recently thanks to the large scale statistical model architectures as for instance \texttt{DALL-E 2} \citep{ramesh2022}, \texttt{Midjourney} \citep{Oppenlaender2022} and \texttt{StableDiffusion} \citep{Rombach2022} which use \textit{stochastic diffusion processes}. Such models have replaced the previous generation based on \textit{variational auto encoder} (aka VAE) \citep{Kingma2014} and  \textit{adversarial networks} (aka GAN) \citep{goodfellow2014generative} as in \citep{KarrasALL18,brock2018large}, or \textit{normalizing flows} (hereafter nicknamed NF) such as in \texttt{Glow} \citep{DinhKB14, DinhSB17, Kingma2018}. 
+Image generation in Machine Learning (ML) is a challenging task that has made a dramatic rise in quality recently thanks to the large scale statistical model architectures as for instance \texttt{DALL-E 2} \citep{ramesh2022}, \texttt{Midjourney} \citep{Oppenlaender2022} and \texttt{StableDiffusion} \citep{Rombach2022} which use \textit{stochastic diffusion processes}. Such models have replaced the previous generation based on \textit{variational auto encoder} (aka VAE) \citep{Kingma2014} and  \textit{adversarial networks} (aka GAN) \citep{goodfellow2014generative} as in \citep{KarrasALL18,brock2018large}, or \textit{normalizing flows} (hereafter nicknamed NF) such as in \texttt{Glow} \citep{Kingma2018}. 
 
 
 The ability of generative models have been rapidly adopted in many domains. For instance, in High Energy Physics the reader may be interested by the review \cite{PhysRevD.107.076017}. Concerning Astrophysics and Cosmology the generative models are used in different tasks (e.g. deblending \citep{Hemmati_2022,Arcelin2020} {\color{red} à compléter}) and especially to create synthetic galaxy images of complex morphologies going beyond parametrized analytic light profile simulations (eg. \texttt{GalSim} by \cite{ROWE2015121}). Along this line \citep{ravanbakhsh2016,Fussell2019} use GAN models, \cite{Lanusse2021} propose an hybrid VAE-Normalizing Flow architecture and \cite{smith2021} use a denoising stochastic diffusion model (hereafter nicknamed DSDM). 
@@ -262,11 +262,54 @@ and is replaced by a Monte Carlo technique using the data samples $\{\bm{x}^{(i)
 \begin{equation}
 \mathcal{L}(\bm{\theta}) = -\frac{1}{N}\sum_{i=0}^{N-1} \left\{ \log \pi(T_{\bm{\theta}}^{-1}(\bm{x}^{(i)})) + \log |\det J_{T_{\bm{\theta}}^{-1}}(\bm{x}^{(i)})| \right\} 
 \end{equation}
-The computation of the  determinant of the Jacobian and its gradient may be challenging but more straightforwardly if the Jacobian matrices $\{J_{T_i}^{-1}\}_{i<n}$ (Eq.~\ref{eq-flow-jacob}) are triangular. Notice that we need $T^{-1}$ as well as the Jacobian and the gradients to minimize $\mathcal{L}(\bm{\theta})$ and obtain the  best $\theta$, but we need also $T_\theta$ for the generation of new $\bm{x}$ samples from sampling $z\sim \pi(z)$.
+The computation of the  determinant of the Jacobian and its gradient may be challenging but more straightforwardly if the Jacobian matrices $\{J_{T_i}^{-1}\}_{i<n}$ (Eq.~\ref{eq-flow-jacob}) are triangular. Notice that we need $T^{-1}$ as well as the Jacobian and the gradients to minimize $\mathcal{L}(\bm{\theta})$ and obtain the  best $\theta$, but we need also $T_\theta$ for the generation of new $\bm{x}$ samples from sampling $z\sim \pi(z)$. Different architectures of normalizing flows as the \textit{autoregressive flows} allowing such program are discussed in the review by \cite{Papamakarios2021}. 
 
-Different architectures of normalizing flows allowing such program are discussed in the review by \cite{Papamakarios2021}, among them the \textit{auto-regressive flows} are used for instance in the \texttt{Glow} image generator.
+The general schema of \textit{autoregressive flows} is the following: if $\bm{x},\bm{z}\in \mathbb{R}^d$ and noting $\bm{x}=(x_1,x_2,\dots,x_d)$ similarly for $\bm{z}$, then
+\begin{equation}
+\forall i, \quad x_i = T(z_i;c_i) \quad \mathrm{with} \quad c_i = C_i(z_1,\dots,z_{i-1})=C_i(z_{<i})
+\end{equation}
+where $T$ a strictly increasing monotonic transformation  and $C_i$ are usually nicknamed \textit{transformer}\footnote{n.b this is not to be confused with the transformer networks that are deep network architecture based on multi-head attention mechanism \citep{Vaswani2017}.} and \textit{conditioner}. The properties of such flows are both the invertibility of the \textit{transformer} and the triangular structure of the Jacobian as
+\begin{equation}
+J_T = \left[ \frac{\partial x_i}{\partial z_j} \right] =  \begin{cases}
+0 & \forall i,j\ s.t.\ i>j \\
+\frac{\partial x_i}{\partial z_i}(z_i;h_i) &  \forall i
+\end{cases}
+\end{equation}
+the other elements are not useful, then it yields
+\begin{equation}
+\log |\det J_T| = \sum_{i=1}^d \log \left| \frac{\partial x_i}{\partial z_i}(z_i;h_i) \right|
+\end{equation}
+The different versions of transformers and conditioners lead to specific architectures.
 
+Among the transformers, the class of affine transformations are certainly the simplest as they are defined as followed
+\begin{equation}
+T(z_i;h_i) = e^{\alpha_i} z_i + \beta_i \quad \mathrm{with} \quad c_i = (\alpha_i(z_{<i}),\beta_i(z_{<i}))
+\label{eq-affine-coupling}
+\end{equation}
+(nb. using matrix notation, it yields $T(\bm{z}) = \exp(\bm{\alpha}) \odot \bm{z} + \bm{\beta}$ with  $\odot$ is the Hadamard product).
+The invertibility of $T$ is guaranteed by the exponential function. The Jacobian determinant is simply given by the $e^{\alpha_i}$ factor. This kind of affine transformers are used for instance in \citep{DinhKB14,Papamakarios2017a,DinhSB17,Kingma2018}. Notice that \textit{spline} related flows are used by \cite{Crenshaw_2024} (\texttt{PZFlow} code) in the context of galaxy photometric redshift posterior distribution.  
 
+Concerning the conditioners $C_i$, in principle they can be any functions (or models) that input $z_{<i}$ and output $c_i$. But this is the computational cost that drives the schema used in practice. A particular schema is the \textit{coupling layer} implemented \text{Real NVP}\footnote{n.b stands for \textit{real-valued non-volume preserving} transformation.} in \citep{DinhKB14,DinhSB17}. In the context of affine transformation $T$ (Eq.~\ref{eq-affine-coupling}), given $s<d$ (in general $s=d/2$) the forward pass is defined as 
+\begin{equation}
+(\mathrm{NVP})\quad  \begin{array}{rcl}
+x_{<s} &=& z_{<s} \\
+x_{i+1,\dots,s} &=& z_{i+1,\dots,s} \odot \exp(\alpha(z_{<s})) + \beta(z_{<s}) 
+\end{array}
+\label{eq-NVP_forward}
+\end{equation}
+ The backward pass involving the inverted transform shares the same complexity contrary to other conditioners as masked schema used in \citep{Germain2015} and reads
+\begin{equation}
+(\mathrm{NVP}^{-1})\quad  \begin{array}{rcl}
+z_{<s} &=& x_{<s} \\
+z_{i+1,\dots,s} &=& (x_{i+1,\dots,s}- \beta_i(x_{<s}))  \odot \exp(-\alpha_i(x_{<s})) 
+\end{array}
+\label{eq-NVP_backward}
+\end{equation}
+The Jacobian structure is triangular and the diagonal is simple as it is
+\begin{equation}
+\diag(J_T) = (\bm{1}_s,\diag(\exp{\bm{\alpha}(z_{<s}))})
+\end{equation}
+with $\bm{1}_s$ a $s\times s$ identity matrix, leading to $d-s$ \textit{a priori} non unitary elements implying the \textit{non-volume conservation} (i.e the NVP notation).
 
 %
 \subsection{Differences between the models}
