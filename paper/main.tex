@@ -207,11 +207,15 @@ Contrary to VAE and GAN the latent and data space dimensionalities are the same.
 T=T_1\circ T_2\circ \dots \circ T_n & \quad \Leftrightarrow \quad 
 T^{-1}=T_n^{-1}\circ T_{n-1}^{-1}\circ \dots \circ T_1^{-1}
 \end{align}
+Figure \ref{fig-normflow} represents a schematic views of the \textit{forward} or \textit{generative} direction and the \textit{backward} or \textit{training} direction. 
 If one notes $\bm{z}_i = T_i(\bm{z}_{i-1})$ for all $i<n$  (using $\bm{z}_0=\bm{z}$, $\bm{z}_n=\bm{x}$) then
 \begin{equation}
 \log |\mathrm{det} J_T| = \sum_{i=0}^{n-1} \log |\det J_{T_i}(\bm{z}_{i-1})|
+\label{eq-flow-jacob}
 \end{equation}
-So, if the flows are well chosen, one can sample $\bm{x}$ with potentially complex (multi-modes) density distribution from a simple spherical multivariate Gaussian distribution. Figure \ref{fig-normflow} represents a schematic views of the \textit{forward} or \textit{generative} direction and the \textit{backward} or \textit{training} direction. 
+Theorem exists showing that under moderate assumptions flow-based models are able to represent any density distributions \citep{Bogachev2005,huang2019solving}. So, if the flows are well chosen, one can sample $\bm{x}$ with potentially complex (multi-modes) density distribution from a simple spherical multivariate Gaussian distribution.
+
+
 %
 \begin{figure}
 \resizebox{\columnwidth}{!}{%
@@ -247,7 +251,23 @@ distrib/.style={rectangle},
 \end{figure}
 %
 
-The computation of the $\{J_{T_i}\}_{i<n}$ determinants may be challenging except if there are triangular matrices which is the case for some generic flows as . \cite{Papamakarios2021} propose a detailed review on the different architectures  of normalizing flows. 
+Let the flow be parametrized by a vector $\bm{\theta}$ leading to a parametrized flow-model $p_{\bm{\theta}}(\bm{x})$. To obtain an optimized flow, we consider the $\DKL$ divergence between  $p_{\bm{\theta}}(\bm{x})$ and the true $p(\bm{x})$ leads to (n.b we consider $\pi(\bm{z})=\mathcal{N}(\bm{z}, \bm{0}, \bm{1})$ without any extra unknown parameters)
+\begin{align}
+\mathcal{L}(\bm{\theta}) &= \DKL(p(\bm{x})\|p_{\bm{\theta}}(\bm{x}))
+= - \Esp_{\bm{x}\sim p(\bm{x})}[-\log p_{\bm{\theta}}(\bm{x})] + \mathrm{const.} \nn \\
+&= - \Esp_{\bm{x}\sim p(\bm{x})}[\log \pi(T_{\bm{\theta}}^{-1}(\bm{x}))+ \log |\det J_{T_{\bm{\theta}}^{-1}}(\bm{x})|] + \mathrm{const.} 
+\end{align}
+In practice, computing the expectation $\Esp_{\bm{x}\sim p(\bm{x})}$ is not possible 
+and is replaced by a Monte Carlo technique using the data samples $\{\bm{x}^{(i)}\}_{i<N}$ (dropping the constant)
+\begin{equation}
+\mathcal{L}(\bm{\theta}) = -\frac{1}{N}\sum_{i=0}^{N-1} \left\{ \log \pi(T_{\bm{\theta}}^{-1}(\bm{x}^{(i)})) + \log |\det J_{T_{\bm{\theta}}^{-1}}(\bm{x}^{(i)})| \right\} 
+\end{equation}
+The computation of the  determinant of the Jacobian and its gradient may be challenging but more straightforwardly if the Jacobian matrices $\{J_{T_i}^{-1}\}_{i<n}$ (Eq.~\ref{eq-flow-jacob}) are triangular. Notice that we need $T^{-1}$ as well as the Jacobian and the gradients to minimize $\mathcal{L}(\bm{\theta})$ and obtain the  best $\theta$, but we need also $T_\theta$ for the generation of new $\bm{x}$ samples from sampling $z\sim \pi(z)$.
+
+Different architectures of normalizing flows allowing such program are discussed in the review by \cite{Papamakarios2021}, among them the \textit{auto-regressive flows} are used for instance in the \texttt{Glow} image generator.
+
+
+
 %
 \subsection{Differences between the models}
 %
