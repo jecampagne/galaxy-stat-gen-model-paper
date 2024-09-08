@@ -132,7 +132,7 @@ blabla
 
 \section{Introduction}
 \label{sec:Intro}
-Image generation in Machine Learning (ML) is a challenging task that has made a dramatic rise in quality recently thanks to the large scale statistical model architectures as for instance \texttt{DALL-E 2} \citep{ramesh2022}, \texttt{Midjourney} \citep{Oppenlaender2022} and \texttt{StableDiffusion} \citep{Rombach2022} which use \textit{stochastic diffusion processes}. Such models have replaced the previous generation based on \textit{variational auto encoder} (aka VAE) \citep{Kingma2014} and  \textit{adversarial networks} (aka GAN) \citep{goodfellow2014generative} as in \citep{KarrasALL18,brock2018large}, or \textit{normalizing flows} (hereafter nicknamed NF) such as in \texttt{Glow} \citep{Kingma2018}. 
+Image generation in Machine Learning (ML) is a challenging task that has made a dramatic rise in quality recently thanks to the large scale statistical model architectures as for instance \texttt{DALL-E 2} \citep{ramesh2022}, \texttt{Midjourney} \citep{Oppenlaender2022} and \texttt{StableDiffusion} \citep{Rombach2022} which use \textit{stochastic diffusion processes}. Such models have replaced the previous generation based on \textit{variational auto encoder} (aka VAE) \citep{Kingma2014}\footnote{nb. notice that \texttt{arxiv} paper have been updated in 2022.} and  \textit{adversarial networks} (aka GAN) \citep{goodfellow2014generative} as in \citep[e.g.]{KarrasALL18,brock2018large}, or \textit{normalizing flows} (hereafter nicknamed NF) such as in \texttt{Glow} \citep{Kingma2018}. 
 
 
 The ability of generative models have been rapidly adopted in many domains. For instance, in High Energy Physics the reader may be interested by the review \cite{PhysRevD.107.076017}. Concerning Astrophysics and Cosmology the generative models are used in different tasks (e.g. deblending \citep{Hemmati_2022,Arcelin2020} {\color{red} à compléter}) and especially to create synthetic galaxy images of complex morphologies going beyond parametrized analytic light profile simulations (eg. \texttt{GalSim} by \cite{ROWE2015121}). Along this line \citep{ravanbakhsh2016,Fussell2019} use GAN models, \cite{Lanusse2021} propose an hybrid VAE-Normalizing Flow architecture and \cite{smith2021} use a denoising stochastic diffusion model (hereafter nicknamed DSDM). 
@@ -146,33 +146,36 @@ In the following sections, first we briefly describe the different kind of gener
 %
 \section{Generative Models}
 %
+{\color{red} Mention ergodic vs non ergodic, reference Allys et al. Lempereur et al. simulation of ergodic case.}\hfill\\
+
 The generative models assume that the observations $\bm{x}$ are described by a probability distribution $p(\bm{x})$ and aim to give a representation of such distribution.  It is also assumed that the data are i.i.d samples of $p(\bm{x})$.  In the following, it is not the intention to describe in high details the different  strategies and their implementations but rather {\color{red} to give some guide lines (à modifier)}.
 %
 \subsection{Variational Auto-Encoder}
 %
-Using \texttt{VAE} \citep{Kingma2014} means that it is assumed that there exists an underlying unobservable stochastic variable $\bm{z}$  (aka \textit{latent variable}) whose distribution is chosen \textit{a priori}  such  a Gaussian distribution $\pi(\bm{z})=\mathcal{N}(\bm{z},\bm{0},\bm{1})$). In general the latent space has a much lower dimensionality than the data space which imply a information compression. Then, it yields $p(\bm{x}) = p(\bm{x}|\bm{z})\pi(\bm{z})$. However, the likelihood  $p(\bm{x}|\bm{z})$ is unknown and one introduces a parametrized version $p_{\bm{\theta}}(\bm{x}|\bm{z})$ where the parameters $\bm{\theta}$ might be adjusted in such a way that  $p_{\bm{\theta}}(x)$ matches the empirical distribution of the $N$ data samples ($\{\bm{x}^{i}\}_{i<N}$). The best solution $\bm{\theta}_{ML}$ is the maximum of $p_{\bm{\theta}}(x)$ but in practice this leads to  intractable problem (either analytical or numerical) as one should evaluate the gradient with respect to $\bm{\theta}$ of the integral 
-$\int\ p_{\bm{\theta}}(\bm{x}|\bm{z})\pi(\bm{z}) dz$. To overcome such problem, one uses first the Bayes relation
+Using \texttt{VAE} \citep{Kingma2014} means that it is assumed that there exists an underlying unobservable stochastic variable $\bm{z}$  (aka \textit{latent variable}) whose distribution is chosen \textit{a priori} among a parametrized distribution family $\pi_{\bm{\theta}_1}(\bm{z})$ differentiable both with respect to $\bm{z}$ and $\bm{\theta}_1$. In general the latent space has a much lower dimensionality than the data space which imply a information compression. Then, it yields $p(\bm{x}) = p(\bm{x}|\bm{z})\pi_{\bm{\theta}_1}(\bm{z})$. However, the likelihood  $p(\bm{x}|\bm{z})$ is also unknown which leads to the introduction of a parametrized version $p_{\bm{\theta_2}}(\bm{x}|\bm{z})$ with the differentiability properties as $\pi_{\bm{\theta}_1}$. Using the notation $\bm{\theta}=(\bm{\theta_1},\bm{\theta_2})$,  these parameters are adjusted in such a way that  $p_{\bm{\theta}}(x)$ matches the empirical distribution of the $N$ data samples ($\{\bm{x}^{i}\}_{i<N}$). The best solution $\bm{\theta}_{ML}$ is the maximum of $p_{\bm{\theta}}(x)$ but in practice this leads to  intractable problem (either analytical or numerical) as one should evaluate the gradient with respect to $\bm{\theta}$ of the integral 
+$\int p_{\bm{\theta}_2}(\bm{x}|\bm{z})\pi_{\bm{\theta}_1}(\bm{z}) dz$ \citep{Kingma2014}. To overcome such problem, one uses first the Bayes relation
 \begin{equation}
-p_{\bm{\theta}}(x) p(\bm{z}|\bm{x}) = p_{\bm{\theta}}(\bm{x}|\bm{z}) \pi(\bm{z})
+p_{\bm{\theta}}(x) p(\bm{z}|\bm{x}) = p_{\bm{\theta}_2}(\bm{x}|\bm{z})\pi_{\bm{\theta}_1}(\bm{z})
 \end{equation}
-and second a parametrized version of the unknown true \textit{a posteriori} distribution as $p_{\bm{\phi}}(\bm{z}|\bm{x})$. If one introduces the Kullback-Leibler divergence $\DKL(p\| q)=\Esp_{x\sim p}[\log(p(x)/q(x))]$, then taking the expected value according to $\bm{z}\sim p_{\bm{\phi}}(\bm{z}|\bm{x})$ of the both sides of the following expression
+and second a parametrized version of the unknown true \textit{a posteriori} distribution as $p_{\bm{\phi}}(\bm{z}|\bm{x})$. If one introduces the Kullback-Leibler divergence $\DKL(p\| q)=\Esp_{\bm{x}\sim p}[\log(p(\bm{x})/q(\bm{x}))]$, then taking the expected value according\footnote{We represent the sampling of variates $\bm{x}$ from a
+distribution $p(\bm{x})$ using the notation $\bm{x}\sim p(\bm{x})$.} to $\bm{z}\sim p_{\bm{\phi}}(\bm{z}|\bm{x})$ of the both sides of the following expression
 \begin{align}
-\log p_{\bm{\theta}}(x) &= \log p_{\bm{\theta}}(\bm{x}|\bm{z}) + \log \pi(\bm{z}) - \log p(\bm{z}|\bm{x}) + \log p_{\bm{\phi}}(\bm{z}|\bm{x}) - \log p_{\bm{\phi}}(\bm{z}|\bm{x})
+\log p_{\bm{\theta}}(x) &= \log p_{\bm{\theta}_2}(\bm{x}|\bm{z}) + \log \pi_{\bm{\theta}_1}(\bm{z}) - \log p(\bm{z}|\bm{x}) + \log p_{\bm{\phi}}(\bm{z}|\bm{x}) - \log p_{\bm{\phi}}(\bm{z}|\bm{x})
 \end{align}
 yields 
 \begin{align}
-\log p_{\bm{\theta}}(x)  &= \Esp_{z\sim p_{\bm{\phi}}}[\log p_{\bm{\theta}}(\bm{x}|\bm{z})] - \DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| \pi(\bm{z})) + \DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| p(\bm{z}|\bm{x}))
+\log p_{\bm{\theta}}(x)  &= \Esp_{z\sim p_{\bm{\phi}}}[\log p_{\bm{\theta}_2}(\bm{x}|\bm{z})] - \DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| \pi_{\bm{\theta}_1}(\bm{z})) + \DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| p(\bm{z}|\bm{x}))
 \geq \mathcal{L}(\bm{x};\{\bm{\theta},\bm{\phi}\})
 \label{eq-VAE-ELBO}
 \end{align}
 where we have emphasized the \textit{evidence lower bound} (aka ELBO)
 \begin{equation}
-\mathcal{L}(\bm{x};\{\bm{\theta},\bm{\phi}\}) = \Esp_{z\sim p_{\bm{\phi}}}[\log p_{\bm{\theta}}(\bm{x}|\bm{z})] - \DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| \pi(\bm{z}))
+\mathcal{L}(\bm{x};\{\bm{\theta},\bm{\phi}\}) = \Esp_{z\sim p_{\bm{\phi}}}[\log p_{\bm{\theta}_2}(\bm{x}|\bm{z})] - \DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| \pi_{\bm{\theta}_1}(\bm{z}))
 \end{equation}
 and use the positiveness property of the $\DKL$ divergence. Maximizing with respect to 
-$\{\bm{\theta},\bm{\phi}\}$ the ELBO is now tractable as it is free of the unknown distributions $p(\bm{x})$ and $p(\bm{z}|\bm{x})$. However, the gradient with respect to $\phi$ may experience large variance, so \cite{Kingma2014} have introduced an auxiliary noise variable $\varepsilon$ such that $\bm{z}\sim p_{\bm{\phi}}(\bm{z}|\bm{x})$ is replaced by $\bm{z} = g_{\bm{\phi}}(\bm{\varepsilon},\bm{x})$ with $\bm{\varepsilon} \sim p(\bm{\varepsilon})$ and $g_{\bm{\phi}}(\bm{\varepsilon},\bm{x})$ a differentiable function with respected to $\phi$. 
+$\{\bm{\theta},\bm{\phi}\}$ the ELBO is now tractable as it is free of the unknown distributions $p(\bm{x})$ and $p(\bm{z}|\bm{x})$. However, the gradient with respect to $\phi$ may experience large variance, so \cite{Kingma2014} have introduced an auxiliary  variable $\varepsilon$ such that $\bm{z}\sim p_{\bm{\phi}}(\bm{z}|\bm{x})$ is replaced by $\bm{z} = g_{\bm{\phi}}(\bm{\varepsilon},\bm{x})$ with $\bm{\varepsilon} \sim p(\bm{\varepsilon})$ and $g_{\bm{\phi}}(\bm{\varepsilon},\bm{x})$ a differentiable function with respected to $\phi$. 
 
-It is usual to call $p_{\bm{\theta}}(\bm{x}|\bm{z})$ the \textit{decoder} part of the whole model while $p_{\bm{\phi}}(\bm{z}|\bm{x})$ is the \textit{encoder} part. Once the optimization is done, then the \textit{decoder} is used as a $\bm{x}$ generator by feeding with $\bm{z}$ samples obtained by sampling $p(\bm{\varepsilon})$ and using $g_{\bm{\phi}}(\bm{\varepsilon},\bm{x})$. It turns out that simple VAE tends to generate blurry images and may  suffer from the problem of posterior collapse which motivate active ML researches \citep[e.g.][]{engel2018latent,Takida2022} and modified VAE versions to overcome this issue as for instance in \cite{Lanusse2021}. 
+It is usual to call $p_{\bm{\theta}_2}(\bm{x}|\bm{z})$ the \textit{decoder} part of the whole model while $p_{\bm{\phi}}(\bm{z}|\bm{x})$ is the \textit{encoder} part. The different VAE models differ by the distribution families used. The simplest choice may be Gaussian multivariate distributions, and the centered isotropic version ($\mathcal{N}(\bm{z},\bm{0},\bm{1}$) for the $\bm{z}$ prior (nb. $\bm{\theta}_1$ are missing is this scenario). Once the optimization is done, the \textit{decoder} is used as a $\bm{x}$ generator by feeding with $\bm{z}$ samples. It turns out that simple VAE tends to generate blurry images and may  suffer from the problem of \textit{posterior collapse} which motivate active ML researches \citep[e.g.][]{engel2018latent,Takida2022} and modified VAE versions to overcome this issue as for instance in \cite{Lanusse2021}. 
 %
 \subsection{Generative Adversarial Networks}
 %
@@ -289,40 +292,67 @@ T(z_i;h_i) = e^{\alpha_i} z_i + \beta_i \quad \mathrm{with} \quad c_i = (\alpha_
 (nb. using matrix notation, it yields $T(\bm{z}) = \exp(\bm{\alpha}) \odot \bm{z} + \bm{\beta}$ with  $\odot$ is the Hadamard product).
 The invertibility of $T$ is guaranteed by the exponential function. The Jacobian determinant is simply given by the $e^{\alpha_i}$ factor. This kind of affine transformers are used for instance in \citep{DinhKB14,Papamakarios2017a,DinhSB17,Kingma2018}. Notice that \textit{spline} related flows are used by \cite{Crenshaw_2024} (\texttt{PZFlow} code) in the context of galaxy photometric redshift posterior distribution.  
 
-Concerning the conditioners $C_i$, in principle they can be any functions (or models) that input $z_{<i}$ and output $c_i$. But this is the computational cost that drives the schema used in practice. A particular schema is the \textit{coupling layer} implemented \text{Real NVP}\footnote{n.b stands for \textit{real-valued non-volume preserving} transformation.} in \citep{DinhKB14,DinhSB17}. In the context of affine transformation $T$ (Eq.~\ref{eq-affine-coupling}), given $s<d$ (in general $s=d/2$) the forward pass is defined as 
+Concerning the conditioners $C_i$, in principle they can be any functions (or models) that input $z_{<i}$ and output $c_i$. But this is the computational cost that drives the schema used in practice. A particular schema is the \textit{coupling layer} implemented \text{Real NVP}\footnote{n.b stands for \textit{real-valued non-volume preserving} transformation.} in \citep{DinhKB14,DinhSB17}. In the context of affine transformation $T$ (Eq.~\ref{eq-affine-coupling}) given $s<d$ (a typical choice is $s=d/2$), the forward pass is defined as 
 \begin{equation}
 (\mathrm{NVP})\quad  \begin{array}{rcl}
-x_{<s} &=& z_{<s} \\
-x_{i+1,\dots,s} &=& z_{i+1,\dots,s} \odot \exp(\alpha(z_{<s})) + \beta(z_{<s}) 
+x_{\leq s} &=& z_{\leq s} \\
+x_{s+1,\dots,d} &=& z_{s+1,\dots,d} \odot \exp(\bm{\alpha}(z_{\leq s})) + \bm{\beta}(z_{\leq s}) 
 \end{array}
 \label{eq-NVP_forward}
 \end{equation}
- The backward pass involving the inverted transform shares the same complexity contrary to other conditioners as masked schema used in \citep{Germain2015} and reads
+The backward pass involving the inverted transform shares the same complexity contrary to other conditioners as masked schema used in \citep{Germain2015} and reads
 \begin{equation}
 (\mathrm{NVP}^{-1})\quad  \begin{array}{rcl}
-z_{<s} &=& x_{<s} \\
-z_{i+1,\dots,s} &=& (x_{i+1,\dots,s}- \beta_i(x_{<s}))  \odot \exp(-\alpha_i(x_{<s})) 
+z_{\leq s} &=& x_{\leq s} \\
+z_{s+1,\dots,d} &=& (x_{s+1,\dots,d}- \bm{\beta}(x_{\leq s}))  \odot \exp(-\bm{\alpha}(x_{\leq s})) \\
+&=&(x_{s+1,\dots,d}- \beta(z_{\leq s}))  \odot \exp(-\alpha(z_{\leq s}))
 \end{array}
 \label{eq-NVP_backward}
 \end{equation}
-The Jacobian structure is triangular and the diagonal is simple as it is
+The Jacobian structure is triangular and the diagonal reads
 \begin{equation}
-\diag(J_T) = (\bm{1}_s,\diag(\exp{\bm{\alpha}(z_{<s}))})
+\diag(J_T) = (\bm{1}_s,\diag(\exp{\bm{\alpha}(z_{\leq s}))})
 \end{equation}
-with $\bm{1}_s$ a $s\times s$ identity matrix, leading to $d-s$ \textit{a priori} non unitary elements implying the \textit{non-volume conservation} (i.e the NVP notation).
+with $\bm{1}_s$ a $s\times s$ identity matrix, leading to $d-s$ \textit{a priori} non-unity terms, and therefore a non unitary transformation implying the \textit{non-volume conservation} property (i.e the NVP notation).
 
+The structure of the transformation (e.g. Eq.~\ref{eq-NVP_forward}) is a single split of the $\bm{z}$ vector coordinates in two parts: the first part $(z_{\leq s})$ is not transformed while the transformation of the second part ${z_{>s}})$ uses a function depending only on the first part. Notice that the conditioner functions do depends only on $(z_{\leq s})$ for both the forward or the backward transformations. This single split schema is illustrated on Figure \ref{fig-nvp}. 
 %
+\begin{figure}
+\centering
+\includegraphics[width=0.45\columnwidth]{fig-nvp.pdf}
+\includegraphics[width=0.45\columnwidth]{fig-nvp-inverse.pdf}
+\caption{Affine coupling layer schema of forward and backward directions (Eqs.~\ref{eq-NVP_forward},\ref{eq-NVP_backward}) with a single split mechanism (figure inspired by \cite{Papamakarios2021}).}
+\label{fig-nvp}
+\end{figure}
+%
+This splitting schema implemented in a so-called \textit{coupling layer} makes the flow-based model computationally efficient and using deep neural networks, one can achieve complex $(\bm{\alpha},\bm{\beta})$ functions. Now, designers of complete architectures can compose different \textit{coupling layers} by reversing $\bm{z}$ elements between layers to ensure that all elements are transformed at the end of the set of operations. An generalisation of any permutation ordering of the inputs can be performed using a $1\times 1$ convolution layer. \cite{2016arXiv160508803D} improves the modelling using a multi-scale approach which would be prohibitive to describe here, and \cite{Kingma2018} use all these extensions to build the \texttt{Glow} model whose schema is displayed on Figure \ref{fig-Glow-archi}.
+\begin{figure}
+    \centering
+    \vspace{-0cm}
+    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{center}
+        \centering
+        \includegraphics[width=.7\textwidth]{fig-Glow-1.pdf}
+        \caption{One step of Glow flow.}
+    \end{center}
+    \end{subfigure}%
+    \vspace{5mm}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=.99\textwidth]{fig-Glow-2.pdf}
+        \caption{Multi-scale architecture \citep{2016arXiv160508803D}.}
+    \end{subfigure}
+    \caption{Figure from \citep{Kingma2018}. The flow step is composed of a scale and bias layer with data dependent initialization (\texttt{actnorm}), a $1\times 1$ invertible convolution layer and an affine coupling layer with $(\bm{\alpha},\bm{\beta})$ issued from a shallow convolutional neural network. Both $\bm{x}$ and $\bm{y}$ are tensors of
+shape $[h \times w \times c]$ with spatial dimensions $(h, w)$ and channel dimension $c$ ans $(i, j)$ denote
+spatial indices into tensors $\bm{x}$ and $\bm{y}$.  This flow step is embedded in a multi-scale  architecture which has $K$ flow steps and a number of levels $L$ \citep{2016arXiv160508803D}. The squeezing operation reduces a $s \times s \times c$ tensor  into a $s/2\times s/2 \times 4c$ tensor which mix spatial and channel components. At each scale, each channel image is divided into $2\times 2$ patches ($s=2$) and each patch is squeezed. }
+    \label{fig-Glow-archi}
+\end{figure}
+ %
 \subsection{Differences between the models}
 %
 %
 \section{Experiment}
 
-%\begin{figure}
-%\centering
-%\includegraphics[width=0.4\columnwidth]{filtreDb4.png}
-%\caption{Coverage of the Fourier domain without gap by a low-pass filter and a collection of band-pass filters.}
-%\label{fig-Daubechies-db4}
-%\end{figure}
 
 
 \section{Discussion}
