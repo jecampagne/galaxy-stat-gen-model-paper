@@ -135,7 +135,7 @@ blabla
 Image generation in Machine Learning (ML) is a challenging task that has made a dramatic rise in quality recently thanks to the large scale statistical model architectures as for instance \texttt{DALL-E 2} \citep{ramesh2022}, \texttt{Midjourney} \citep{Oppenlaender2022} and \texttt{StableDiffusion} \citep{Rombach2022} which use \textit{stochastic diffusion processes}. Such models have replaced the previous generation based on \textit{variational auto encoder} (aka VAE) \citep{Kingma2014}\footnote{nb. notice that \texttt{arxiv} paper have been updated in 2022.} and  \textit{adversarial networks} (aka GAN) \citep{goodfellow2014generative} as in \citep[e.g.]{KarrasALL18,brock2018large}, or \textit{normalizing flows} (hereafter nicknamed NF) such as in \texttt{Glow} \citep{Kingma2018}. 
 
 
-The ability of generative models have been rapidly adopted in many domains. For instance, in High Energy Physics the reader may be interested by the review \cite{PhysRevD.107.076017}. Concerning Astrophysics and Cosmology the generative models are used in different tasks (e.g. deblending \citep{Hemmati_2022,Arcelin2020} {\color{red} à compléter}) and especially to create synthetic galaxy images of complex morphologies going beyond parametrized analytic light profile simulations (eg. \texttt{GalSim} by \cite{ROWE2015121}). Along this line \citep{ravanbakhsh2016,Fussell2019} use GAN models, \cite{Lanusse2021} propose an hybrid VAE-Normalizing Flow architecture and \cite{smith2021} use a denoising stochastic diffusion model (hereafter nicknamed DSDM). 
+The ability of generative models have been rapidly adopted in many domains. For instance, in High Energy Physics the reader may be interested by the review \cite{PhysRevD.107.076017}. Concerning Astrophysics and Cosmology the generative models are used in different tasks (e.g. deblending \citep{Hemmati_2022,Arcelin2020} {\color{red} à compléter}) and especially to create synthetic galaxy images of complex morphologies going beyond parametrized analytic light profile simulations (eg. \texttt{GalSim} by \cite{ROWE2015121}). Along this line \citep{ravanbakhsh2016,Fussell2019} use GAN models, \cite{Lanusse2021} propose an hybrid VAE-Normalizing Flow architecture and \cite{smith2021} use a denoising stochastic diffusion model. 
 
 Despite the impressive image quality of these generative models that are nowadays well diffused in the general public, many questions arise from mathematical and usage point of views. Notably, one may ask for what is really learned by the generative models and what are the statistical properties of the generated samples. In a general manner \cite{Hataya2023} ask if the image generated can corrupt the future datasets. However, the study is devoted  to the large scale statistical models mentioned above that are trained usually with billion-scale data extracted from the Internet, and so in turn can be contaminated by the images shared by many users. Concerning galaxy image generation the datasets are much more modest for the time being (i.e $O(10^5)$) collected from optical surveys (eg. COSMOS HST Advanced Camera for Surveys, \cite{mandelbaum_2019_3242143},  Sloan Digital Sky Survey \citep[SDSS;][]{sdss} Data Release 7 \citep{sdssdr7}) and used by a rather small community compared to social network followers which certainly  limits the datasets corruption. So, besides image corruption, \cite{HACKSTEIN2023100685,janulewicz2024assessing} have investigated different metrics to address the question of fidelity of the generated galaxy images and morphological properties compared to the original dataset.
 
@@ -221,7 +221,7 @@ Theorem exists showing that under moderate assumptions flow-based models are abl
 
 %
 \begin{figure}
-\resizebox{\columnwidth}{!}{%
+\resizebox{0.8\columnwidth}{!}{%
 %\begin{center}
 \begin{tikzpicture}[
 node distance = 1cm, 
@@ -350,17 +350,39 @@ spatial indices into tensors $\bm{x}$ and $\bm{y}$.  This flow step is embedded 
  %
 \subsection{Score based diffusion models}
 %
-To generate samples from $p(\bm{x})$, we can proceed as follows \citep[e.g][]{Chang2023,LinYang2023}. Starting from a sample $\bm{x}$ assumed to be drawn from the distribution $p(\bm{x})$, we progressively transform it until the  distribution is as simple as for instance $\mathcal{N}(\bm{z},\bm{0},\bm{1})$.  The idea is then to reverse the process (the \textit{backward} mode) by generating a new sample from a new instance of noise. This transfer mapping looks very similar in concept as normalizing flows. Their latent spaces have the same dimension as the data space, but the main difference consists in the fact that the later are deterministic by essence while the former are stochastic. 
+To generate samples from $p(\bm{x})$, we can proceed as follows \citep[e.g][]{Chang2023,LinYang2023}. Starting from a sample $\bm{x}_0$ assumed to be drawn from the distribution $p_0(\bm{x})=p(\bm{x})$, we progressively transform it until the  distribution is as simple as for instance $\mathcal{N}(\bm{z},\bm{0},\bm{1})$.  The idea is then to reverse the process (the \textit{backward} mode) by generating a new sample from a new instance of noise. This transfer mapping looks very similar in concept as normalizing flows. Their latent spaces have the same dimension as the data space, but the main difference consists in the fact that the later are deterministic by essence while the former are stochastic. 
 
-The transport process used in the \textit{score diffusion} algorithm is the Ornstein-Uhlenbeck equation \citep{Uhlenbeck1930}. The \textit{forward} process follows the following stochastic differential equation:
+Following the notations used in \cite{kadkhodaie2024generalization}, the transport process used in the \textit{score diffusion} algorithm is the Ornstein-Uhlenbeck equation \citep{Uhlenbeck1930}. The \textit{forward} process follows the following stochastic differential equation:
 \begin{equation}
 d\bm{x}_t = -\bm{x}_t dt + \sqrt{2}\ dB_t \quad t\in[0,T]
 \label{eq-Ornstein-cont}
 \end{equation}
-where $dB_t$ is a Wiener process (Brownian motion). The solution of such forward process reads
+where $dB_t$ is a Wiener process (Brownian motion) and $T$ is a finite ending time that would be considered to be large enough. The solution of such forward process reads
 \begin{equation}
-\bm{x}_t = \bm{x}_0 e^{-t} + \underbrace{(1-e^{-2t})^{1/2}}_{\sigma_t} \bm{z} \qquad \bm{z} \overset{iid}{\sim} \mathcal{N}(z,\bm{0},\bm{1})
+\bm{x}_t = \bm{x}_0 e^{-t} + \underbrace{(1-e^{-2t})^{1/2}}_{\sigma_t} \bm{z} \qquad \bm{z} \overset{iid}{\sim} \mathcal{N}(\bm{z},\bm{0},\bm{1})
 \end{equation}
+The associated probability density function is given by the expression 
+\begin{equation}
+p_t(\bm{x}_t) = \int p_t(\bm{x}_t,\bm{x}_0) d\bm{x}_0 = \int p_t(\bm{x}_t|\bm{x}_0) p_0(\bm{x}_0)dx_0
+\label{eq-smoothing-p0-gauss}
+\end{equation}
+where according to the Fokker-Planck representation of the Ornstein-Uhlenbeck process,  it yields
+\begin{equation}
+p_t(\bm{x}_t|\bm{x}_0)= \frac{1}{(2\pi \sigma_t^2)^{d/2}}\exp\left\{\displaystyle -\frac{\|\bm{x}_t-\bm{x}_0e^{-t}\|^2}{2\sigma_t^2}\right\}
+\end{equation}
+So, $p_t(\bm{x}_t)$ is the result of the convolution of the initial distribution $p_0(x_0)$ with a Gaussian with variance $\sigma_t^2$ which gradually tends towards the normal distribution $\mathcal{N}(.,\bm{0},\bm{1})$, producing a progressive blurring that also makes $p_t(\bm{x}_t)$ converging towards the normal distribution. 
+
+
+Notice that in a VAE architecture beyond the information compression,  the transformation from $\bm{x}_0$ to $\bm{z}$ is performed by an \textit{encoder} whose implementation is typically a deep neural networks with trained parameters. This is not the case in the above stochastic process where only noise is added to the original signal (e.g. galaxy image). In the same spirit, the VAE \textit{decoder} or the inverted flows are replaces by stochastic differential equation (damped Langevin)
+\begin{equation}
+dx_{T-t} = (x_{T-t} + 2\nabla_x \log p_{T-t}(x_{T-t}))dt + \sqrt{2}\ dB_t \quad t\in[0,T]
+\label{eq-backward-diffusion}
+\end{equation}
+where $\nabla_x \log p_{t}(\bm{x}_{t})$ is the \textit{score} of the probability density at time $t$. This backward process is the $\bm{x}=\bm{x}_0$ generative direction from $\mathcal{N}(\bm{z},\bm{0},\bm{1})$ sampling. 
+
+The key problem is how to obtain the score. One can think about two possible approaches: either we have a model for $p_t$ \citep[e.g.][]{Guth2022b,Lempereur2024} that can exploit regularity patterns and assumptions about correlations to provide a constrained parametric framework for learning the score by score matching \citep{hyvarinen2005a}, or we use a \textit{denoising} neural network as introduced by \cite{Bengio2013} and then \cite{Sohl-Dickstein2015,Ho2020} and recently studied from a mathematical point of view by \citep{kadkhodaie2024generalization}, as well as used in cosmology such as the generation of galaxy images \citep{smith2021}, the generation of 21cm luminosity temperature maps \citep{Zhao2023} and super-resolved large-scale cosmic structure predictions \citep{Schanz2023} and sampling of the high-dimensional Bayesian posterior of the weak lensing mass-mapping problem \citep{Remy2023}.
+
+Denoising diffusion stochastic models have certain advantages compared to GAN.... 
 
 
 They can jointly be interplayed as for instance in \citep{zhang2021diffusion,gong2021interpreting}.  
