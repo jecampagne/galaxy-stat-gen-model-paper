@@ -108,6 +108,10 @@
 \usepackage[margin=1cm]{caption}
 
 
+\newenvironment{nouppercase}{%
+  \let\uppercase\relax%
+  \renewcommand{\uppercasenonmath}[1]{}}{}
+
 
 \title{Galaxy image statistical generator: how to be confident?}
 \author{Jean-Eric Campagne}
@@ -118,7 +122,9 @@
 \calclayout  % switch off left right margin different even/odd pages.
 
 \begin{document}
+\begin{nouppercase}
 \maketitle
+\end{nouppercase}
 %\renewcommand{\baselinestretch}{0.75}\normalsize
 %\tableofcontents
 %\renewcommand{\baselinestretch}{1.0}\normalsize
@@ -401,7 +407,7 @@ An answer has been given in \cite{kadkhodaie2024generalization} and point out th
 
 We propose to replay their experiment using the same \texttt{U-Net} architecture \citep{2015arXiv150504597R}  as \textit{denoiser} consisting of a contracting part and an expending part that allows for multi-scale architecture with scale correlations. Details are found in \cite{kadkhodaie2024generalization}\footnote{Source code:  \url{https://github.com/LabForComputationalVision/memorization_generalization_in_diffusion_models}}. For comparison purposes, we also use the \texttt{Glow} flow-based model implemented\footnote{Source code: \url{https://github.com/rosinality/glow-pytorch}} in \texttt{PyTorch}  \citep{PyTorch2019} for convenience. The architecture has been presented on Figure \ref{fig-Glow-archi}.
 
-Concerning the training dataset, as we need to train two models with up to $100,000$ images each, we have used the SDSS (Sloan Digital Sky Survey) dataset used in \citep{smith2021}\footnoe{See \url{https://github.com/Smith42/astroddpm} to obtain the raw data.} but first all images are cropped about the target coordinate galaxy to a shape of $64\times 64$ pixels and from the $z,g,r$ channels we produce a single  channel in gray levels in the range $[0,1]$ using \texttt{scipy} \citep{2020SciPy-NMeth} library\footnote{In particular the \texttt{make_lupton_rgb} function has been applied with $Q=8$ and $stretch=0.2$ setting}. Moreover, the gray level is coded using 5-bits precision.
+Concerning the training dataset, as we need to train two models with up to $100,000$ images each, we have used the SDSS (Sloan Digital Sky Survey) dataset used in \citep{smith2021}\footnote{See \url{https://github.com/Smith42/astroddpm} to obtain the raw data.} but first all images are cropped about the target coordinate galaxy to a shape of $64\times 64$ pixels and from the $z,g,r$ channels we produce a single  channel in gray levels in the range $[0,1]$ using \texttt{scipy} \citep{2020SciPy-NMeth} library\footnote{In particular the \texttt{make\_lupton\_rgb} function has been applied with $Q=8$ and $stretch=0.2$ setting}. Moreover, the gray level is coded using 5-bits precision.
 {\color{red}The training dataset of $250,000$ galaxies is available in github}. With such dataset,  according to \cite{kadkhodaie2024generalization} results, the transition between memorization to generalisation regimes is expected to occur with size the range $10^4-10^5$. 
 
 The training 
