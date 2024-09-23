@@ -195,9 +195,20 @@ with $p_{\bm{G}}(\bm{x}) = \pi(\bm{z})|\det J_{\bm{G}} |^{-1}$ using the Jacobia
 \begin{equation}
 \min_G \left\{ \DKL{\left( p_{data} \left\| \frac{p_{data} + p_{\bm{G}}}{2}\right. \right) }  + \DKL{\left(p_{\bm{G}} \left\| \frac{p_{data} + p_{\bm{G}}}{2} \right. \right)} \right\}
 \end{equation}
-leading to the optimal solution $p_{\bm{G}} = p_{data}$ yielding a perfect matching of the data distribution. 
+leading to the optimal solution $p_{\bm{G}} = p_{data}$ yielding a perfect matching of the data distribution.  But, training GAN model via the above objective function is in general unstable with a pathology called \textit{mode-collapse} in the literature, dealing with the fact that the \textit{discriminator} may overfit the dataset too quickly leading to vanishing gradients \citep{Gulrajani2017}. This training instability has been studied by many authors \citep[see e.g.][for some reviews]{Saxena2021,Jozdani2022}. Architectures like \texttt{BigGAN} \citep{Brock2019} and \texttt{StyleGAN2} \cite{Karras2018ASG,Karras2020} overcome the gradient flow issue by different techniques beeing "state-of-the-art" improvements but at the expense of computational resources. 
 
-GAN architectures have been used for galaxy generation as \citep[e.g.][]{Schawinski2017,Coccomini2021,Hemmati_2022} in conjunction of deblending and deconvolving tasks. 
+\cite{liu2021towards} manage to address the training stability and low  computational resources, in particular low sized datasets, developing a \texttt{light-weight-GAN} structure. A first ingredient is to use the hinge loss introduced by \cite{Lim2017} which aims to minimize the following losses to alternatively train the \textit{discriminator} and the \textit{generator}: 
+\begin{align}
+\min_{\bm{D}}& \left\{\Esp_{\bm{x}\sim p_{data}}[\max{(0,1-\bm{D}(\bm{x}))}] + \Esp_{\bm{z}\sim \pi(\bm{z})}[\max{(0,1+\bm{D}(\bm{G}(\bm{z}))}]
+\right\}\\
+\min_{\bm{G}} &\left\{-\Esp_{\bm{z}\sim \pi(\bm{z})}[\bm{D}(\bm{G}(\bm{z}))]
+\right\}
+\end{align}
+Here $\bm{D}$ is a linear discriminator as in the Support Vector Machine context \citep{Vapnik1997}. The second ingredient concerns a strong regularisation to the \textit{discriminator} loss. The \textit{discriminator}  $\bm{D}$  is treated as an \textit{encoder} (e.g. as in a VAE) and is trained together with \textit{decoders} in such a way that $\bm{D}$ is forced to extract image features at different scales ($8\times 8$, $16\times 16$) that the \textit{decoders} can give good reconstruction. Finally, for the \textit{generator} a new skip-layer excitation module (SLE) is used allowing a more robust gradient flow between feature maps extracted at different scales.
+
+%Coccomini2021 utilise Lightweight GAN
+% Schawinski2017,Hemmati_2022 GAN vanilla
+GAN architectures have been used for galaxy generation in conjunction of deblending and deconvolving tasks: for instance \cite{Schawinski2017,Hemmati_2022} use vanilla-GANs while  \cite{Coccomini2021} the \texttt{light-weight-GAN}.
 %
 \subsection{Normalizing Flows}
 %
@@ -403,47 +414,33 @@ Denoising diffusion stochastic models have gain in popularity due to the fact th
 %
 Having briefly outlined different architectures of generative models in the previous section it turns out that one aspect in common between diffusion-based and flow-based models consists in the generation process of a $\bm{x}$ sample which starts by sampling a centred isotropic Gaussian distribution $\bm{z}\sim \mathcal{N}(\bm{z},\bm{0},\bm{1})$ (i.e. a white noise) of dimension $d$ equal to the final sample. But a question rises: if we train two generative models of the same kind, let say two flow-based or two diffusion-based, and if we feed them with the same white noise image, does the generative process of the two models give the same final image? If not we can ask ourselves about the nature of the learned process and if we are faced to a real probability density $p(\bm{x})$ sample or does the result is a sort of mixture of the original dataset images? 
 
- 
-%
-\subsection{Datasets and Models}
-%
-An answer to the previous question has been given in \cite{kadkhodaie2024generalization} and point out the size of the dataset in the passage from \textit{memorization} to \textit{generation} regimes. We propose to replay their experiment using first the same \texttt{U-Net} architecture \citep{2015arXiv150504597R}  as \textit{denoiser} consisting of a contracting part and an expending part that allows for multi-scale architecture with scale correlations. Details are found in \cite{kadkhodaie2024generalization}\footnote{Source code:  \url{https://github.com/LabForComputationalVision/memorization_generalization_in_diffusion_models}}. Second, for comparison purposes, we use the \texttt{Glow} flow-based model implemented\footnote{Source code: \url{https://github.com/rosinality/glow-pytorch}} in \texttt{PyTorch}  \citep{PyTorch2019}. The architecture has been presented on Figure \ref{fig-Glow-archi} and we use $K=32$ and $L=4$.
+An answer to the previous question has been given in \cite{kadkhodaie2024generalization} and point out the size of the dataset in the passage from \textit{memorization} to \textit{generation} regimes. We propose to use the same methodology by comparing typically two generative models of same kind trained with two different non-overlapping sub-datasets extracted from the same dataset of original images.
 
-Concerning the training dataset, \cite{kadkhodaie2024generalization}  have used different datasets commonly-used in ML as \texttt{CelebA} \citep{Liu2015}, \texttt{LSUN} bedroom \citep{Yu2015} and  \texttt{CelebA HQ} \citep{KarrasALL18} datasets. All dataset images use  gray level single channel ranging in $[0,1]$.  The \texttt{LSUN}  images have been down sampled to $80\times 80$ as well as the \texttt{CelebA} images which also have been further down sampled to $32\times 32$ resolution, while \texttt{CelebA HQ}  have been down sampled to $40\times 40$ resolution.
+%
+\subsection{Datasets}
+%
+Concerning the training dataset, \cite{kadkhodaie2024generalization}  have used different sources commonly-used in ML as \texttt{CelebA} \citep{Liu2015}, \texttt{LSUN} bedroom \citep{Yu2015} and  \texttt{CelebA HQ} \citep{KarrasALL18} datasets. All dataset images use  gray level single channel ranging in $[0,1]$.  The \texttt{LSUN}  images have been down sampled to $80\times 80$ as well as the \texttt{CelebA} images which also have been further down sampled to $32\times 32$ resolution, while \texttt{CelebA HQ}  have been down sampled to $40\times 40$ resolution.
 
-We are more concerned with galaxy image generation, but as we need to train two models with up to $100,000$ images each, we have chosen to use the SDSS (Sloan Digital Sky Survey) dataset described in \citep{smith2021}\footnote{See \url{https://github.com/Smith42/astroddpm} to obtain the raw data.} with some modification on the preprocessing. First, all images are cropped about the target coordinate galaxy to a shape of $64\times 64$ pixels, and secondly from the $(z,g,r)$ channels we produce a single  channel in the range $[0,1]$ using \texttt{scipy} \citep{2020SciPy-NMeth} library\footnote{In particular the \texttt{make\_lupton\_rgb} function has been applied with $Q=8$ and $stretch=0.2$ setting}. Moreover, the gray levels are coded using 5-bit precision in the line of experiment described in \cite{Kingma2018}. With such dataset according to \cite{kadkhodaie2024generalization} results, we expect the transition between memorization to generalisation regimes to occur with a number of training images in the range $10^4-10^5$. 
+We are more concerned with galaxy image generation, but as we need to train two models with up to at least $100,000$ images each, we have chosen to use the SDSS (Sloan Digital Sky Survey) dataset described in \citep{smith2021}\footnote{See \url{https://github.com/Smith42/astroddpm} to obtain the raw data.} with some modification on the preprocessing. First, all images are cropped about the target coordinate galaxy to a shape of $64\times 64$ pixels, and secondly from the $(z,g,r)$ channels we produce a single  channel in the range $[0,1]$ using \texttt{scipy} \citep{2020SciPy-NMeth} library\footnote{In particular the \texttt{make\_lupton\_rgb} function has been applied with $Q=8$ and $stretch=0.2$ setting}. Moreover, the gray levels are coded using 5-bit precision in the line of experiment described in \cite{Kingma2018}. With such dataset according to \cite{kadkhodaie2024generalization} results, we expect the transition between memorization to generalisation regimes to occur with a number of training images in the range $10^4-10^5$. 
+
+\subsection{Models}
+%
+{\color{red} Concerning the models, for the GAN model type ....  
+For the diffusion-based model, we have used the same \texttt{U-Net} architecture \citep{2015arXiv150504597R}  as \textit{denoiser} consisting of a contracting part and an expending part that allows for multi-scale architecture with scale correlations. Details are found in \cite{kadkhodaie2024generalization}\footnote{Source code:  \url{https://github.com/LabForComputationalVision/memorization_generalization_in_diffusion_models}}. Second, for comparison purposes, we use the \texttt{Glow} flow-based model implemented\footnote{Source code: \url{https://github.com/rosinality/glow-pytorch}} in \texttt{PyTorch}  \citep{PyTorch2019}. The architecture has been presented on Figure \ref{fig-Glow-archi} and we use $K=32$ and $L=4$.}
+
 
 So, we have trained two \texttt{U-Net}-based diffusion models with independent datasets of sizes  $N=10^2,10^3,10^4,10^5$ extracted from the whole dataset composed of $250,000$ galaxy images. The same training procedure used by \cite{kadkhodaie2024generalization} has been applied. Concerning the \texttt{Glow} model, we use two independent datasets of sizes $N=10^5$ and train two models with  batches of size $32$ for $450,000$ iterations. {\color{red} We refer the reader to the  github repository companion of the present article for the details of the different codes and notebooks used and models trained as well as to get the whole dataset of $250,000$ original galaxy images.}
 %
 \subsection{Results}
 %
 \subsubsection{Generated images}
-Figure \ref{fig-Original-Glow-UNet-samples} presents some galaxy images extracted from the original dataset and generated by  diffusion-based and flow-based models trained with $N=10^5$ original images. 
+Figure \ref{fig-Original-Glow-UNet-Gan-samples} presents some galaxy images extracted from the original dataset and generated by  diffusion-based and flow-based models trained with $N=10^5$ original images. 
 %
 \begin{figure}
     \centering
-    \vspace{-0cm}
-    \begin{subfigure}[t]{0.30\columnwidth}
-    \begin{center}
-        \centering
-        \includegraphics[width=0.8\textwidth]{fig-original_samples_gray.pdf}
-        %\caption{xxx}
-    \end{center}
-    \end{subfigure}%
-    \begin{subfigure}[t]{0.30\columnwidth}
-    \begin{center}
-        \centering
-        \includegraphics[width=0.8\textwidth]{fig-diffusion_samples_gray.pdf}
-        %\caption{xxx}
-    \end{center}
-    \end{subfigure}%
-    \begin{subfigure}[t]{0.30\columnwidth}
-        \centering
-        \raisebox{0mm}{\includegraphics[width=0.8\textwidth]{fig-glow_samples_gray.pdf}}
-        %\caption{xxx}
-    \end{subfigure}
-    \caption{Illustration of the generation of some samples from the diffusion-based (\texttt{U-Net} denoiser) and the \texttt{Glow} flow-based models trained with $N=10^5$ images. On the left some original images are also displayed for visual comparison.}
-    \label{fig-Original-Glow-UNet-samples}
+        \includegraphics[width=0.8\textwidth]{fig-model_sample_images.pdf}
+    \caption{Some \textit{validation} images from the original dataset (first row from top) and  generates samples from different models trained with $N=10^5$ images:  the \texttt{light-weight} GAN-based model (second row), the \texttt{Glow} flow-based model (third row) and the diffusion-based with \texttt{U-Net} denoiser (bottow row).}
+    \label{fig-Original-Glow-UNet-Gan-samples}
 \end{figure}
 At first look the generated images may be not distinguishable from the original images.
 To be a bit more quantitative, Figure \ref{fig-morpho-coeff} presents  some morphological coefficients that have been computed using \texttt{Statmorph}\footnote{\url{https://github.com/vrodgom/statmorph}} \citep{2019MNRAS.483.4140R}: the Concentration, Asymmetry and Smoothness \citep{2000AJ....119.2645B,2003ApJS..147....1C,2004AJ....128..163L}  as well as the Gini and M20 coefficients \citep{2004AJ....128..163L,10.1093/mnras/stv2078}.
@@ -451,9 +448,10 @@ To be a bit more quantitative, Figure \ref{fig-morpho-coeff} presents  some morp
     \centering
 		\includegraphics[width=0.5\textwidth]{fig-CAS-all.pdf}
 		\includegraphics[width=0.35\textwidth]{fig-gini-m20-all.pdf}
-	\caption{Corner plots \citep{corner2016} of morphological coefficients computed with $10^4$ images, first from the original dataset but \textit{never} used by any models (red, "test"), second from a diffusion-based model generation (blue, "diffusion") and from a flow-based model generation (green, "Glow") (both models used for Figure \ref{fig-Original-Glow-UNet-samples}). The figure has been inspired by \cite{HACKSTEIN2023100685}.}
+	\caption{Corner plots\protect\footnotemark of morphological coefficients computed with $10^4$ images, first from the original dataset but \textit{never} used by any models (red, "test"), second from a diffusion-based model generation (blue, "diffusion") and from a flow-based model generation (green, "Glow") (both models used for Figure \ref{fig-Original-Glow-UNet-samples}). The figure has been inspired by \cite{HACKSTEIN2023100685}.}
 	\label{fig-morpho-coeff}
 \end{figure}
+\footnotetext{Plots from the library \url{https://corner.readthedocs.io} \citep{corner2016}.}
 The distributions derived from the \texttt{U-Net} diffusion model are in better agreement with those obtained with the original images than are those derived from the \texttt{Glow} flow model, although this is not dramatic.
 Notice that we do not expect high quality images as well as state-of-the-art competitive results, see for instance \citep{ravanbakhsh2016,Fussell2019,Lanusse2021,smith2021,HACKSTEIN2023100685} for better image quality. Our goal is somewhat different: we ask ourselves if with such low resolution and low complexity images, does the models of the same kind learn the same thing with moderate dataset size?
 %
