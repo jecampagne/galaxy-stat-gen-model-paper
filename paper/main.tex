@@ -152,11 +152,11 @@ In the following sections, first we briefly describe the different kind of gener
 %
 \section{Generative Models}
 %
-The generative models assume that the observations $\bm{x}$ are described by a probability distribution $p(\bm{x})$ and aim to give a representation of such distribution.  It is also assumed that the data are i.i.d samples of $p(\bm{x})$.  In the following sections, the intention is more to give some background knowledge rather than describe in great details the different  architecture types and their implementations.
+The generative models assume that the observations $\bm{x}\in \mathbb{R}^d$ (in the context of image modelling $d$ is the number of pixels  times the number of channels) are described by a probability distribution $p(\bm{x})$ and aim to give a representation of such distribution.  It is also assumed that the data are i.i.d samples of $p(\bm{x})$.  In the following sections, the intention is more to give some background knowledge rather than describe in great details the different  architecture types and their implementations.
 %
 \subsection{Variational Auto-Encoder}
 %
-Using \texttt{VAE} \citep{Kingma2014} means that it is assumed that there exists an underlying unobservable stochastic variable $\bm{z}$  (aka \textit{latent variable}) whose distribution is chosen \textit{a priori} among a parametrized distribution family $\pi_{\bm{\theta}_1}(\bm{z})$ differentiable both with respect to $\bm{z}$ and $\bm{\theta}_1$. In general the latent space has a much lower dimensionality than the data space which imply a information compression. Then, it yields $p(\bm{x}) = p(\bm{x}|\bm{z})\pi_{\bm{\theta}_1}(\bm{z})$. However, the likelihood  $p(\bm{x}|\bm{z})$ is also unknown which leads to the introduction of a parametrized version $p_{\bm{\theta_2}}(\bm{x}|\bm{z})$ with the differentiability properties as $\pi_{\bm{\theta}_1}$. Using the notation $\bm{\theta}=(\bm{\theta_1},\bm{\theta_2})$,  these parameters are adjusted in such a way that  $p_{\bm{\theta}}(x)$ matches the empirical distribution of the $N$ data samples ($\{\bm{x}^{i}\}_{i<N}$). The best solution $\bm{\theta}_{ML}$ is the maximum of $p_{\bm{\theta}}(x)$ but in practice this leads to  intractable problem (either analytical or numerical) as one should evaluate the gradient with respect to $\bm{\theta}$ of the integral 
+Using \texttt{VAE} \citep{Kingma2014} means that it is assumed that there exists an underlying unobservable stochastic variable $\bm{z}\in\mathbb{R}^{d_\ell}$  (aka \textit{latent variable}) whose distribution is chosen \textit{a priori} among a parametrized distribution family $\pi_{\bm{\theta}_1}(\bm{z})$ differentiable both with respect to $\bm{z}$ and $\bm{\theta}_1$. In general the latent space has a much lower dimensionality than the data space which imply a information compression ($d_\ell \ll d$). Then, it yields $p(\bm{x}) = p(\bm{x}|\bm{z})\pi_{\bm{\theta}_1}(\bm{z})$. However, the likelihood  $p(\bm{x}|\bm{z})$ is also unknown which leads to the introduction of a parametrized version $p_{\bm{\theta_2}}(\bm{x}|\bm{z})$ with the differentiability properties as $\pi_{\bm{\theta}_1}$. Using the notation $\bm{\theta}=(\bm{\theta_1},\bm{\theta_2})$,  these parameters are adjusted in such a way that  $p_{\bm{\theta}}(x)$ matches the empirical distribution of the $N$ data samples ($\{\bm{x}^{i}\}_{i<N}$). The best solution $\bm{\theta}_{ML}$ is the maximum of $p_{\bm{\theta}}(x)$ but in practice this leads to  intractable problem (either analytical or numerical) as one should evaluate the gradient with respect to $\bm{\theta}$ of the integral 
 $\int p_{\bm{\theta}_2}(\bm{x}|\bm{z})\pi_{\bm{\theta}_1}(\bm{z}) dz$ \citep{Kingma2014}. To overcome such problem, one uses first the Bayes relation
 \begin{equation}
 p_{\bm{\theta}}(x) p(\bm{z}|\bm{x}) = p_{\bm{\theta}_2}(\bm{x}|\bm{z})\pi_{\bm{\theta}_1}(\bm{z})
@@ -182,8 +182,9 @@ $\{\bm{\theta},\bm{\phi}\}$ the ELBO is now tractable as it is free of the unkno
 It is usual to call $p_{\bm{\theta}_2}(\bm{x}|\bm{z})$ the \textit{decoder} part of the whole model while $p_{\bm{\phi}}(\bm{z}|\bm{x})$ is the \textit{encoder} part. The different VAE models differ by the distribution families used. The simplest choice may be commonly-used Gaussian multivariate distributions, and the centred isotropic with unit variance version ($\mathcal{N}(\bm{z},\bm{0},\bm{1}$) for the $\bm{z}$ prior (nb. $\bm{\theta}_1$ are missing is this scenario). Once the optimization is done, the \textit{decoder} is used as a $\bm{x}$ generator by feeding with $\bm{z}$ samples. It turns out that simple VAE tends to generate blurry images and may  suffer from the problem of \textit{posterior collapse} which motivate active ML researches \citep[e.g.][]{engel2018latent,Takida2022} and modified VAE versions to overcome this issue as for instance in \cite{Lanusse2021}. 
 %
 \subsection{Generative Adversarial Networks}
+\label{sec-GAN}
 %
-The vanilla GAN \citep{goodfellow2014generative} shares with VAE the target to optimize a \textit{generator} network ($\bm{G}$) to get $\bm{x}$ samples from a latent variable $\bm{z}$ such that  $\bm{x} = \bm{G}(\bm{z})$ with $\bm{z}$ \textit{prior} $\pi(\bm{z})$ is for instance a Gaussian distribution $\mathcal{N}(\bm{z},\bm{0},\bm{1})$. To do so, a second network ($\bm{D}$) acts as a \textit{discriminator} which aims to state if a sample $\bm{x}$ is from the model distribution or the data distribution. To reach that goal one solves the \texttt{min-max} problem
+The vanilla GAN \citep{goodfellow2014generative} shares with VAE the purpose to optimize a \textit{generator} network ($\bm{G}$) to get $\bm{x}$ samples from a latent variable $\bm{z}$ such that  $\bm{x} = \bm{G}(\bm{z})$ with $\bm{z}\in\mathbb{R}^{d_\ell}$ (in general $d_\ell\ll d$) \textit{prior} $\pi(\bm{z})$ is for instance a Gaussian distribution $\mathcal{N}(\bm{z},\bm{0},\bm{1})$. To do so, a second network ($\bm{D}$) acts as a \textit{discriminator} which aims to state if a sample $\bm{x}$ is from the model distribution or the data distribution. To reach that goal one solves the \texttt{min-max} problem
 \begin{equation}
 \min_{\bm{G}} \max_{\bm{D}}\left\{ \Esp_{\bm{x}\sim p_{data}(\bm{x})}[\log \bm{D}(\bm{x})] + \Esp_{\bm{z}\sim \pi(\bm{z})}[\log(1-\bm{D}(\bm{G}(\bm{z})))] \right\}
 \end{equation} 
@@ -211,6 +212,7 @@ Here $\bm{D}$ is a linear discriminator as in the Support Vector Machine context
 GAN architectures have been used for galaxy generation in conjunction of deblending and deconvolving tasks: for instance \cite{Schawinski2017,Hemmati_2022} use vanilla-GANs while  \cite{Coccomini2021} the \texttt{light-weight-GAN}.
 %
 \subsection{Normalizing Flows}
+\label{sec-NF}
 %
 Looking at Equation \ref{eq-VAE-ELBO}, one notices that the optimal solution is reached in case of $\DKL(p_{\bm{\phi}}(\bm{z}|\bm{x})\| p(\bm{z}|\bm{x}))=0$ which is true iif $p_{\bm{\phi}}(\bm{z}|\bm{x}) = p(\bm{z}|\bm{x})$. But this situation cannot be true in general as typical $p_{\bm{\phi}}$ parametrizations involve for instance independent Gaussian distributions. The limited choices of the parametrization is one of the limitation of VAE. So, one motivates the use of normalizing flows (NF) to allow for more flexibility in the distribution family design to hope that the true posterior is member of such family \citep{Tabak2010, Tabak2013a, Rezende2015}. 
 
@@ -366,8 +368,9 @@ spatial indices into tensors $\bm{x}$ and $\bm{y}$.  This flow step is embedded 
 \end{figure}
  %
 \subsection{Score based diffusion models}
+\label{sec-diff}
 %
-To generate samples from $p(\bm{x})$, we can proceed as follows \citep[e.g][]{Chang2023,LinYang2023}. Starting from a sample $\bm{x}_0$ assumed to be drawn from the distribution $p_0(\bm{x})=p(\bm{x})$, we progressively transform it until the  distribution is as simple as for instance $\mathcal{N}(\bm{z},\bm{0},\bm{1})$.  The idea is then to reverse the process (the \textit{backward} mode) by generating a new sample from a new instance of noise. This transfer mapping looks very similar in concept as normalizing flows. Their latent spaces have the same dimension as the data space, there is no compression as for VAE architecture, but the main difference consists in the fact that the normalizing flows are deterministic by essence while the \textit{score diffusion} models are stochastic. 
+To generate samples from $p(\bm{x})$, we can proceed as follows \citep[e.g][]{Chang2023,LinYang2023}. Starting from a sample $\bm{x}_0$ assumed to be drawn from the distribution $p_0(\bm{x})=p(\bm{x})$, we progressively transform it until the  distribution is as simple as for instance $\mathcal{N}(\bm{z},\bm{0},\bm{1})$.  The idea is then to reverse the process (the \textit{backward} mode) by generating a new sample from a new instance of noise. This transfer mapping looks very similar in concept as normalizing flows. Their latent spaces have the same dimension as the data space, there is no compression as for VAE and GAN architectures, but the main difference consists in the fact that the normalizing flows are deterministic by essence while the \textit{score diffusion} models are stochastic. 
 
 Following the notations used in \cite{kadkhodaie2024generalization}, the transport process used in the \textit{score diffusion} algorithm is the Ornstein-Uhlenbeck equation \citep{Uhlenbeck1930}. The \textit{forward} process follows the following stochastic differential equation:
 \begin{equation}
@@ -408,33 +411,37 @@ So, the use of a \textit{denoiser} network in a generative model is the schemati
 
 
 
-Denoising diffusion stochastic models have gain in popularity due to the fact that they get as good as results as GAN and have certain advantages. Notably they do not need any adversarial networks, the mathematical ground is clear and robust, the training is also theoretically well defined. But they use an iterative schema for the generation that can be computationally intensive and slower compared to GAN, and the implementation of stochastic processes may require some theoretical expertise even if this argument can be mitigated. More discussion about the comparison between the two architectures  can be found in this article \cite{dhariwal2021diffusion}. We do not investigate further the mixing of flow-based and diffusion-based models as \citep[e.g.][]{zhang2021diffusion,gong2021interpreting} as well as the use of diffusion models to improve GAN stability as introduced by \cite{Wang2022}. This can be envisaged in a future study.
+Denoising diffusion stochastic models have gain in popularity due to the fact that they get as good as results as GAN and have certain advantages. Notably they do not need any adversarial networks, the mathematical ground is clear and robust, the training is also theoretically well defined. But they use an iterative schema for the generation that can be computationally intensive and slower compared to GAN, and the implementation of stochastic processes may require some theoretical expertise even if this argument can be mitigated as expertise is also needed for all kinds of architectures. More discussion about the comparison between the two architectures  can be found in this article \cite{dhariwal2021diffusion}. We do not investigate further the mixing of flow-based and diffusion-based models as \citep[e.g.][]{zhang2021diffusion,gong2021interpreting} as well as the use of diffusion models to improve GAN stability as introduced by \cite{Wang2022}. This can be envisaged in a future study.
 %
 \section{Experiment}
 %
-Having briefly outlined different architectures of generative models in the previous section it turns out that one aspect in common between diffusion-based and flow-based models consists in the generation process of a $\bm{x}$ sample which starts by sampling a centred isotropic Gaussian distribution $\bm{z}\sim \mathcal{N}(\bm{z},\bm{0},\bm{1})$ (i.e. a white noise) of dimension $d$ equal to the final sample. But a question rises: if we train two generative models of the same kind, let say two flow-based or two diffusion-based, and if we feed them with the same white noise image, does the generative process of the two models give the same final image? If not we can ask ourselves about the nature of the learned process and if we are faced to a real probability density $p(\bm{x})$ sample or does the result is a sort of mixture of the original dataset images? 
+Having briefly outlined different architectures of generative models in the previous section, it turns out that the generation process of a $\bm{x}$ sample may start\footnote{nb. it is the typical implementation choice but one would have chosen uniform distribution as well.} by sampling a centred isotropic Gaussian distribution $\bm{z}\sim \mathcal{N}(\bm{z},\bm{0},\bm{1})$ (i.e. a white noise) of dimension $d_\ell$. In the case of VAE/GAN-based models $d_\ell\ll d$ while $d=d_\ell$ by construction for flow-based and diffusion-based models. But a question arises: if we train two generative models of the same kind, and if we feed them with the same white noise latent array, does the generative process of the two models give the same final image? If not we can ask ourselves about the nature of the learned process and if we are faced to a real probability density $p(\bm{x})$ sample or does the result is a sort of mixture of the original dataset images? 
 
-An answer to the previous question has been given in \cite{kadkhodaie2024generalization} and point out the size of the dataset in the passage from \textit{memorization} to \textit{generation} regimes. We propose to use the same methodology by comparing typically two generative models of same kind trained with two different non-overlapping sub-datasets extracted from the same dataset of original images.
-
+An answer to the previous question has been given in \cite{kadkhodaie2024generalization} in the context of diffusion-based models and point out the size of the dataset in the passage from \textit{memorization} to \textit{generation} regimes. We propose to use the same methodology by comparing typically two generative models of same kind trained with two different non-overlapping sub-datasets extracted from the same dataset of original images. In this task we cannot be exhaustive and choose only three models and a single dataset in our experiment. We think it is enough to draw some guide lines.
 %
-\subsection{Datasets}
+\subsection{Dataset}
 %
-Concerning the training dataset, \cite{kadkhodaie2024generalization}  have used different sources commonly-used in ML as \texttt{CelebA} \citep{Liu2015}, \texttt{LSUN} bedroom \citep{Yu2015} and  \texttt{CelebA HQ} \citep{KarrasALL18} datasets. All dataset images use  gray level single channel ranging in $[0,1]$.  The \texttt{LSUN}  images have been down sampled to $80\times 80$ as well as the \texttt{CelebA} images which also have been further down sampled to $32\times 32$ resolution, while \texttt{CelebA HQ}  have been down sampled to $40\times 40$ resolution.
+Concerning the training dataset, \cite{kadkhodaie2024generalization}  have used different sources commonly-used in ML as \texttt{CelebA} \citep{Liu2015}, \texttt{LSUN} bedroom \citep{Yu2015} and  \texttt{CelebA HQ} \citep{KarrasALL18} datasets. All dataset images use  gray scale (single channel) ranging in $[0,1]$.  The \texttt{LSUN}  images have been down sampled to $80\times 80$ as well as the \texttt{CelebA} images which also have been further down sampled to $32\times 32$ resolution, while \texttt{CelebA HQ}  have been down sampled to $40\times 40$ resolution.
 
-We are more concerned with galaxy image generation, but as we need to train two models with up to at least $100,000$ images each, we have chosen to use the SDSS (Sloan Digital Sky Survey) dataset described in \citep{smith2021}\footnote{See \url{https://github.com/Smith42/astroddpm} to obtain the raw data.} with some modification on the preprocessing. First, all images are cropped about the target coordinate galaxy to a shape of $64\times 64$ pixels, and secondly from the $(z,g,r)$ channels we produce a single  channel in the range $[0,1]$ using \texttt{scipy} \citep{2020SciPy-NMeth} library\footnote{In particular the \texttt{make\_lupton\_rgb} function has been applied with $Q=8$ and $stretch=0.2$ setting}. Moreover, the gray levels are coded using 5-bit precision in the line of experiment described in \cite{Kingma2018}. With such dataset according to \cite{kadkhodaie2024generalization} results, we expect the transition between memorization to generalisation regimes to occur with a number of training images in the range $10^4-10^5$. 
+We are more concerned with galaxy image generation, but as it will be clear in the result section, we need to train two models with up to at least $100,000$ images each, so we have chosen to use the Sloan Digital Sky Survey (SDSS) dataset described in \citep{smith2021}\footnote{See \url{https://github.com/Smith42/astroddpm} to obtain the raw data.} with some modification on the preprocessing. First, all images are cropped about the target coordinate galaxy to a shape of $64\times 64$ pixels, and secondly from the $(z,g,r)$ channels we produce a single  channel in the range $[0,1]$ using \texttt{scipy} \citep{2020SciPy-NMeth} library\footnote{In particular the \texttt{make\_lupton\_rgb} function has been applied with $Q=8$ and $stretch=0.2$ setting}. %Moreover, the gray levels are coded using 5-bit precision in the line of experiment described in \cite{Kingma2018}.
+ With such dataset according to \cite{kadkhodaie2024generalization} results, we expect the transition between memorization to generalisation regimes to occur with a number of training images in the range $10^4-10^5$. 
 
 \subsection{Models}
 %
-{\color{red} Concerning the models, for the GAN model type ....  
-For the diffusion-based model, we have used the same \texttt{U-Net} architecture \citep{2015arXiv150504597R}  as \textit{denoiser} consisting of a contracting part and an expending part that allows for multi-scale architecture with scale correlations. Details are found in \cite{kadkhodaie2024generalization}\footnote{Source code:  \url{https://github.com/LabForComputationalVision/memorization_generalization_in_diffusion_models}}. Second, for comparison purposes, we use the \texttt{Glow} flow-based model implemented\footnote{Source code: \url{https://github.com/rosinality/glow-pytorch}} in \texttt{PyTorch}  \citep{PyTorch2019}. The architecture has been presented on Figure \ref{fig-Glow-archi} and we use $K=32$ and $L=4$.}
+Concerning the models, we have chosen three architectures: a GAN, a flow-based and a diffusion-based. 
 
+For GAN model, we have chosen the \texttt{light-weight} architecture described in section \ref{sec-GAN} implemented\footnote{\url{https://github.com/lucidrains/lightweight-gan/}. We have chosen this code has it is more user-friendly compared to the original code given by authors (\url{https://github.com/odegeasslbc/FastGAN-pytorch/tree/main}).} in \texttt{PyTorch} \citep{PyTorch2019}. We have used default architecture settings as the latent space dimension ($d_\ell=256$) as well as the \textit{generator} and \textit{discriminator} (\textit{encoder} and \textit{decoders}) details. The total number of model parameters is about $36$~million.  We do not change as well the default optimizer choice and learning settings, except that first we force any input image to be resized to $128^2$, second we allow only horizontal and vertical flips for input data augmentation. Such model optimization takes about 30~hours for about $100,000$ iterations on a single Nvidia's GPU V100.
 
-So, we have trained two \texttt{U-Net}-based diffusion models with independent datasets of sizes  $N=10^2,10^3,10^4,10^5$ extracted from the whole dataset composed of $250,000$ galaxy images. The same training procedure used by \cite{kadkhodaie2024generalization} has been applied. Concerning the \texttt{Glow} model, we use two independent datasets of sizes $N=10^5$ and train two models with  batches of size $32$ for $450,000$ iterations. {\color{red} We refer the reader to the  github repository companion of the present article for the details of the different codes and notebooks used and models trained as well as to get the whole dataset of $250,000$ original galaxy images.}
+Concerning flow-based model, we use the \texttt{Glow} model implemented\footnote{Source code: \url{https://github.com/rosinality/glow-pytorch}} in \texttt{PyTorch}. The architecture has been presented on Figure \ref{fig-Glow-archi} (Sec.~\ref{sec-NF}) and we use $K=32$ and $L=4$ leading to about $61$~million parameters. Concerning the training we use defaults settings and as for the GAN training we allow only horizontal and vertical flips for input data augmentation. For completeness, the image pixel value encoding as been switched from 8-bit to 5-bit following \cite{Kingma2018}. We think that this has a minor impact on our results. We ask for $450,000$ iterations to complete a single model optimization which last approximately 100~hours.
+
+For the diffusion-based model, we have used the same \texttt{U-Net} architecture\footnote{Notice that \cite{2015arXiv150504597R} have also studied a different \textit{denoiser} architecture leading to the same result.} \citep{2015arXiv150504597R} as \textit{denoiser} consisting of a contracting part and an expending part that allows for multi-scale architecture with scale correlations. Details are found in \cite{kadkhodaie2024generalization}\footnote{\url{https://github.com/LabForComputationalVision/memorization_generalization_in_diffusion_models}}. The number of parameters is about $7.6$~million.  The same training procedure used by \cite{kadkhodaie2024generalization} has been applied with 100 epochs, lasting approximately 100~hours.
+
+{\color{red} We refer the reader to the  github repository companion of the present article for the details of the different codes and notebooks used and models trained as well as to get the whole dataset of $250,000$ original galaxy images.}
 %
 \subsection{Results}
 %
 \subsubsection{Generated images}
-Figure \ref{fig-Original-Glow-UNet-Gan-samples} presents some galaxy images extracted from the original dataset and generated by  diffusion-based and flow-based models trained with $N=10^5$ original images. 
+Figure \ref{fig-Original-Glow-UNet-Gan-samples} presents some galaxy images (\textit{validation}) extracted from the original dataset and some samples generated by  the three different models trained with $N=10^5$ images. 
 %
 \begin{figure}
     \centering
@@ -448,7 +455,7 @@ To be a bit more quantitative, Figure \ref{fig-morpho-coeff} presents  some morp
     \centering
 		\includegraphics[width=0.5\textwidth]{fig-CAS-all.pdf}
 		\includegraphics[width=0.35\textwidth]{fig-gini-m20-all.pdf}
-	\caption{Corner plots\protect\footnotemark of morphological coefficients computed with $10^4$ images, first from the original dataset but \textit{never} used by any models (red, "test"), second from a diffusion-based model generation (blue, "diffusion") and from a flow-based model generation (green, "Glow") (both models used for Figure \ref{fig-Original-Glow-UNet-samples}). The figure has been inspired by \cite{HACKSTEIN2023100685}.}
+	\caption{Corner plots\protect\footnotemark of morphological coefficients computed with $10^4$ images, first from the original dataset but \textit{never} used by any models (red, "test"), second from a diffusion-based model generation (blue, "diffusion") and from a flow-based model generation (green, "Glow") (both models used for Figure \ref{fig-Original-Glow-UNet-Gan-samples}). The figure has been inspired by \cite{HACKSTEIN2023100685}.}
 	\label{fig-morpho-coeff}
 \end{figure}
 \footnotetext{Plots from the library \url{https://corner.readthedocs.io} \citep{corner2016}.}
@@ -461,20 +468,16 @@ Before diving into the generative performances of the models, we present first s
 Using an image from the \textit{training} dataset, both networks have similar denoising results in terms of the evolution of the output images  PSNR values with respect to the PSNR of the noisy input images. What is the remarkable by contrast is the differences of the  PSNR evolutions when considering the \textit{validation image}: if the \texttt{U-Net} network trained with $N=100,000$ images obtains similar results as for the training image which is the sign of a good generalisation power, this is  not the case for the \texttt{U-Net} network trained with $N=100$ images. For this later  network, the PSNR values of the output images are nearly constant ($\mathrm{PSNR}=27$), even for very low noise level added to the original image. This difference of denoising power between the two networks has an impact on generative process as it starts from pure noise image to progressively output a noiseless image.
 \begin{figure}
     \centering
-%		\includegraphics[width=0.8\textwidth]{fig-UNet_100_denoising_train.pdf}\\
-%		\includegraphics[width=0.8\textwidth, trim={0 0 0 25cm},clip=True]{fig-UNet_100000_denoising_train.pdf}
-		\includegraphics[width=0.8\textwidth]{fig-UNet_denoising_train.pdf}
-	\caption{Performances of a some \texttt{U-Net} models using an image of the \textit{training sample}. Top row: (left to right) the original image with progressively a larger noise added. \texttt{PSNR} is defined as $10 \log10$ ratio of squared dynamic range
-to mean square error; the distance is the euclidean distance divided between the square root of number of pixels. Middle row: (left to right) (image, PSNR, distance) obtained after denoising the corresponding image of top row with \texttt{U-Net} trained with  $N=100$ images. Bottom row: same as the middle row but   with \texttt{U-Net} trained with  $N=100,000$ images.}
+		\includegraphics[width=0.8\textwidth]{fig-UNet_denoising_perf_train.pdf}
+	\caption{Performances of two \texttt{U-Net} models using an image of the \textit{training sample}. Top row: (left to right) the original image with progressively a larger noise added. \texttt{PSNR} is defined as $10 \log10$ ratio of squared dynamic range
+to mean square error. Middle row: (left to right) image and PSNR obtained after denoising the corresponding image on top row with \texttt{U-Net} trained with a dataset size of $N=100$. Bottom row: same as the middle row but with \texttt{U-Net} trained with  a much larger dataset of $N=100,000$ images.}
 	\label{fig-UNet-denoising-train}
 \end{figure}
 
 \begin{figure}
     \centering
-%		\includegraphics[width=0.8\textwidth]{fig-UNet_100_denoising_test.pdf}\\
-%		\includegraphics[width=0.8\textwidth, trim={0 0 0 25cm},clip=True]{fig-UNet_100000_denoising_test.pdf}
-	\includegraphics[width=0.8\textwidth]{fig-UNet_denoising_test.pdf}
-	\caption{Similar to  Figure \ref{fig-UNet-denoising-train} but  using an image never used to train any models (i.e. a \textit{validation} image). }
+	\includegraphics[width=0.8\textwidth]{fig-UNet_denoising_perf_test.pdf}
+	\caption{Similar to Figure \ref{fig-UNet-denoising-train} but  using an image never used to train any models (i.e. a \textit{validation} image). }
 	\label{fig-UNet-denoising-test}
 \end{figure}
 %
@@ -506,12 +509,23 @@ This last remarks invite ourselves to perform the same experiment with the \text
 \end{figure}
 
 
+%
+\begin{figure}
+    \centering
+	\includegraphics[width=0.8\textwidth]{fig-gan-cosine-AB_ATrain.pdf}
+	\caption{Histograms similar to those of Figure \ref{fig-cosine-diffusion} for two \texttt{light-weight} GAN models using two different datasets of size $N=100,000$ (nb. they are the same as the ones used by the diffusion models). Left: the cosine similarity of $1,000$ samples generated by the two models seeded by the same white noise image. Right: the maximum cosine similarity values of $1,000$ samples generated by one of the models and the training images and their flipped versions (horizontal, vertical and horizontal+vertical) as this data augmentation is used in the training process.}
+	\label{fig-cosine-gan} 
+\end{figure}
+
+
+
 
 
 \section{Discussion}
 
 
 \section*{Acknowledgements}
+We acknowledges the use of  Nvidia’s V100 resources from French GENCI–IDRIS (Grant 2024-AD010413957R1).
 
 \section*{Codes}
 
