@@ -1,0 +1,478 @@
+\begin{thebibliography}{}
+\makeatletter
+\relax
+\def\mn@urlcharsother{\let\do\@makeother \do\$\do\&\do\#\do\^\do\_\do\%\do\~}
+\def\mn@doi{\begingroup\mn@urlcharsother \@ifnextchar [ {\mn@doi@}
+  {\mn@doi@[]}}
+\def\mn@doi@[#1]#2{\def\@tempa{#1}\ifx\@tempa\@empty \href
+  {http://dx.doi.org/#2} {doi:#2}\else \href {http://dx.doi.org/#2} {#1}\fi
+  \endgroup}
+\def\mn@eprint#1#2{\mn@eprint@#1:#2::\@nil}
+\def\mn@eprint@arXiv#1{\href {http://arxiv.org/abs/#1} {{\tt arXiv:#1}}}
+\def\mn@eprint@dblp#1{\href {http://dblp.uni-trier.de/rec/bibtex/#1.xml}
+  {dblp:#1}}
+\def\mn@eprint@#1:#2:#3:#4\@nil{\def\@tempa {#1}\def\@tempb {#2}\def\@tempc
+  {#3}\ifx \@tempc \@empty \let \@tempc \@tempb \let \@tempb \@tempa \fi \ifx
+  \@tempb \@empty \def\@tempb {arXiv}\fi \@ifundefined
+  {mn@eprint@\@tempb}{\@tempb:\@tempc}{\expandafter \expandafter \csname
+  mn@eprint@\@tempb\endcsname \expandafter{\@tempc}}}
+
+\bibitem[\protect\citeauthoryear{Abazajian et~al.,}{Abazajian
+  et~al.}{2009}]{sdssdr7}
+Abazajian K.~N.,  et~al., 2009, \mn@doi [The Astrophysical Journal Supplement
+  Series] {10.1088/0067-0049/182/2/543}, 182, 543
+
+\bibitem[\protect\citeauthoryear{Arcelin, Doux, Aubourg, Roucelle  \&
+  Collaboration)}{Arcelin et~al.}{2020}]{Arcelin2020}
+Arcelin B.,  Doux C.,  Aubourg E.,  Roucelle C.,   Collaboration) T. L. D.
+  E.~S.,  2020, \mn@doi [Monthly Notices of the Royal Astronomical Society]
+  {10.1093/mnras/staa3062}, 500, 531
+
+\bibitem[\protect\citeauthoryear{Bengio, Yao, Alain  \& Vincent}{Bengio
+  et~al.}{2013}]{Bengio2013}
+Bengio Y.,  Yao L.,  Alain G.,   Vincent P.,  2013, in Proceedings of the 26th
+  International Conference on Neural Information Processing Systems - Volume 1.
+  NIPS'13.
+Curran Associates Inc., Red Hook, NY, USA, p. 899–907
+
+\bibitem[\protect\citeauthoryear{{Bershady}, {Jangren}  \&
+  {Conselice}}{{Bershady} et~al.}{2000}]{2000AJ....119.2645B}
+{Bershady} M.~A.,  {Jangren} A.,   {Conselice} C.~J.,  2000, \mn@doi [\aj]
+  {10.1086/301386}, \href
+  {https://ui.adsabs.harvard.edu/abs/2000AJ....119.2645B} {119, 2645}
+
+\bibitem[\protect\citeauthoryear{{Bogachev}, {Kolesnikov}  \&
+  {Medvedev}}{{Bogachev} et~al.}{2005}]{Bogachev2005}
+{Bogachev} V.~I.,  {Kolesnikov} A.~V.,   {Medvedev} K.~V.,  2005, \mn@doi
+  [Sbornik: Mathematics] {10.1070/SM2005v196n03ABEH000882}, \href
+  {https://ui.adsabs.harvard.edu/abs/2005SbMat.196..309B} {196, 309}
+
+\bibitem[\protect\citeauthoryear{Brock, Donahue  \& Simonyan}{Brock
+  et~al.}{2019a}]{brock2018large}
+Brock A.,  Donahue J.,   Simonyan K.,  2019a, in International Conference on
+  Learning Representations. \url {https://openreview.net/forum?id=B1xsqj09Fm}
+
+\bibitem[\protect\citeauthoryear{Brock, Donahue  \& Simonyan}{Brock
+  et~al.}{2019b}]{Brock2019}
+Brock A.,  Donahue J.,   Simonyan K.,  2019b, in 7th International Conference
+  on Learning Representations, {ICLR} 2019, New Orleans, LA, USA, May 6-9,
+  2019. OpenReview.net, \url {https://openreview.net/forum?id=B1xsqj09Fm}
+
+\bibitem[\protect\citeauthoryear{{Chang}, {Koulieris}  \& {Shum}}{{Chang}
+  et~al.}{2023}]{Chang2023}
+{Chang} Z.,  {Koulieris} G.~A.,   {Shum} H. P.~H.,  2023, \mn@doi [arXiv
+  e-prints] {10.48550/arXiv.2306.04542}, \href
+  {https://ui.adsabs.harvard.edu/abs/2023arXiv230604542C} {p. arXiv:2306.04542}
+
+\bibitem[\protect\citeauthoryear{{Coccomini}, {Messina}, {Gennaro}  \&
+  {Falchi}}{{Coccomini} et~al.}{2021}]{Coccomini2021}
+{Coccomini} D.,  {Messina} N.,  {Gennaro} C.,   {Falchi} F.,  2021, \mn@doi
+  [arXiv e-prints] {10.48550/arXiv.2111.11578}, \href
+  {https://ui.adsabs.harvard.edu/abs/2021arXiv211111578C} {p. arXiv:2111.11578}
+
+\bibitem[\protect\citeauthoryear{{Conselice}}{{Conselice}}{2003}]{2003ApJS..147....1C}
+{Conselice} C.~J.,  2003, \mn@doi [\apjs] {10.1086/375001}, \href
+  {https://ui.adsabs.harvard.edu/abs/2003ApJS..147....1C} {147, 1}
+
+\bibitem[\protect\citeauthoryear{Crenshaw, Kalmbach, Gagliano, Yan, Connolly,
+  Malz, Schmidt  \& Collaboration}{Crenshaw et~al.}{2024}]{Crenshaw_2024}
+Crenshaw J.~F.,  Kalmbach J.~B.,  Gagliano A.,  Yan Z.,  Connolly A.~J.,  Malz
+  A.~I.,  Schmidt S.~J.,   Collaboration T. L. D. E.~S.,  2024, \mn@doi [The
+  Astronomical Journal] {10.3847/1538-3881/ad54bf}, 168, 80
+
+\bibitem[\protect\citeauthoryear{Dhariwal \& Nichol}{Dhariwal \&
+  Nichol}{2021}]{dhariwal2021diffusion}
+Dhariwal P.,  Nichol A.,  2021, Advances in neural information processing
+  systems, 34, 8780
+
+\bibitem[\protect\citeauthoryear{Dinh, Krueger  \& Bengio}{Dinh
+  et~al.}{2015}]{DinhKB14}
+Dinh L.,  Krueger D.,   Bengio Y.,  2015, in Bengio Y.,  LeCun Y.,  eds, 3rd
+  International Conference on Learning Representations, {ICLR} 2015, San Diego,
+  CA, USA, May 7-9, 2015, Workshop Track Proceedings. \url
+  {http://arxiv.org/abs/1410.8516}
+
+\bibitem[\protect\citeauthoryear{Dinh, Sohl{-}Dickstein  \& Bengio}{Dinh
+  et~al.}{2017}]{DinhSB17}
+Dinh L.,  Sohl{-}Dickstein J.,   Bengio S.,  2017, in 5th International
+  Conference on Learning Representations, {ICLR} 2017, Toulon, France, April
+  24-26, 2017, Conference Track Proceedings. OpenReview.net, \url
+  {https://openreview.net/forum?id=HkpbnH9lx}
+
+\bibitem[\protect\citeauthoryear{Engel, Hoffman  \& Roberts}{Engel
+  et~al.}{2018}]{engel2018latent}
+Engel J.,  Hoffman M.,   Roberts A.,  2018, in International Conference on
+  Learning Representations. \url {https://openreview.net/forum?id=Sy8XvGb0-}
+
+\bibitem[\protect\citeauthoryear{Foreman-Mackey}{Foreman-Mackey}{2016}]{corner2016}
+Foreman-Mackey D.,  2016, \mn@doi [The Journal of Open Source Software]
+  {10.21105/joss.00024}, 1, 24
+
+\bibitem[\protect\citeauthoryear{Fussell \& Moews}{Fussell \&
+  Moews}{2019}]{Fussell2019}
+Fussell L.,  Moews B.,  2019, \mn@doi [Monthly Notices of the Royal
+  Astronomical Society] {10.1093/mnras/stz602}, 485, 3203
+
+\bibitem[\protect\citeauthoryear{Germain, Gregor, Murray  \&
+  Larochelle}{Germain et~al.}{2015}]{Germain2015}
+Germain M.,  Gregor K.,  Murray I.,   Larochelle H.,  2015, in Bach F.,  Blei
+  D.,  eds,  Proceedings of Machine Learning Research Vol. 37, Proceedings of
+  the 32nd International Conference on Machine Learning. PMLR, Lille, France,
+  pp 881--889, \url {https://proceedings.mlr.press/v37/germain15.html}
+
+\bibitem[\protect\citeauthoryear{Gong \& Li}{Gong \&
+  Li}{2021}]{gong2021interpreting}
+Gong W.,  Li Y.,  2021, in ICML Workshop on Invertible Neural Networks,
+  Normalizing Flows, and Explicit Likelihood Models. \url
+  {https://openreview.net/forum?id=jxsmOXCDv9l}
+
+\bibitem[\protect\citeauthoryear{Goodfellow, Pouget-Abadie, Mirza, Xu,
+  Warde-Farley, Ozair, Courville  \& Bengio}{Goodfellow
+  et~al.}{2014}]{goodfellow2014generative}
+Goodfellow I.,  Pouget-Abadie J.,  Mirza M.,  Xu B.,  Warde-Farley D.,  Ozair
+  S.,  Courville A.,   Bengio Y.,  2014, Advances in neural information
+  processing systems, 27
+
+\bibitem[\protect\citeauthoryear{Gulrajani, Ahmed, Arjovsky, Dumoulin  \&
+  Courville}{Gulrajani et~al.}{2017}]{Gulrajani2017}
+Gulrajani I.,  Ahmed F.,  Arjovsky M.,  Dumoulin V.,   Courville A.,  2017, in
+  Proceedings of the 31st International Conference on Neural Information
+  Processing Systems. NIPS'17.
+Curran Associates Inc., Red Hook, NY, USA, p. 5769–5779
+
+\bibitem[\protect\citeauthoryear{Guth, Coste, De~Bortoli  \& Mallat}{Guth
+  et~al.}{2022}]{Guth2022b}
+Guth F.,  Coste S.,  De~Bortoli V.,   Mallat S.,  2022, Advances in neural
+  information processing systems, 35, 478
+
+\bibitem[\protect\citeauthoryear{Hackstein, Kinakh, Bailer  \&
+  Melchior}{Hackstein et~al.}{2023}]{HACKSTEIN2023100685}
+Hackstein S.,  Kinakh V.,  Bailer C.,   Melchior M.,  2023, \mn@doi [Astronomy
+  and Computing] {https://doi.org/10.1016/j.ascom.2022.100685}, 42, 100685
+
+\bibitem[\protect\citeauthoryear{Hataya, Bao  \& Arai}{Hataya
+  et~al.}{2023}]{Hataya2023}
+Hataya R.,  Bao H.,   Arai H.,  2023, in 2023 IEEE/CVF International Conference
+  on Computer Vision (ICCV). IEEE Computer Society, Los Alamitos, CA, USA, pp
+  20498--20508, \mn@doi{10.1109/ICCV51070.2023.01879}, \url
+  {https://doi.ieeecomputersociety.org/10.1109/ICCV51070.2023.01879}
+
+\bibitem[\protect\citeauthoryear{Hemmati et~al.,}{Hemmati
+  et~al.}{2022}]{Hemmati_2022}
+Hemmati S.,  et~al., 2022, \mn@doi [The Astrophysical Journal]
+  {10.3847/1538-4357/aca1b8}, 941, 141
+
+\bibitem[\protect\citeauthoryear{Herbert}{Herbert}{1956}]{herbert1956empirical}
+Herbert R.,  1956, in Proceedings of the third berkeley symposium on
+  mathematical statistics and probability. pp 157--163
+
+\bibitem[\protect\citeauthoryear{Ho, Jain  \& Abbeel}{Ho et~al.}{2020}]{Ho2020}
+Ho J.,  Jain A.,   Abbeel P.,  2020, in Proceedings of the 34th International
+  Conference on Neural Information Processing Systems. NIPS '20.
+Curran Associates Inc., Red Hook, NY, USA
+
+\bibitem[\protect\citeauthoryear{Huang, Dinh  \& Courville}{Huang
+  et~al.}{2019}]{huang2019solving}
+Huang C.-W.,  Dinh L.,   Courville A.,  2019, in ICLR 2020 Workshop on
+  Integration of Deep Neural Models and Differential Equations. \url
+  {https://openreview.net/forum?id=cfKpOiUzF}
+
+\bibitem[\protect\citeauthoryear{Hyv{{\"a}}rinen}{Hyv{{\"a}}rinen}{2005}]{hyvarinen2005a}
+Hyv{{\"a}}rinen A.,  2005, Journal of Machine Learning Research, 6, 695
+
+\bibitem[\protect\citeauthoryear{Janulewicz, Perreault-Levasseur  \&
+  Webb}{Janulewicz et~al.}{2024}]{janulewicz2024assessing}
+Janulewicz P.,  Perreault-Levasseur L.,   Webb T.,  2024, in ICML 2024 Workshop
+  on Structured Probabilistic Inference {\&} Generative Modeling. \url
+  {https://openreview.net/forum?id=lzLMJ6KkiS}
+
+\bibitem[\protect\citeauthoryear{Jozdani, Chen, Pouliot  \& {Alan
+  Johnson}}{Jozdani et~al.}{2022}]{Jozdani2022}
+Jozdani S.,  Chen D.,  Pouliot D.,   {Alan Johnson} B.,  2022, \mn@doi
+  [International Journal of Applied Earth Observation and Geoinformation]
+  {https://doi.org/10.1016/j.jag.2022.102734}, 108, 102734
+
+\bibitem[\protect\citeauthoryear{Kadkhodaie, Guth, Simoncelli  \&
+  Mallat}{Kadkhodaie et~al.}{2024}]{kadkhodaie2024generalization}
+Kadkhodaie Z.,  Guth F.,  Simoncelli E.~P.,   Mallat S.,  2024, in The Twelfth
+  International Conference on Learning Representations. \url
+  {https://openreview.net/forum?id=ANvmVS2Yr0}
+
+\bibitem[\protect\citeauthoryear{Kansal, Li, Duarte, Chernyavskaya, Pierini,
+  Orzari  \& Tomei}{Kansal et~al.}{2023}]{PhysRevD.107.076017}
+Kansal R.,  Li A.,  Duarte J.,  Chernyavskaya N.,  Pierini M.,  Orzari B.,
+  Tomei T.,  2023, \mn@doi [Phys. Rev. D] {10.1103/PhysRevD.107.076017}, 107,
+  076017
+
+\bibitem[\protect\citeauthoryear{Karras, Aila, Laine  \& Lehtinen}{Karras
+  et~al.}{2018a}]{KarrasALL18}
+Karras T.,  Aila T.,  Laine S.,   Lehtinen J.,  2018a, in 6th International
+  Conference on Learning Representations, ICLR 2018, Vancouver, BC, Canada,
+  April 30 - May 3, 2018, Conference Track Proceedings. OpenReview.net, \url
+  {https://openreview.net/forum?id=Hk99zCeAb}
+
+\bibitem[\protect\citeauthoryear{Karras, Laine  \& Aila}{Karras
+  et~al.}{2018b}]{Karras2018ASG}
+Karras T.,  Laine S.,   Aila T.,  2018b, 2019 IEEE/CVF Conference on Computer
+  Vision and Pattern Recognition (CVPR), pp 4396--4405
+
+\bibitem[\protect\citeauthoryear{Karras, Laine, Aittala, Hellsten, Lehtinen  \&
+  Aila}{Karras et~al.}{2020}]{Karras2020}
+Karras T.,  Laine S.,  Aittala M.,  Hellsten J.,  Lehtinen J.,   Aila T.,
+  2020, in 2020 IEEE/CVF Conference on Computer Vision and Pattern Recognition
+  (CVPR). pp 8107--8116, \mn@doi{10.1109/CVPR42600.2020.00813}
+
+\bibitem[\protect\citeauthoryear{Kingma \& Dhariwal}{Kingma \&
+  Dhariwal}{2018}]{Kingma2018}
+Kingma D.~P.,  Dhariwal P.,  2018, in Bengio S.,  Wallach H.,  Larochelle H.,
+  Grauman K.,  Cesa-Bianchi N.,   Garnett R.,  eds,  NIPS '18 Vol. 31, Advances
+  in Neural Information Processing Systems. Curran Associates, Inc., \url
+  {https://proceedings.neurips.cc/paper_files/paper/2018/file/d139db6a236200b21cc7f752979132d0-Paper.pdf}
+
+\bibitem[\protect\citeauthoryear{Kingma \& Welling}{Kingma \&
+  Welling}{2014}]{Kingma2014}
+Kingma D.~P.,  Welling M.,  2014, in 2nd International Conference on Learning
+  Representations, {ICLR} 2014, Banff, AB, Canada, April 14-16, 2014,
+  Conference Track Proceedings.  (\mn@eprint {}
+  {http://arxiv.org/abs/1312.6114})
+
+\bibitem[\protect\citeauthoryear{Lanusse, Mandelbaum, Ravanbakhsh, Li, Freeman
+  \& Póczos}{Lanusse et~al.}{2021}]{Lanusse2021}
+Lanusse F.,  Mandelbaum R.,  Ravanbakhsh S.,  Li C.-L.,  Freeman P.,   Póczos
+  B.,  2021, \mn@doi [Monthly Notices of the Royal Astronomical Society]
+  {10.1093/mnras/stab1214}, 504, 5543
+
+\bibitem[\protect\citeauthoryear{{Lempereur} \& {Mallat}}{{Lempereur} \&
+  {Mallat}}{2024}]{Lempereur2024}
+{Lempereur} E.,  {Mallat} S.,  2024, \mn@doi [arXiv e-prints]
+  {10.48550/arXiv.2405.03468}, \href
+  {https://ui.adsabs.harvard.edu/abs/2024arXiv240503468L} {p. arXiv:2405.03468}
+
+\bibitem[\protect\citeauthoryear{{Lim} \& {Ye}}{{Lim} \& {Ye}}{2017}]{Lim2017}
+{Lim} J.~H.,  {Ye} J.~C.,  2017, \mn@doi [arXiv e-prints]
+  {10.48550/arXiv.1705.02894}, \href
+  {https://ui.adsabs.harvard.edu/abs/2017arXiv170502894L} {p. arXiv:1705.02894}
+
+\bibitem[\protect\citeauthoryear{Liu, Luo, Wang  \& Tang}{Liu
+  et~al.}{2015}]{Liu2015}
+Liu Z.,  Luo P.,  Wang X.,   Tang X.,  2015, in 2015 IEEE International
+  Conference on Computer Vision (ICCV). pp 3730--3738,
+  \mn@doi{10.1109/ICCV.2015.425}
+
+\bibitem[\protect\citeauthoryear{Liu, Zhu, Song  \& Elgammal}{Liu
+  et~al.}{2021}]{liu2021towards}
+Liu B.,  Zhu Y.,  Song K.,   Elgammal A.,  2021, in International Conference on
+  Learning Representations. \url {https://openreview.net/forum?id=1Fqg133qRaI}
+
+\bibitem[\protect\citeauthoryear{{Lotz}, {Primack}  \& {Madau}}{{Lotz}
+  et~al.}{2004}]{2004AJ....128..163L}
+{Lotz} J.~M.,  {Primack} J.,   {Madau} P.,  2004, \mn@doi [\aj]
+  {10.1086/421849}, \href
+  {https://ui.adsabs.harvard.edu/abs/2004AJ....128..163L} {128, 163}
+
+\bibitem[\protect\citeauthoryear{Mandelbaum, Lackner, Leauthaud  \&
+  Rowe}{Mandelbaum et~al.}{2019}]{mandelbaum_2019_3242143}
+Mandelbaum R.,  Lackner C.,  Leauthaud A.,   Rowe B.,  2019, COSMOS real galaxy
+  dataset, \mn@doi{10.5281/zenodo.3242143}, \url
+  {https://doi.org/10.5281/zenodo.3242143}
+
+\bibitem[\protect\citeauthoryear{Miyasawa et~al.}{Miyasawa
+  et~al.}{1961}]{miyasawa1961empirical}
+Miyasawa K.,  et~al., 1961, Bull. Inst. Internat. Statist, 38, 1
+
+\bibitem[\protect\citeauthoryear{Mohan, Kadkhodaie, Simoncelli  \&
+  Fernandez-Granda}{Mohan et~al.}{2020}]{Mohan2020Robust}
+Mohan S.,  Kadkhodaie Z.,  Simoncelli E.~P.,   Fernandez-Granda C.,  2020, in
+  International Conference on Learning Representations. \url
+  {https://openreview.net/forum?id=HJlSmC4FPS}
+
+\bibitem[\protect\citeauthoryear{Oppenlaender}{Oppenlaender}{2022}]{Oppenlaender2022}
+Oppenlaender J.,  2022, in Proceedings of the 25th International Academic
+  Mindtrek Conference. Academic Mindtrek '22.
+Association for Computing Machinery, New York, NY, USA, p. 192–202,
+  \mn@doi{10.1145/3569219.3569352}, \url
+  {https://doi.org/10.1145/3569219.3569352}
+
+\bibitem[\protect\citeauthoryear{Papamakarios, Pavlakou  \&
+  Murray}{Papamakarios et~al.}{2017}]{Papamakarios2017a}
+Papamakarios G.,  Pavlakou T.,   Murray I.,  2017, in Proceedings of the 31st
+  International Conference on Neural Information Processing Systems. NIPS'17.
+Curran Associates Inc., Red Hook, NY, USA, p. 2335–2344
+
+\bibitem[\protect\citeauthoryear{Papamakarios, Nalisnick, Rezende, Mohamed  \&
+  Lakshminarayanan}{Papamakarios et~al.}{2021}]{Papamakarios2021}
+Papamakarios G.,  Nalisnick E.,  Rezende D.~J.,  Mohamed S.,   Lakshminarayanan
+  B.,  2021, Journal of Machine Learning Research, 22, 1
+
+\bibitem[\protect\citeauthoryear{{Paszke} et~al.,}{{Paszke}
+  et~al.}{2019}]{PyTorch2019}
+{Paszke} A.,  et~al., 2019, \mn@doi [arXiv e-prints]
+  {10.48550/arXiv.1912.01703}, \href
+  {https://ui.adsabs.harvard.edu/abs/2019arXiv191201703P} {p. arXiv:1912.01703}
+
+\bibitem[\protect\citeauthoryear{{Ramesh}, {Dhariwal}, {Nichol}, {Chu}  \&
+  {Chen}}{{Ramesh} et~al.}{2022}]{ramesh2022}
+{Ramesh} A.,  {Dhariwal} P.,  {Nichol} A.,  {Chu} C.,   {Chen} M.,  2022,
+  \mn@doi [arXiv e-prints] {10.48550/arXiv.2204.06125}, \href
+  {https://ui.adsabs.harvard.edu/abs/2022arXiv220406125R} {p. arXiv:2204.06125}
+
+\bibitem[\protect\citeauthoryear{Raphan \& Simoncelli}{Raphan \&
+  Simoncelli}{2011}]{Raphan2011}
+Raphan M.,  Simoncelli E.~P.,  2011, \mn@doi [Neural Comput.]
+  {10.1162/NECO_a_00076}, 23, 374–420
+
+\bibitem[\protect\citeauthoryear{Ravanbakhsh, Lanusse, Mandelbaum, Schneider
+  \& Poczos}{Ravanbakhsh et~al.}{2017}]{ravanbakhsh2016}
+Ravanbakhsh S.,  Lanusse F.,  Mandelbaum R.,  Schneider J.,   Poczos B.,  2017,
+  in Proceedings of 31st AAAI Conference on Artificial Intelligence (AAAI '17).
+  pp 1488 -- 1494 (\mn@eprint {arXiv} {1609.05796})
+
+\bibitem[\protect\citeauthoryear{{Remy, B.}, {Lanusse, F.}, {Jeffrey, N.},
+  {Liu, J.}, {Starck, J.-L.}, {Osato, K.}  \& {Schrabback, T.}}{{Remy, B.}
+  et~al.}{2023}]{Remy2023}
+{Remy, B.} {Lanusse, F.} {Jeffrey, N.} {Liu, J.} {Starck, J.-L.} {Osato, K.}
+  {Schrabback, T.} 2023, \mn@doi [\aap] {10.1051/0004-6361/202243054}, 672, A51
+
+\bibitem[\protect\citeauthoryear{Rezende \& Mohamed}{Rezende \&
+  Mohamed}{2015}]{Rezende2015}
+Rezende D.~J.,  Mohamed S.,  2015, in Proceedings of the 32nd International
+  Conference on International Conference on Machine Learning - Volume 37.
+  ICML'15.
+JMLR.org, p. 1530–1538
+
+\bibitem[\protect\citeauthoryear{{Rodriguez-Gomez} et~al.,}{{Rodriguez-Gomez}
+  et~al.}{2019}]{2019MNRAS.483.4140R}
+{Rodriguez-Gomez} V.,  et~al., 2019, \mn@doi [\mnras] {10.1093/mnras/sty3345},
+  \href {https://ui.adsabs.harvard.edu/abs/2019MNRAS.483.4140R} {483, 4140}
+
+\bibitem[\protect\citeauthoryear{Rombach, Blattmann, Lorenz, Esser  \&
+  Ommer}{Rombach et~al.}{2022}]{Rombach2022}
+Rombach R.,  Blattmann A.,  Lorenz D.,  Esser P.,   Ommer B.,  2022, in 2022
+  IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR). pp
+  10674--10685, \mn@doi{10.1109/CVPR52688.2022.01042}
+
+\bibitem[\protect\citeauthoryear{Ronneberger, Fischer  \& Brox}{Ronneberger
+  et~al.}{2015}]{ronneberger2015u}
+Ronneberger O.,  Fischer P.,   Brox T.,  2015, in Navab N.,  Hornegger J.,
+  Wells W.~M.,   Frangi A.~F.,  eds, Medical Image Computing and
+  Computer-Assisted Intervention -- MICCAI 2015. Springer International
+  Publishing, Cham, pp 234--241
+
+\bibitem[\protect\citeauthoryear{Rowe et~al.,}{Rowe et~al.}{2015}]{ROWE2015121}
+Rowe B.,  et~al., 2015, \mn@doi [Astronomy and Computing]
+  {https://doi.org/10.1016/j.ascom.2015.02.002}, 10, 121
+
+\bibitem[\protect\citeauthoryear{Saxena \& Cao}{Saxena \&
+  Cao}{2021}]{Saxena2021}
+Saxena D.,  Cao J.,  2021, \mn@doi [ACM Comput. Surv.] {10.1145/3446374}, 54
+
+\bibitem[\protect\citeauthoryear{{Schanz}, {List}  \& {Hahn}}{{Schanz}
+  et~al.}{2023}]{Schanz2023}
+{Schanz} A.,  {List} F.,   {Hahn} O.,  2023, \mn@doi [arXiv e-prints]
+  {10.48550/arXiv.2310.06929}, \href
+  {https://ui.adsabs.harvard.edu/abs/2023arXiv231006929S} {p. arXiv:2310.06929}
+
+\bibitem[\protect\citeauthoryear{Schawinski, Zhang, Zhang, Fowler  \&
+  Santhanam}{Schawinski et~al.}{2017}]{Schawinski2017}
+Schawinski K.,  Zhang C.,  Zhang H.,  Fowler L.,   Santhanam G.~K.,  2017,
+  \mn@doi [Monthly Notices of the Royal Astronomical Society: Letters]
+  {10.1093/mnrasl/slx008}, 467, L110
+
+\bibitem[\protect\citeauthoryear{Smith, Geach, Jackson, Arora, Stone  \&
+  Courteau}{Smith et~al.}{2022}]{smith2021}
+Smith M.~J.,  Geach J.~E.,  Jackson R.~A.,  Arora N.,  Stone C.,   Courteau S.,
+   2022, \mn@doi [Monthly Notices of the Royal Astronomical Society]
+  {10.1093/mnras/stac130}, 511, 1808
+
+\bibitem[\protect\citeauthoryear{Snyder et~al.,}{Snyder
+  et~al.}{2015}]{10.1093/mnras/stv2078}
+Snyder G.~F.,  et~al., 2015, \mn@doi [Monthly Notices of the Royal Astronomical
+  Society] {10.1093/mnras/stv2078}, 454, 1886
+
+\bibitem[\protect\citeauthoryear{Sohl-Dickstein, Weiss, Maheswaranathan  \&
+  Ganguli}{Sohl-Dickstein et~al.}{2015}]{Sohl-Dickstein2015}
+Sohl-Dickstein J.,  Weiss E.,  Maheswaranathan N.,   Ganguli S.,  2015, in Bach
+  F.,  Blei D.,  eds,  Proceedings of Machine Learning Research Vol. 37,
+  Proceedings of the 32nd International Conference on Machine Learning. PMLR,
+  Lille, France, pp 2256--2265, \url
+  {https://proceedings.mlr.press/v37/sohl-dickstein15.html}
+
+\bibitem[\protect\citeauthoryear{Tabak \& Turner}{Tabak \&
+  Turner}{2013}]{Tabak2013a}
+Tabak E.~G.,  Turner C.~V.,  2013, \mn@doi [Communications on Pure and Applied
+  Mathematics] {https://doi.org/10.1002/cpa.21423}, 66, 145
+
+\bibitem[\protect\citeauthoryear{Tabak \& Vanden-Eijnden}{Tabak \&
+  Vanden-Eijnden}{2010}]{Tabak2010}
+Tabak E.~G.,  Vanden-Eijnden E.,  2010, Communications in Mathematical
+  Sciences, 8, 217
+
+\bibitem[\protect\citeauthoryear{Takida, Liao, Lai, Uesaka, Takahashi  \&
+  Mitsufuji}{Takida et~al.}{2022}]{Takida2022}
+Takida Y.,  Liao W.-H.,  Lai C.-H.,  Uesaka T.,  Takahashi S.,   Mitsufuji Y.,
+  2022, \mn@doi [Neurocomput.] {10.1016/j.neucom.2022.08.067}, 509, 137–156
+
+\bibitem[\protect\citeauthoryear{Tan, Steinbach  \& Kumar}{Tan
+  et~al.}{2005}]{books/aw/TanSK2005}
+Tan P.-N.,  Steinbach M.~S.,   Kumar V.,  2005, Introduction to Data Mining.
+Addison-Wesley
+
+\bibitem[\protect\citeauthoryear{Tweedie}{Tweedie}{1947}]{tweedie1947functions}
+Tweedie M. C.~K.,  1947, \mn@doi [Mathematical Proceedings of the Cambridge
+  Philosophical Society] {10.1017/S0305004100023185}, 43, 41–49
+
+\bibitem[\protect\citeauthoryear{Uhlenbeck \& Ornstein}{Uhlenbeck \&
+  Ornstein}{1930}]{Uhlenbeck1930}
+Uhlenbeck G.~E.,  Ornstein L.~S.,  1930, \mn@doi [Phys. Rev.]
+  {10.1103/PhysRev.36.823}, 36, 823
+
+\bibitem[\protect\citeauthoryear{Vapnik}{Vapnik}{1997}]{Vapnik1997}
+Vapnik V.~N.,  1997, in Gerstner W.,  Germond A.,  Hasler M.,   Nicoud J.-D.,
+  eds, Artificial Neural Networks --- ICANN'97. Springer Berlin Heidelberg,
+  Berlin, Heidelberg, pp 261--271
+
+\bibitem[\protect\citeauthoryear{Vaswani, Shazeer, Parmar, Uszkoreit, Jones,
+  Gomez, Kaiser  \& Polosukhin}{Vaswani et~al.}{2017}]{Vaswani2017}
+Vaswani A.,  Shazeer N.,  Parmar N.,  Uszkoreit J.,  Jones L.,  Gomez A.~N.,
+  Kaiser L.,   Polosukhin I.,  2017, in Proceedings of the 31st International
+  Conference on Neural Information Processing Systems. NIPS'17.
+Curran Associates Inc., Red Hook, NY, USA, p. 6000–6010
+
+\bibitem[\protect\citeauthoryear{Virtanen et~al.,}{Virtanen
+  et~al.}{2020}]{2020SciPy-NMeth}
+Virtanen P.,  et~al., 2020, \mn@doi [Nature Methods]
+  {10.1038/s41592-019-0686-2}, \href {https://rdcu.be/b08Wh} {17, 261}
+
+\bibitem[\protect\citeauthoryear{Wang, Zheng, He, Chen  \& Zhou}{Wang
+  et~al.}{2023}]{Wang2023}
+Wang Z.,  Zheng H.,  He P.,  Chen W.,   Zhou M.,  2023, in The Eleventh
+  International Conference on Learning Representations. \url
+  {https://openreview.net/forum?id=HZf7UbpWHuA}
+
+\bibitem[\protect\citeauthoryear{Yang et~al.,}{Yang et~al.}{2023}]{LinYang2023}
+Yang L.,  et~al., 2023, \mn@doi [ACM Comput. Surv.] {10.1145/3626235}, 56
+
+\bibitem[\protect\citeauthoryear{{York} et~al.,}{{York} et~al.}{2000}]{sdss}
+{York} D.~G.,  et~al., 2000, \mn@doi [\aj] {10.1086/301513}, \href
+  {https://ui.adsabs.harvard.edu/abs/2000AJ....120.1579Y} {120, 1579}
+
+\bibitem[\protect\citeauthoryear{{Yu}, {Seff}, {Zhang}, {Song}, {Funkhouser}
+  \& {Xiao}}{{Yu} et~al.}{2015}]{Yu2015}
+{Yu} F.,  {Seff} A.,  {Zhang} Y.,  {Song} S.,  {Funkhouser} T.,   {Xiao} J.,
+  2015, \mn@doi [arXiv e-prints] {10.48550/arXiv.1506.03365}, \href
+  {https://ui.adsabs.harvard.edu/abs/2015arXiv150603365Y} {p. arXiv:1506.03365}
+
+\bibitem[\protect\citeauthoryear{Zhang \& Chen}{Zhang \&
+  Chen}{2021}]{zhang2021diffusion}
+Zhang Q.,  Chen Y.,  2021, in Beygelzimer A.,  Dauphin Y.,  Liang P.,   Vaughan
+  J.~W.,  eds, Advances in Neural Information Processing Systems. \url
+  {https://openreview.net/forum?id=x1Lp2bOlVIo}
+
+\bibitem[\protect\citeauthoryear{{Zhao}, {Ting}, {Diao}  \& {Mao}}{{Zhao}
+  et~al.}{2023}]{Zhao2023}
+{Zhao} X.,  {Ting} Y.-S.,  {Diao} K.,   {Mao} Y.,  2023, \mn@doi [\mnras]
+  {10.1093/mnras/stad2778}, \href
+  {https://ui.adsabs.harvard.edu/abs/2023MNRAS.526.1699Z} {526, 1699}
+
+\makeatother
+\end{thebibliography}
