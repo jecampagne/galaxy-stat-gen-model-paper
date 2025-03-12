@@ -113,13 +113,6 @@ Foreman-Mackey D.,  2016, \mn@doi [The Journal of Open Source Software]
 Fussell L.,  Moews B.,  2019, \mn@doi [Monthly Notices of the Royal
   Astronomical Society] {10.1093/mnras/stz602}, 485, 3203
 
-\bibitem[\protect\citeauthoryear{Germain, Gregor, Murray  \&
-  Larochelle}{Germain et~al.}{2015}]{Germain2015}
-Germain M.,  Gregor K.,  Murray I.,   Larochelle H.,  2015, in Bach F.,  Blei
-  D.,  eds,  Proceedings of Machine Learning Research Vol. 37, Proceedings of
-  the 32nd International Conference on Machine Learning. PMLR, Lille, France,
-  pp 881--889, \url {https://proceedings.mlr.press/v37/germain15.html}
-
 \bibitem[\protect\citeauthoryear{Gong \& Li}{Gong \&
   Li}{2021}]{gong2021interpreting}
 Gong W.,  Li Y.,  2021, in ICML Workshop on Invertible Neural Networks,
@@ -141,8 +134,13 @@ Gulrajani I.,  Ahmed F.,  Arjovsky M.,  Dumoulin V.,   Courville A.,  2017, in
 Curran Associates Inc., Red Hook, NY, USA, p. 5769–5779
 
 \bibitem[\protect\citeauthoryear{Guth, Coste, De~Bortoli  \& Mallat}{Guth
-  et~al.}{2022}]{Guth2022b}
-Guth F.,  Coste S.,  De~Bortoli V.,   Mallat S.,  2022, Advances in neural
+  et~al.}{2022a}]{guth2022wavelet}
+Guth F.,  Coste S.,  De~Bortoli V.,   Mallat S.,  2022a, Advances in neural
+  information processing systems, 35, 478
+
+\bibitem[\protect\citeauthoryear{Guth, Coste, De~Bortoli  \& Mallat}{Guth
+  et~al.}{2022b}]{Guth2022b}
+Guth F.,  Coste S.,  De~Bortoli V.,   Mallat S.,  2022b, Advances in neural
   information processing systems, 35, 478
 
 \bibitem[\protect\citeauthoryear{Hackstein, Kinakh, Bailer  \&
