@@ -119,11 +119,9 @@
 \newlabel{eq-backward-diffusion}{{20}{5}{Score-based diffusion models}{equation.20}{}}
 \newlabel{thm-score-denoising}{{21}{5}{Score-based diffusion models}{equation.21}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Some comments}{5}{subsection.2.5}\protected@file@percent }
+\newlabel{sec-some-comments}{{2.5}{5}{Some comments}{subsection.2.5}{}}
 \citation{Brock2019}
 \citation{kadkhodaie2024generalization}
-\citation{kadkhodaie2024generalization}
-\citation{smith2021}
-\citation{2020SciPy-NMeth}
 \citation{PyTorch2019}
 \citation{HACKSTEIN2023100685}
 \citation{HACKSTEIN2023100685}
@@ -131,15 +129,18 @@
 \citation{Kingma2018}
 \citation{ronneberger2015u}
 \citation{kadkhodaie2024generalization}
+\citation{kadkhodaie2024generalization}
+\citation{smith2021}
+\citation{2020SciPy-NMeth}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Experiment}{6}{section.3}\protected@file@percent }
+\newlabel{sec-experiment}{{3}{6}{Experiment}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}The models}{6}{subsection.3.1}\protected@file@percent }
+\newlabel{sec-Exp-Models}{{3.1}{6}{The models}{subsection.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}The dataset}{6}{subsection.3.2}\protected@file@percent }
+\newlabel{sec-Dataset}{{3.2}{6}{The dataset}{subsection.3.2}{}}
 \citation{2019MNRAS.483.4140R}
 \citation{2000AJ....119.2645B,2003ApJS..147....1C,2004AJ....128..163L}
 \citation{2004AJ....128..163L,10.1093/mnras/stv2078}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Experiment}{6}{section.3}\protected@file@percent }
-\newlabel{sec-experiment}{{3}{6}{Experiment}{section.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}The dataset}{6}{subsection.3.1}\protected@file@percent }
-\newlabel{sec-Dataset}{{3.1}{6}{The dataset}{subsection.3.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}The models}{6}{subsection.3.2}\protected@file@percent }
-\newlabel{sec-Exp-Models}{{3.2}{6}{The models}{subsection.3.2}{}}
 \citation{ravanbakhsh2016,Fussell2019,Lanusse2021,smith2021,HACKSTEIN2023100685}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Examples of \textit  {validation} images from the original dataset (top row) and generated samples from different models trained with $N = 10^5$ images: the \texttt  {light-weight-gan} GAN-based model (second row), the \texttt  {Glow} flow-based model (third row), and the diffusion-based model with a \texttt  {U-Net} denoiser (bottom row).\relax }}{7}{figure.caption.3}\protected@file@percent }
 \newlabel{fig-Original-Glow-UNet-Gan-samples}{{3}{7}{Examples of \textit {validation} images from the original dataset (top row) and generated samples from different models trained with $N = 10^5$ images: the \texttt {light-weight-gan} GAN-based model (second row), the \texttt {Glow} flow-based model (third row), and the diffusion-based model with a \texttt {U-Net} denoiser (bottom row).\relax }{figure.caption.3}{}}
@@ -149,10 +150,7 @@
 \newlabel{sec-Results}{{3.3}{7}{Results}{subsection.3.3}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Generated images}{7}{subsubsection.3.3.1}\protected@file@percent }
 \newlabel{sec-Generated-Images}{{3.3.1}{7}{Generated images}{subsubsection.3.3.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}\texttt  {U-Net} Denoising Performances}{7}{subsubsection.3.3.2}\protected@file@percent }
-\newlabel{sec-UNet-Perf}{{3.3.2}{7}{\texttt {U-Net} Denoising Performances}{subsubsection.3.3.2}{}}
 \citation{books/aw/TanSK2005}
-\citation{kadkhodaie2024generalization}
 \citation{kadkhodaie2024generalization}
 \citation{kadkhodaie2024generalization}
 \citation{kadkhodaie2024generalization}
@@ -160,39 +158,44 @@
 \newlabel{fig-UNet-denoising-train}{{5}{8}{Denoising performances of two \texttt {U-Net} models on an image from the \textit {training sample}. Top row: (left to right) the original image with progressively increasing noise added. The \texttt {PSNR} is defined as $10\log _{10}$ ratio of the squared dynamic range to the mean square error. Middle row: (left to right) denoised images and their PSNR values obtained using a \texttt {U-Net} trained with a dataset of size $N=100$. Bottom row: same as the middle row but with a \texttt {U-Net} trained with a much larger dataset of $N=100,000$ images.\relax }{figure.caption.5}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Similar to Figure\nobreakspace  {}\ref  {fig-UNet-denoising-train}, but applied to an image that was never used to train the networks (a \textit  {validation} image).\relax }}{8}{figure.caption.6}\protected@file@percent }
 \newlabel{fig-UNet-denoising-test}{{6}{8}{Similar to Figure~\ref {fig-UNet-denoising-train}, but applied to an image that was never used to train the networks (a \textit {validation} image).\relax }{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}\texttt  {U-Net} Denoising Performances}{8}{subsubsection.3.3.2}\protected@file@percent }
+\newlabel{sec-UNet-Perf}{{3.3.2}{8}{\texttt {U-Net} Denoising Performances}{subsubsection.3.3.2}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Two Diffusion-Based Models Test}{8}{subsubsection.3.3.3}\protected@file@percent }
 \newlabel{sec-two_models-Diffusion}{{3.3.3}{8}{Two Diffusion-Based Models Test}{subsubsection.3.3.3}{}}
+\citation{kadkhodaie2024generalization}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Evolution of the cosine similarity metric for diffusion-based models. Top row: normalized histograms of cosine similarity values between $1,000$ samples generated by two models trained on independent datasets of size $N$, using the same white noise images as seeds. Bottom row: maximum cosine similarity between $1,000$ generated samples from a single model and all images in its corresponding training dataset (i.e., the cosine of the closest training image for each generated sample). The logarithmic vertical scale and linear horizontal scale (cosine value) are consistent across all histograms on each row. The horizontal range in the bottom row is restricted to values near the maximum (cosine = 1), indicated by the dashed red vertical line. This figure is inspired by Figure 2 of \cite {kadkhodaie2024generalization}.\relax }}{9}{figure.caption.7}\protected@file@percent }
 \newlabel{fig-cosine-diffusion}{{7}{9}{Evolution of the cosine similarity metric for diffusion-based models. Top row: normalized histograms of cosine similarity values between $1,000$ samples generated by two models trained on independent datasets of size $N$, using the same white noise images as seeds. Bottom row: maximum cosine similarity between $1,000$ generated samples from a single model and all images in its corresponding training dataset (i.e., the cosine of the closest training image for each generated sample). The logarithmic vertical scale and linear horizontal scale (cosine value) are consistent across all histograms on each row. The horizontal range in the bottom row is restricted to values near the maximum (cosine = 1), indicated by the dashed red vertical line. This figure is inspired by Figure 2 of \protect \cite {kadkhodaie2024generalization}.\relax }{figure.caption.7}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Some morphological coefficients (see Figure\nobreakspace  {}\ref  {fig-morpho-coeff}) computed using diffusion models trained with different dataset sizes ($N=10^5, 10^4, 10^3$).\relax }}{9}{figure.caption.8}\protected@file@percent }
 \newlabel{fig-morpho-coeff-diff-comparison}{{8}{9}{Some morphological coefficients (see Figure~\ref {fig-morpho-coeff}) computed using diffusion models trained with different dataset sizes ($N=10^5, 10^4, 10^3$).\relax }{figure.caption.8}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.4}Flow-Based Models Tests}{9}{subsubsection.3.3.4}\protected@file@percent }
-\newlabel{sec-two_models-Flow}{{3.3.4}{9}{Flow-Based Models Tests}{subsubsection.3.3.4}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Histograms similar to those of Figure\nobreakspace  {}\ref  {fig-cosine-diffusion} for two \texttt  {Glow} models trained on independent datasets of size $N=100,000$ (identical to the datasets used by the diffusion models). Left: cosine similarity of $1,000$ samples generated by the two models seeded with the same white noise image. Right: maximum cosine similarity values of $1,000$ samples generated by one model compared to all training images and their augmented versions (horizontal, vertical, and horizontal+vertical flips), as these augmentations are part of the \texttt  {Glow} training process.\relax }}{9}{figure.caption.9}\protected@file@percent }
 \newlabel{fig-cosine-glow}{{9}{9}{Histograms similar to those of Figure~\ref {fig-cosine-diffusion} for two \texttt {Glow} models trained on independent datasets of size $N=100,000$ (identical to the datasets used by the diffusion models). Left: cosine similarity of $1,000$ samples generated by the two models seeded with the same white noise image. Right: maximum cosine similarity values of $1,000$ samples generated by one model compared to all training images and their augmented versions (horizontal, vertical, and horizontal+vertical flips), as these augmentations are part of the \texttt {Glow} training process.\relax }{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.4}Flow-Based Models Tests}{9}{subsubsection.3.3.4}\protected@file@percent }
+\newlabel{sec-two_models-Flow}{{3.3.4}{9}{Flow-Based Models Tests}{subsubsection.3.3.4}{}}
 \citation{Lim2017}
 \@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Results of the "inversion test" using $1,000$ samples $\bm  {z}$ (see text). Top panel: Comparison of $z^\prime _{\texttt  {model}}$ vs. $z$ at all levels of the \texttt  {Glow} architecture (see Figure\nobreakspace  {}\ref  {fig-Glow-archi}) for Model A (blue dots) and Model B (orange dots). Bottom panel: Distributions of $z^\prime _{\texttt  {model}}[\ell ]$ for different levels $\ell = \{0, 1, 2 = L\}$, where solid (resp. dashed) curves correspond to Model A (resp. Model B). Both models were trained on independent datasets of $10^5$ galaxy images.\relax }}{10}{figure.caption.10}\protected@file@percent }
 \newlabel{fig-glow-inversibility}{{10}{10}{Results of the "inversion test" using $1,000$ samples $\bm {z}$ (see text). Top panel: Comparison of $z^\prime _{\texttt {model}}$ vs. $z$ at all levels of the \texttt {Glow} architecture (see Figure~\ref {fig-Glow-archi}) for Model A (blue dots) and Model B (orange dots). Bottom panel: Distributions of $z^\prime _{\texttt {model}}[\ell ]$ for different levels $\ell = \{0, 1, 2 = L\}$, where solid (resp. dashed) curves correspond to Model A (resp. Model B). Both models were trained on independent datasets of $10^5$ galaxy images.\relax }{figure.caption.10}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Same legend as bottom panel of Figure \ref  {fig-glow-inversibility} but the models have been trained with independent datasets composed of $10^3$ galaxy images. One notices that de $z_B^\prime $ distributions significantly tend to deviate from the $z$ (i.e. $\mathcal  {N}(\bm  {0},\bm  {1})$) contrary to the $z_A^\prime $ distributions.\relax }}{10}{figure.caption.12}\protected@file@percent }
 \newlabel{fig-glow-inversibility-1000}{{11}{10}{Same legend as bottom panel of Figure \ref {fig-glow-inversibility} but the models have been trained with independent datasets composed of $10^3$ galaxy images. One notices that de $z_B^\prime $ distributions significantly tend to deviate from the $z$ (i.e. $\mathcal {N}(\bm {0},\bm {1})$) contrary to the $z_A^\prime $ distributions.\relax }{figure.caption.12}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Some morphological coefficients (see Figure\nobreakspace  {}\ref  {fig-morpho-coeff}) computed using \texttt  {Glow} models trained with different dataset sizes ($N=10^5, 10^4, 10^3$). We can notice a degradation of the $M_{20}$ distribution when the number of training images decreases.\relax }}{10}{figure.caption.13}\protected@file@percent }
-\newlabel{fig-morpho-coeff-glow-comparison}{{12}{10}{Some morphological coefficients (see Figure~\ref {fig-morpho-coeff}) computed using \texttt {Glow} models trained with different dataset sizes ($N=10^5, 10^4, 10^3$). We can notice a degradation of the $M_{20}$ distribution when the number of training images decreases.\relax }{figure.caption.13}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.5}GAN-based models tests}{10}{subsubsection.3.3.5}\protected@file@percent }
 \newlabel{sec-two_models-GAN}{{3.3.5}{10}{GAN-based models tests}{subsubsection.3.3.5}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Values of the 1-Wasserstein metric ($W_1(X,Y)$) computed for \texttt  {Glow} models trained in the "two-models test" context with three different training dataset sizes. For $K=32$ flows and $L=3$ levels, and considering $1,000$ generated images, one obtains $6\times 10^6$ (resp. $3\times 10^6$) $z$ and $z^\prime $ samples at level 0 (resp. levels 1, 2). Using i.i.d. samples $(X,Y)$ from $\mathcal  {N}(0,1)$ yields $W_1(X,Y) \approx 7\times 10^{-4}$ (resp. $\approx 10^{-3}$) for level 0 (resp. levels 1, 2). The very low value of $W_1(z^\prime _A, z) = O(10^{-6})$ is a direct consequence of the $z^\prime _A = z$ property shown in the left panel of Figure\nobreakspace  {}\ref  {fig-glow-inversibility}.\relax }}{11}{table.caption.11}\protected@file@percent }
 \newlabel{tab:Wasserstein-1-Glow-AB}{{1}{11}{Values of the 1-Wasserstein metric ($W_1(X,Y)$) computed for \texttt {Glow} models trained in the "two-models test" context with three different training dataset sizes. For $K=32$ flows and $L=3$ levels, and considering $1,000$ generated images, one obtains $6\times 10^6$ (resp. $3\times 10^6$) $z$ and $z^\prime $ samples at level 0 (resp. levels 1, 2). Using i.i.d. samples $(X,Y)$ from $\mathcal {N}(0,1)$ yields $W_1(X,Y) \approx 7\times 10^{-4}$ (resp. $\approx 10^{-3}$) for level 0 (resp. levels 1, 2). The very low value of $W_1(z^\prime _A, z) = O(10^{-6})$ is a direct consequence of the $z^\prime _A = z$ property shown in the left panel of Figure~\ref {fig-glow-inversibility}.\relax }{table.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Some morphological coefficients (see Figure\nobreakspace  {}\ref  {fig-morpho-coeff}) computed using \texttt  {Glow} models trained with different dataset sizes ($N=10^5, 10^4, 10^3$). We can notice a degradation of the $M_{20}$ distribution when the number of training images decreases.\relax }}{11}{figure.caption.13}\protected@file@percent }
+\newlabel{fig-morpho-coeff-glow-comparison}{{12}{11}{Some morphological coefficients (see Figure~\ref {fig-morpho-coeff}) computed using \texttt {Glow} models trained with different dataset sizes ($N=10^5, 10^4, 10^3$). We can notice a degradation of the $M_{20}$ distribution when the number of training images decreases.\relax }{figure.caption.13}{}}
+\newlabel{eq-hinge-loss-ab}{{22}{11}{GAN-based models tests}{equation.22}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Histograms similar to those of Figures \ref  {fig-cosine-diffusion}, \ref  {fig-cosine-glow} for two \texttt  {light-weight} GAN models using two different datasets of size $N=100,000$ (nb. they are the same as the ones used by the diffusion models). Left: the cosine similarity of $1,000$ samples generated by the two models seeded by the same white noise image. Right: the maximum cosine similarity values of $1,000$ samples generated by one of the models and the training images and their flipped versions (horizontal, vertical and horizontal+vertical) as this data augmentation is used in the training process.\relax }}{11}{figure.caption.14}\protected@file@percent }
 \newlabel{fig-cosine-gan}{{13}{11}{Histograms similar to those of Figures \ref {fig-cosine-diffusion}, \ref {fig-cosine-glow} for two \texttt {light-weight} GAN models using two different datasets of size $N=100,000$ (nb. they are the same as the ones used by the diffusion models). Left: the cosine similarity of $1,000$ samples generated by the two models seeded by the same white noise image. Right: the maximum cosine similarity values of $1,000$ samples generated by one of the models and the training images and their flipped versions (horizontal, vertical and horizontal+vertical) as this data augmentation is used in the training process.\relax }{figure.caption.14}{}}
-\newlabel{eq-hinge-loss-ab}{{22}{11}{GAN-based models tests}{equation.22}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Evolution of the hinge loss (Equation\nobreakspace  {}\ref  {eq-hinge-loss-ab}) for the "discriminator test" across various training epochs for models "A" and "B". Here, \(D_M(\bm  {x}_{M^\prime })\) represents the output of the discriminator of model \(M\) applied to samples generated by the generator of model \(M^\prime \), while \(\bm  {x}_{\text  {train}}\) refers to samples from the respective training dataset used for both models. All models were trained using datasets consisting of $N=10^5$ images.\relax }}{12}{figure.caption.15}\protected@file@percent }
 \newlabel{fig-gan-hinge-loss-evol}{{14}{12}{Evolution of the hinge loss (Equation~\ref {eq-hinge-loss-ab}) for the "discriminator test" across various training epochs for models "A" and "B". Here, \(D_M(\bm {x}_{M^\prime })\) represents the output of the discriminator of model \(M\) applied to samples generated by the generator of model \(M^\prime \), while \(\bm {x}_{\text {train}}\) refers to samples from the respective training dataset used for both models. All models were trained using datasets consisting of $N=10^5$ images.\relax }{figure.caption.15}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Some morphological coefficients (see Figure\nobreakspace  {}\ref  {fig-morpho-coeff}) computed using \texttt  {light-weight-gan} models trained with different dataset sizes ($N=10^5, 10^4, 10^3$).\relax }}{12}{figure.caption.16}\protected@file@percent }
 \newlabel{fig-morpho-coeff-gan-comparison}{{15}{12}{Some morphological coefficients (see Figure~\ref {fig-morpho-coeff}) computed using \texttt {light-weight-gan} models trained with different dataset sizes ($N=10^5, 10^4, 10^3$).\relax }{figure.caption.16}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Same legend as for Figure\nobreakspace  {}\ref  {fig-gan-hinge-loss-evol} but with different dataset sizes: $N=10^4$ (a) and $N=10^3$ (b).\relax }}{12}{figure.caption.17}\protected@file@percent }
-\newlabel{fig-gan-hinge-loss-epoch100-ntrain-10p3-10p4}{{16}{12}{Same legend as for Figure~\ref {fig-gan-hinge-loss-evol} but with different dataset sizes: $N=10^4$ (a) and $N=10^3$ (b).\relax }{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Conclusion}{12}{section.4}\protected@file@percent }
+\newlabel{sec-conclusion}{{4}{12}{Conclusion}{section.4}{}}
 \citation{kadkhodaie2024generalization}
 \citation{kadkhodaie2024generalization}
 \citation{Kingma2018}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Same legend as for Figure\nobreakspace  {}\ref  {fig-gan-hinge-loss-evol} but with different dataset sizes: $N=10^4$ (a) and $N=10^3$ (b).\relax }}{13}{figure.caption.17}\protected@file@percent }
+\newlabel{fig-gan-hinge-loss-epoch100-ntrain-10p3-10p4}{{16}{13}{Same legend as for Figure~\ref {fig-gan-hinge-loss-evol} but with different dataset sizes: $N=10^4$ (a) and $N=10^3$ (b).\relax }{figure.caption.17}{}}
 \bibstyle{mnras}
 \bibdata{references}
 \bibcite{sdssdr7}{{1}{2009}{{Abazajian et~al.}}{{Abazajian et~al.,}}}
@@ -201,8 +204,6 @@
 \bibcite{2000AJ....119.2645B}{{4}{2000}{{{Bershady} et~al.}}{{{Bershady}, {Jangren} \& {Conselice}}}}
 \bibcite{Bogachev2005}{{5}{2005}{{{Bogachev} et~al.}}{{{Bogachev}, {Kolesnikov} \& {Medvedev}}}}
 \bibcite{brock2018large}{{6}{2019a}{{Brock et~al.}}{{Brock, Donahue \& Simonyan}}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Conclusion}{13}{section.4}\protected@file@percent }
-\newlabel{sec-conclusion}{{4}{13}{Conclusion}{section.4}{}}
 \bibcite{Brock2019}{{7}{2019b}{{Brock et~al.}}{{Brock, Donahue \& Simonyan}}}
 \bibcite{Chang2023}{{8}{2023}{{{Chang} et~al.}}{{{Chang}, {Koulieris} \& {Shum}}}}
 \bibcite{Coccomini2021}{{9}{2021}{{{Coccomini} et~al.}}{{{Coccomini}, {Messina}, {Gennaro} \& {Falchi}}}}
