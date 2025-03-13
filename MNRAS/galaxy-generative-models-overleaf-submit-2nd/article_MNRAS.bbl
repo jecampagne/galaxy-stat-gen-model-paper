@@ -395,6 +395,11 @@ Sohl-Dickstein J.,  Weiss E.,  Maheswaranathan N.,   Ganguli S.,  2015, in Bach
   Lille, France, pp 2256--2265, \url
   {https://proceedings.mlr.press/v37/sohl-dickstein15.html}
 
+\bibitem[\protect\citeauthoryear{Song, Sohl-Dickstein, Kingma, Kumar, Ermon  \&
+  Poole}{Song et~al.}{2020}]{song2020score}
+Song Y.,  Sohl-Dickstein J.,  Kingma D.~P.,  Kumar A.,  Ermon S.,   Poole B.,
+  2020, arXiv preprint arXiv:2011.13456
+
 \bibitem[\protect\citeauthoryear{Tabak \& Turner}{Tabak \&
   Turner}{2013}]{Tabak2013a}
 Tabak E.~G.,  Turner C.~V.,  2013, \mn@doi [Communications on Pure and Applied
