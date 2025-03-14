@@ -465,9 +465,12 @@ An interesting question arises: if we train two generative models of the same ar
 
 If the generated images differ, how can we evaluate the fidelity of the learning process? More critically, are we truly sampling from the probability density $p(\bm{x})$, or are the generated samples a mixture of the original dataset images?
 
-A partial answer to these questions is provided in \cite{kadkhodaie2024generalization} within the context of diffusion-based models, highlighting the impact of dataset size on the transition from \textit{memorization} to \textit{generation} regimes. Following their methodology, we compare two generative models of the same architecture trained on non-overlapping subsets of the same dataset. For simplicity, we limit our experiment to three models and a single dataset, which we believe suffices to derive meaningful insights.
+A partial answer to these questions is provided in \cite{kadkhodaie2024generalization} within the context of diffusion-based models, highlighting the impact of dataset size on the transition from \textit{memorization} to \textit{generation} regimes. Following their methodology, we compare two generative models of the same architecture trained on non-overlapping subsets of the same dataset. For simplicity, we limit our experiment to three models and a single dataset, which we believe suffices to derive meaningful insights. 
+{\color{red}We focus on investigating how one can perform tests, particularly with the two-model scenario, to ensure that the model behaves as intended. 
+}
 
-All experiments have been conducted mainly on a single Nvidia V100-32g GPU at Jean Zay supercomputer at IDRIS\footnote{\url{http://www.idris.fr/eng/jean-zay/jean-zay-presentation-eng.html}}, a national computing centre for the France's National Centre for Scientific Research (CNRS).
+%14-mars-25 phrase deplacee
+%All experiments have been conducted mainly on a single Nvidia V100-32g GPU at Jean Zay supercomputer at IDRIS\footnote{\url{http://www.idris.fr/eng/jean-zay/jean-zay-presentation-eng.html}}, a national computing centre for the France's National Centre for Scientific Research (CNRS).
 %
 
 %
@@ -491,6 +494,11 @@ For the GAN model, we used the \texttt{light-weight-gan} architecture\footnote{S
 For the flow-based model, we used the \texttt{Glow} architecture\footnote{Source code: \url{https://github.com/rosinality/glow-pytorch}. Original repository: \url{https://github.com/openai/glow}.} described in Section \ref{sec-NF}. The model configuration, shown in Figure \ref{fig-Glow-archi}, includes $K=32$ flows and $L=3$ blocks or levels by default\footnote{Different $(K,L)$ values have been used with no significant differences with the default values.}, comprising $44$ million parameters. Training followed default settings, with image pixel values reduced from 8-bit to 5-bit precision \citep{Kingma2018}. Optimization had required approximately $24$ hours for about $200,000$ iterations with a batch size of $32$ images.
 
 For the diffusion-based model, we adopted a \texttt{U-Net} architecture \citep{ronneberger2015u} as the \textit{denoiser}, leveraging its multi-scale structure with $7.6$ million parameters\footnote{Source code: \url{https://github.com/LabForComputationalVision/memorization_generalization_in_diffusion_models}.}. Training followed the procedure in \cite{kadkhodaie2024generalization}, with $100$ epochs taking about $100$ hours.
+
+{\color{red}The author have perform some tests with other settings of the above architectures and even if not exhaustive, the results presented in the following section are generic and would serve as guide line if one would like to use either another settings of the models I have used, either to test a completely different model architecture.
+
+All experiments have been conducted mainly on a single Nvidia V100-32g GPU at Jean Zay supercomputer at IDRIS\footnote{\url{http://www.idris.fr/eng/jean-zay/jean-zay-presentation-eng.html}}, a national computing centre for the France's National Centre for Scientific Research (CNRS).
+}
 
 \subsection{The dataset}
 \label{sec-Dataset}
@@ -527,7 +535,9 @@ The distributions of morphological coefficients derived from the three models sh
 \subsubsection{\texttt{U-Net} Denoising Performances}
 \label{sec-UNet-Perf}
 %
-Before assessing the generative performances of the models, we first present results regarding the denoising performances of two \texttt{U-Net} networks.
+%Before assessing the generative performances of the models, we first present results regarding the denoising performances of two \texttt{U-Net} networks.
+{\color{red} Before assessing the generative performance of the diffusion models in the next section, we first present the denoising performance of two \texttt{U-Net} networks with the same architecture, which are subsequently used to estimate the score as discussed in Section~\ref{sec-diff} (Equation~\ref{eq-backward-diffusion}).
+}
 
 \begin{figure}
     \centering
@@ -550,7 +560,7 @@ Figure~\ref{fig-UNet-denoising-train} presents the denoising results of two netw
 
 When using an image from the \textit{training} dataset, both networks demonstrate similar denoising capabilities, as shown by the evolution of the output images' PSNR values relative to the PSNR of the noisy input images. However, a notable difference emerges when using the \textit{validation image}. The \texttt{U-Net} trained with $N=100,000$ images achieves results comparable to those observed with the training image, indicating good generalization performance. In contrast, the \texttt{U-Net} trained with $N=100$ images shows limited generalization: the PSNR values of its output images remain nearly constant ($\mathrm{PSNR} \approx 27$), even for input images with very low noise levels. 
 
-This disparity in denoising performance between the two networks has significant implications for the generative process, which begins with a purely noisy image and progressively refines it into a noiseless output.
+{\color{red}This disparity in denoising performance between the two networks may have significant implications for the generative process, as the score computation could be problematic, starting with a purely noisy image and progressively refining it into a noiseless output.}
 %
 \subsubsection{Two Diffusion-Based Models Test}
 \label{sec-two_models-Diffusion}
