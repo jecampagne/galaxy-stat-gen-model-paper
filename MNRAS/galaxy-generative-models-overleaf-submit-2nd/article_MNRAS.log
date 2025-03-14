@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.26)  14 MAR 2025 11:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.26)  14 MAR 2025 14:34
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1175,15 +1175,15 @@ File: ./figures//fig-gini-m20-diff-compare_0.pdf Graphic file (type pdf)
 Package pdftex.def Info: ./figures//fig-gini-m20-diff-compare_0.pdf  used on in
 put line 607.
 (pdftex.def)             Requested size: 170.79926pt x 170.79997pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 <./figures//fig-glow-cosine-AB_ATrain.pdf, id=1164, 1011.78pt x 361.35pt>
 File: ./figures//fig-glow-cosine-AB_ATrain.pdf Graphic file (type pdf)
 <use ./figures//fig-glow-cosine-AB_ATrain.pdf>
 Package pdftex.def Info: ./figures//fig-glow-cosine-AB_ATrain.pdf  used on inpu
 t line 621.
 (pdftex.def)             Requested size: 244.0pt x 87.1393pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [9 <./figures//fig-diffusion-cosine-AB.pdf> <./figures//fig-diffusion-cosine-A
 Train.pdf> <./figures//fig-gini-m20-diff-compare_0.pdf>]
 <./figures//fig-glow_100000_test_inversibility_AB_2.png, id=1248, 508.90125pt x
@@ -1238,37 +1238,38 @@ Package pdftex.def Info: ./figures//fig-gan-cosine-AB_ATrain.pdf  used on input
 (pdftex.def)             Requested size: 244.0pt x 112.33679pt.
  [10 <./figures//fig-glow-cosine-AB_ATrain.pdf> <./figures//fig-glow_100000_tes
 t_inversibility_AB_2.png> <./figures//fig-glow_100000_test_inversibility_AB_blo
-cks.pdf> <./figures//fig-glow_1000_test_inversibility_AB_blocks.pdf>]
-<./figures//fig-gan_loss_discri_A_B_num_0.pdf, id=1401, 462.52798pt x 346.89601
+cks.pdf>]
+<./figures//fig-gan_loss_discri_A_B_num_0.pdf, id=1367, 462.52798pt x 346.89601
 pt>
 File: ./figures//fig-gan_loss_discri_A_B_num_0.pdf Graphic file (type pdf)
 <use ./figures//fig-gan_loss_discri_A_B_num_0.pdf>
 Package pdftex.def Info: ./figures//fig-gan_loss_discri_A_B_num_0.pdf  used on 
 input line 720.
 (pdftex.def)             Requested size: 195.20074pt x 146.39932pt.
-<./figures//fig-gan_loss_discri_A_B_num_10.pdf, id=1402, 462.52798pt x 346.8960
+<./figures//fig-gan_loss_discri_A_B_num_10.pdf, id=1368, 462.52798pt x 346.8960
 1pt>
 File: ./figures//fig-gan_loss_discri_A_B_num_10.pdf Graphic file (type pdf)
 <use ./figures//fig-gan_loss_discri_A_B_num_10.pdf>
 Package pdftex.def Info: ./figures//fig-gan_loss_discri_A_B_num_10.pdf  used on
  input line 721.
 (pdftex.def)             Requested size: 195.20074pt x 146.39932pt.
-<./figures//fig-gan_loss_discri_A_B_num_50.pdf, id=1403, 462.52798pt x 346.8960
+<./figures//fig-gan_loss_discri_A_B_num_50.pdf, id=1369, 462.52798pt x 346.8960
 1pt>
 File: ./figures//fig-gan_loss_discri_A_B_num_50.pdf Graphic file (type pdf)
 <use ./figures//fig-gan_loss_discri_A_B_num_50.pdf>
 Package pdftex.def Info: ./figures//fig-gan_loss_discri_A_B_num_50.pdf  used on
  input line 722.
 (pdftex.def)             Requested size: 195.20074pt x 146.39932pt.
-<./figures//fig-gan_loss_discri_A_B_num_100.pdf, id=1404, 462.52798pt x 346.896
+<./figures//fig-gan_loss_discri_A_B_num_100.pdf, id=1370, 462.52798pt x 346.896
 01pt>
 File: ./figures//fig-gan_loss_discri_A_B_num_100.pdf Graphic file (type pdf)
 <use ./figures//fig-gan_loss_discri_A_B_num_100.pdf>
 Package pdftex.def Info: ./figures//fig-gan_loss_discri_A_B_num_100.pdf  used o
 n input line 723.
 (pdftex.def)             Requested size: 195.20074pt x 146.39932pt.
- [11 <./figures//fig-gini-m20-glow-compare_0.pdf> <./figures//fig-gan-cosine-AB
-_ATrain.pdf>]
+
+[11 <./figures//fig-glow_1000_test_inversibility_AB_blocks.pdf> <./figures//fig
+-gini-m20-glow-compare_0.pdf> <./figures//fig-gan-cosine-AB_ATrain.pdf>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 <./figures//fig-gini-m20-gan-compare_0.pdf, id=1486, 397.485pt x 397.485pt>
@@ -1365,11 +1366,11 @@ Package rerunfilecheck Info: File `article_MNRAS.out' has not changed.
 (rerunfilecheck)             Checksum: FD6ECA7D0A7366E27ED0FCCF0459A442;1606.
  ) 
 Here is how much of TeX's memory you used:
- 30149 strings out of 478268
- 591115 string characters out of 5846347
+ 30151 strings out of 478268
+ 591135 string characters out of 5846347
  984663 words of memory out of 5000000
  47179 multiletter control sequences out of 15000+600000
- 515210 words of font info for 336 fonts, out of 8000000 for 9000
+ 515329 words of font info for 337 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,15n,103p,1448b,1025s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
@@ -1422,7 +1423,7 @@ ype1/public/cm-super/sfti1200.pfb></usr/local/texlive/2022/texmf-dist/fonts/typ
 e1/public/cm-super/sftt0800.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1
 /public/cm-super/sftt0900.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/p
 ublic/cm-super/sftt1000.pfb>
-Output written on article_MNRAS.pdf (15 pages, 2214440 bytes).
+Output written on article_MNRAS.pdf (15 pages, 2214750 bytes).
 PDF statistics:
  2115 PDF objects out of 2487 (max. 8388607)
  1277 compressed objects within 13 object streams
