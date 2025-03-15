@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.26)  14 MAR 2025 14:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.26)  15 MAR 2025 11:56
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1085,19 +1085,19 @@ n/9 ]\OML/cmm/m/it/9 ;$
  []
 
 [5]
-<./figures//fig-model_sample_images.pdf, id=638, 928.82573pt x 237.04561pt>
+<./figures//fig-model_sample_images.pdf, id=639, 928.82573pt x 237.04561pt>
 File: ./figures//fig-model_sample_images.pdf Graphic file (type pdf)
 <use ./figures//fig-model_sample_images.pdf>
 Package pdftex.def Info: ./figures//fig-model_sample_images.pdf  used on input 
 line 452.
 (pdftex.def)             Requested size: 406.40155pt x 103.71803pt.
-<./figures//fig-CAS-All_100000.pdf, id=647, 549.25201pt x 549.25201pt>
+<./figures//fig-CAS-All_100000.pdf, id=648, 549.25201pt x 549.25201pt>
 File: ./figures//fig-CAS-All_100000.pdf Graphic file (type pdf)
 <use ./figures//fig-CAS-All_100000.pdf>
 Package pdftex.def Info: ./figures//fig-CAS-All_100000.pdf  used on input line 
 484.
 (pdftex.def)             Requested size: 244.0pt x 243.99313pt.
-<figures/fig-gini-m20-All_100000.pdf, id=648, 397.485pt x 397.485pt>
+<figures/fig-gini-m20-All_100000.pdf, id=649, 397.485pt x 397.485pt>
 File: figures/fig-gini-m20-All_100000.pdf Graphic file (type pdf)
 <use figures/fig-gini-m20-All_100000.pdf>
 Package pdftex.def Info: figures/fig-gini-m20-All_100000.pdf  used on input lin
@@ -1135,168 +1135,175 @@ $[]$ [][][][]$\T1/cmtt/m/n/8 http : / / www . idris . fr / eng / jean-[]zay /
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Underfull \hbox (badness 1163) in paragraph at lines 516--518
+Underfull \hbox (badness 1163) in paragraph at lines 516--517
 \T1/cmr/m/n/9 (+20) sizes com-pared to those pro-duced by mod-els such as
  []
 
 [7 <./figures//fig-model_sample_images.pdf> <./figures//fig-CAS-All_100000.pdf>
  <./figures/fig-gini-m20-All_100000.pdf>]
-<./figures//fig-UNet_denoising_perf_train.pdf, id=983, 861.96394pt x 580.32808p
+<./figures//fig-UNet_denoising_perf_train.pdf, id=985, 861.96394pt x 580.32808p
 t>
 File: ./figures//fig-UNet_denoising_perf_train.pdf Graphic file (type pdf)
 <use ./figures//fig-UNet_denoising_perf_train.pdf>
 Package pdftex.def Info: ./figures//fig-UNet_denoising_perf_train.pdf  used on 
-input line 544.
+input line 547.
 (pdftex.def)             Requested size: 231.79926pt x 156.06197pt.
-<./figures//fig-UNet_denoising_perf_test.pdf, id=984, 861.96394pt x 580.32808pt
+<./figures//fig-UNet_denoising_perf_test.pdf, id=986, 861.96394pt x 580.32808pt
 >
 File: ./figures//fig-UNet_denoising_perf_test.pdf Graphic file (type pdf)
 <use ./figures//fig-UNet_denoising_perf_test.pdf>
 Package pdftex.def Info: ./figures//fig-UNet_denoising_perf_test.pdf  used on i
-nput line 553.
+nput line 556.
 (pdftex.def)             Requested size: 231.79926pt x 156.06197pt.
-<./figures//fig-diffusion-cosine-AB.pdf, id=992, 2023.56pt x 361.35pt>
+<./figures//fig-diffusion-cosine-AB.pdf, id=994, 2023.56pt x 361.35pt>
 File: ./figures//fig-diffusion-cosine-AB.pdf Graphic file (type pdf)
 <use ./figures//fig-diffusion-cosine-AB.pdf>
 Package pdftex.def Info: ./figures//fig-diffusion-cosine-AB.pdf  used on input 
-line 572.
+line 575.
 (pdftex.def)             Requested size: 457.1969pt x 81.64209pt.
-<./figures//fig-diffusion-cosine-ATrain.pdf, id=993, 2023.56pt x 361.35pt>
+<./figures//fig-diffusion-cosine-ATrain.pdf, id=995, 2023.56pt x 361.35pt>
 File: ./figures//fig-diffusion-cosine-ATrain.pdf Graphic file (type pdf)
 <use ./figures//fig-diffusion-cosine-ATrain.pdf>
 Package pdftex.def Info: ./figures//fig-diffusion-cosine-ATrain.pdf  used on in
-put line 573.
+put line 576.
 (pdftex.def)             Requested size: 457.1969pt x 81.64209pt.
  [8 <./figures//fig-UNet_denoising_perf_train.pdf> <./figures//fig-UNet_denoisi
 ng_perf_test.pdf>]
-<./figures//fig-gini-m20-diff-compare_0.pdf, id=1159, 397.485pt x 397.485pt>
+<./figures//fig-gini-m20-diff-compare_0.pdf, id=1161, 397.485pt x 397.485pt>
 File: ./figures//fig-gini-m20-diff-compare_0.pdf Graphic file (type pdf)
 <use ./figures//fig-gini-m20-diff-compare_0.pdf>
 Package pdftex.def Info: ./figures//fig-gini-m20-diff-compare_0.pdf  used on in
-put line 607.
+put line 610.
 (pdftex.def)             Requested size: 170.79926pt x 170.79997pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-<./figures//fig-glow-cosine-AB_ATrain.pdf, id=1164, 1011.78pt x 361.35pt>
+<./figures//fig-glow-cosine-AB_ATrain.pdf, id=1167, 1011.78pt x 361.35pt>
 File: ./figures//fig-glow-cosine-AB_ATrain.pdf Graphic file (type pdf)
 <use ./figures//fig-glow-cosine-AB_ATrain.pdf>
 Package pdftex.def Info: ./figures//fig-glow-cosine-AB_ATrain.pdf  used on inpu
-t line 621.
+t line 628.
 (pdftex.def)             Requested size: 244.0pt x 87.1393pt.
+
+Underfull \vbox (badness 1057) has occurred while \output is active []
+
  [9 <./figures//fig-diffusion-cosine-AB.pdf> <./figures//fig-diffusion-cosine-A
 Train.pdf> <./figures//fig-gini-m20-diff-compare_0.pdf>]
-<./figures//fig-glow_100000_test_inversibility_AB_2.png, id=1248, 508.90125pt x
+<./figures//fig-glow_100000_test_inversibility_AB_2.png, id=1252, 508.90125pt x
  494.84875pt>
 File: ./figures//fig-glow_100000_test_inversibility_AB_2.png Graphic file (type
  png)
 <use ./figures//fig-glow_100000_test_inversibility_AB_2.png>
 Package pdftex.def Info: ./figures//fig-glow_100000_test_inversibility_AB_2.png
-  used on input line 644.
+  used on input line 651.
 (pdftex.def)             Requested size: 170.79926pt x 166.07927pt.
-<./figures//fig-glow_100000_test_inversibility_AB_blocks.pdf, id=1249, 445.4611
+<./figures//fig-glow_100000_test_inversibility_AB_blocks.pdf, id=1253, 445.4611
 2pt x 412.5814pt>
 File: ./figures//fig-glow_100000_test_inversibility_AB_blocks.pdf Graphic file 
 (type pdf)
 <use ./figures//fig-glow_100000_test_inversibility_AB_blocks.pdf>
 Package pdftex.def Info: ./figures//fig-glow_100000_test_inversibility_AB_block
-s.pdf  used on input line 645.
+s.pdf  used on input line 652.
 (pdftex.def)             Requested size: 146.40149pt x 135.59198pt.
 LaTeX Font Info:    Trying to load font information for U+dsrom on input line 6
-53.
+60.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/doublestroke/Udsrom.fd
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
 )
 Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/9'
-(microtype)             (new value: 9.0pt) on input line 653.
+(microtype)             (new value: 9.0pt) on input line 660.
 Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/6'
-(microtype)             (new value: 6.0pt) on input line 653.
+(microtype)             (new value: 6.0pt) on input line 660.
 Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/5'
-(microtype)             (new value: 5.0pt) on input line 653.
+(microtype)             (new value: 5.0pt) on input line 660.
 Package microtype Info: Fixing zero \fontdimen 6 for font `U/dsrom/m/n/8'
-(microtype)             (new value: 8.0pt) on input line 660.
-<./figures//fig-glow_1000_test_inversibility_AB_blocks.pdf, id=1260, 445.46112p
+(microtype)             (new value: 8.0pt) on input line 667.
+<./figures//fig-glow_1000_test_inversibility_AB_blocks.pdf, id=1264, 445.46112p
 t x 412.5814pt>
 File: ./figures//fig-glow_1000_test_inversibility_AB_blocks.pdf Graphic file (t
 ype pdf)
 <use ./figures//fig-glow_1000_test_inversibility_AB_blocks.pdf>
 Package pdftex.def Info: ./figures//fig-glow_1000_test_inversibility_AB_blocks.
-pdf  used on input line 683.
+pdf  used on input line 690.
 (pdftex.def)             Requested size: 146.40149pt x 135.59198pt.
-<./figures//fig-gini-m20-glow-compare_0.pdf, id=1263, 397.485pt x 397.485pt>
+<./figures//fig-gini-m20-glow-compare_0.pdf, id=1267, 397.485pt x 397.485pt>
 File: ./figures//fig-gini-m20-glow-compare_0.pdf Graphic file (type pdf)
 <use ./figures//fig-gini-m20-glow-compare_0.pdf>
 Package pdftex.def Info: ./figures//fig-gini-m20-glow-compare_0.pdf  used on in
-put line 692.
+put line 699.
 (pdftex.def)             Requested size: 170.79926pt x 170.79997pt.
-<./figures//fig-gan-cosine-AB_ATrain.pdf, id=1270, 885.90973pt x 407.87383pt>
+<./figures//fig-gan-cosine-AB_ATrain.pdf, id=1274, 885.90973pt x 407.87383pt>
 File: ./figures//fig-gan-cosine-AB_ATrain.pdf Graphic file (type pdf)
 <use ./figures//fig-gan-cosine-AB_ATrain.pdf>
 Package pdftex.def Info: ./figures//fig-gan-cosine-AB_ATrain.pdf  used on input
- line 704.
+ line 711.
 (pdftex.def)             Requested size: 244.0pt x 112.33679pt.
+
+Underfull \vbox (badness 1616) has occurred while \output is active []
+
  [10 <./figures//fig-glow-cosine-AB_ATrain.pdf> <./figures//fig-glow_100000_tes
 t_inversibility_AB_2.png> <./figures//fig-glow_100000_test_inversibility_AB_blo
 cks.pdf>]
-<./figures//fig-gan_loss_discri_A_B_num_0.pdf, id=1367, 462.52798pt x 346.89601
+[11 <./figures//fig-glow_1000_test_inversibility_AB_blocks.pdf> <./figures//fig
+-gini-m20-glow-compare_0.pdf> <./figures//fig-gan-cosine-AB_ATrain.pdf>]
+<./figures//fig-gan_loss_discri_A_B_num_0.pdf, id=1479, 462.52798pt x 346.89601
 pt>
 File: ./figures//fig-gan_loss_discri_A_B_num_0.pdf Graphic file (type pdf)
 <use ./figures//fig-gan_loss_discri_A_B_num_0.pdf>
 Package pdftex.def Info: ./figures//fig-gan_loss_discri_A_B_num_0.pdf  used on 
-input line 720.
+input line 727.
 (pdftex.def)             Requested size: 195.20074pt x 146.39932pt.
-<./figures//fig-gan_loss_discri_A_B_num_10.pdf, id=1368, 462.52798pt x 346.8960
+<./figures//fig-gan_loss_discri_A_B_num_10.pdf, id=1480, 462.52798pt x 346.8960
 1pt>
 File: ./figures//fig-gan_loss_discri_A_B_num_10.pdf Graphic file (type pdf)
 <use ./figures//fig-gan_loss_discri_A_B_num_10.pdf>
 Package pdftex.def Info: ./figures//fig-gan_loss_discri_A_B_num_10.pdf  used on
- input line 721.
+ input line 728.
 (pdftex.def)             Requested size: 195.20074pt x 146.39932pt.
-<./figures//fig-gan_loss_discri_A_B_num_50.pdf, id=1369, 462.52798pt x 346.8960
+<./figures//fig-gan_loss_discri_A_B_num_50.pdf, id=1481, 462.52798pt x 346.8960
 1pt>
 File: ./figures//fig-gan_loss_discri_A_B_num_50.pdf Graphic file (type pdf)
 <use ./figures//fig-gan_loss_discri_A_B_num_50.pdf>
 Package pdftex.def Info: ./figures//fig-gan_loss_discri_A_B_num_50.pdf  used on
- input line 722.
+ input line 729.
 (pdftex.def)             Requested size: 195.20074pt x 146.39932pt.
-<./figures//fig-gan_loss_discri_A_B_num_100.pdf, id=1370, 462.52798pt x 346.896
+<./figures//fig-gan_loss_discri_A_B_num_100.pdf, id=1482, 462.52798pt x 346.896
 01pt>
 File: ./figures//fig-gan_loss_discri_A_B_num_100.pdf Graphic file (type pdf)
 <use ./figures//fig-gan_loss_discri_A_B_num_100.pdf>
 Package pdftex.def Info: ./figures//fig-gan_loss_discri_A_B_num_100.pdf  used o
-n input line 723.
+n input line 730.
 (pdftex.def)             Requested size: 195.20074pt x 146.39932pt.
-
-[11 <./figures//fig-glow_1000_test_inversibility_AB_blocks.pdf> <./figures//fig
--gini-m20-glow-compare_0.pdf> <./figures//fig-gan-cosine-AB_ATrain.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-<./figures//fig-gini-m20-gan-compare_0.pdf, id=1486, 397.485pt x 397.485pt>
+<./figures//fig-gini-m20-gan-compare_0.pdf, id=1490, 397.485pt x 397.485pt>
 File: ./figures//fig-gini-m20-gan-compare_0.pdf Graphic file (type pdf)
 <use ./figures//fig-gini-m20-gan-compare_0.pdf>
 Package pdftex.def Info: ./figures//fig-gini-m20-gan-compare_0.pdf  used on inp
-ut line 759.
+ut line 766.
 (pdftex.def)             Requested size: 170.79926pt x 170.79997pt.
-<./figures//fig-gan-loss_discri_10000_A_B_num_100.pdf, id=1489, 462.52798pt x 3
+<./figures//fig-gan-loss_discri_10000_A_B_num_100.pdf, id=1493, 462.52798pt x 3
 46.89601pt>
 File: ./figures//fig-gan-loss_discri_10000_A_B_num_100.pdf Graphic file (type p
 df)
 <use ./figures//fig-gan-loss_discri_10000_A_B_num_100.pdf>
 Package pdftex.def Info: ./figures//fig-gan-loss_discri_10000_A_B_num_100.pdf  
-used on input line 767.
+used on input line 774.
 (pdftex.def)             Requested size: 195.20074pt x 146.39932pt.
-<./figures//fig-gan-loss_discri_1000_A_B_num_100.pdf, id=1490, 462.52798pt x 34
+<./figures//fig-gan-loss_discri_1000_A_B_num_100.pdf, id=1494, 462.52798pt x 34
 6.89601pt>
 File: ./figures//fig-gan-loss_discri_1000_A_B_num_100.pdf Graphic file (type pd
 f)
 <use ./figures//fig-gan-loss_discri_1000_A_B_num_100.pdf>
 Package pdftex.def Info: ./figures//fig-gan-loss_discri_1000_A_B_num_100.pdf  u
-sed on input line 773.
+sed on input line 780.
 (pdftex.def)             Requested size: 195.20074pt x 146.39932pt.
- [12 <./figures//fig-gan_loss_discri_A_B_num_0.pdf> <./figures//fig-gan_loss_di
-scri_A_B_num_10.pdf> <./figures//fig-gan_loss_discri_A_B_num_50.pdf> <./figures
-//fig-gan_loss_discri_A_B_num_100.pdf>]
+
+[12 <./figures//fig-gan_loss_discri_A_B_num_0.pdf> <./figures//fig-gan_loss_dis
+cri_A_B_num_10.pdf> <./figures//fig-gan_loss_discri_A_B_num_50.pdf> <./figures/
+/fig-gan_loss_discri_A_B_num_100.pdf>]
+Underfull \vbox (badness 6542) has occurred while \output is active []
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [13 <./figures//fig-gini-m20-gan-compare_0.pdf> <./figures//fig-gan-loss_discr
@@ -1313,7 +1320,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 153--157
 mtt/m/n/8 https : / / doi .
  []
 
-
+[14]
 Underfull \hbox (badness 1242) in paragraph at lines 219--222
 \T1/cmr/m/n/8 (+20) T., 2020, in 2020 IEEE/CVF Con-fer-ence on Com-puter
  []
@@ -1346,7 +1353,7 @@ Underfull \hbox (badness 1308) in paragraph at lines 225--229
  . cc / paper _ files / paper /
  []
 
-[14]
+
 Underfull \hbox (badness 1320) in paragraph at lines 348--351
 \T1/cmr/m/n/8 (+20) 2022, in 2022 IEEE/CVF Con-fer-ence on Com-puter Vi-
  []
@@ -1357,7 +1364,9 @@ Underfull \hbox (badness 4765) in paragraph at lines 369--372
 , [][]p.
  []
 
-) [15] (./article_MNRAS.aux)
+) [15] [16
+
+] (./article_MNRAS.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.28pt have occurred.
@@ -1366,11 +1375,11 @@ Package rerunfilecheck Info: File `article_MNRAS.out' has not changed.
 (rerunfilecheck)             Checksum: FD6ECA7D0A7366E27ED0FCCF0459A442;1606.
  ) 
 Here is how much of TeX's memory you used:
- 30151 strings out of 478268
- 591135 string characters out of 5846347
- 984663 words of memory out of 5000000
- 47179 multiletter control sequences out of 15000+600000
- 515329 words of font info for 337 fonts, out of 8000000 for 9000
+ 30161 strings out of 478268
+ 591295 string characters out of 5846347
+ 992838 words of memory out of 5000000
+ 47182 multiletter control sequences out of 15000+600000
+ 515500 words of font info for 339 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,15n,103p,1448b,1025s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
@@ -1423,10 +1432,10 @@ ype1/public/cm-super/sfti1200.pfb></usr/local/texlive/2022/texmf-dist/fonts/typ
 e1/public/cm-super/sftt0800.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1
 /public/cm-super/sftt0900.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/p
 ublic/cm-super/sftt1000.pfb>
-Output written on article_MNRAS.pdf (15 pages, 2214750 bytes).
+Output written on article_MNRAS.pdf (16 pages, 2216248 bytes).
 PDF statistics:
- 2115 PDF objects out of 2487 (max. 8388607)
- 1277 compressed objects within 13 object streams
- 171 named destinations out of 1000 (max. 500000)
+ 2129 PDF objects out of 2487 (max. 8388607)
+ 1290 compressed objects within 13 object streams
+ 174 named destinations out of 1000 (max. 500000)
  74991 words of extra memory for PDF output out of 89155 (max. 10000000)
 

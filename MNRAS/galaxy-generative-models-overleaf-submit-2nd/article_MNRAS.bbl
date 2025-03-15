@@ -395,10 +395,17 @@ Sohl-Dickstein J.,  Weiss E.,  Maheswaranathan N.,   Ganguli S.,  2015, in Bach
   Lille, France, pp 2256--2265, \url
   {https://proceedings.mlr.press/v37/sohl-dickstein15.html}
 
+\bibitem[\protect\citeauthoryear{Song, Durkan, Murray  \& Ermon}{Song
+  et~al.}{2021b}]{song2021maximum}
+Song Y.,  Durkan C.,  Murray I.,   Ermon S.,  2021b, in Beygelzimer A.,
+  Dauphin Y.,  Liang P.,   Vaughan J.~W.,  eds, Advances in Neural Information
+  Processing Systems. \url {https://openreview.net/forum?id=AklttWFnxS9}
+
 \bibitem[\protect\citeauthoryear{Song, Sohl-Dickstein, Kingma, Kumar, Ermon  \&
-  Poole}{Song et~al.}{2020}]{song2020score}
+  Poole}{Song et~al.}{2021a}]{song2021scorebased}
 Song Y.,  Sohl-Dickstein J.,  Kingma D.~P.,  Kumar A.,  Ermon S.,   Poole B.,
-  2020, arXiv preprint arXiv:2011.13456
+  2021a, in International Conference on Learning Representations. \url
+  {https://openreview.net/forum?id=PxTIG12RRHS}
 
 \bibitem[\protect\citeauthoryear{Tabak \& Turner}{Tabak \&
   Turner}{2013}]{Tabak2013a}
