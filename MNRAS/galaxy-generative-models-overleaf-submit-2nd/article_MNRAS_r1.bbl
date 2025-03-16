@@ -48,15 +48,10 @@ Curran Associates Inc., Red Hook, NY, USA, p. 899–907
   {https://ui.adsabs.harvard.edu/abs/2005SbMat.196..309B} {196, 309}
 
 \bibitem[\protect\citeauthoryear{Brock, Donahue  \& Simonyan}{Brock
-  et~al.}{2019a}]{brock2018large}
-Brock A.,  Donahue J.,   Simonyan K.,  2019a, in International Conference on
-  Learning Representations. \url {https://openreview.net/forum?id=B1xsqj09Fm}
-
-\bibitem[\protect\citeauthoryear{Brock, Donahue  \& Simonyan}{Brock
-  et~al.}{2019b}]{Brock2019}
-Brock A.,  Donahue J.,   Simonyan K.,  2019b, in 7th International Conference
-  on Learning Representations, {ICLR} 2019, New Orleans, LA, USA, May 6-9,
-  2019. OpenReview.net, \url {https://openreview.net/forum?id=B1xsqj09Fm}
+  et~al.}{2019}]{Brock2019}
+Brock A.,  Donahue J.,   Simonyan K.,  2019, in 7th International Conference on
+  Learning Representations, {ICLR} 2019, New Orleans, LA, USA, May 6-9, 2019.
+  OpenReview.net, \url {https://openreview.net/forum?id=B1xsqj09Fm}
 
 \bibitem[\protect\citeauthoryear{{Chang}, {Koulieris}  \& {Shum}}{{Chang}
   et~al.}{2023}]{Chang2023}
@@ -134,13 +129,8 @@ Gulrajani I.,  Ahmed F.,  Arjovsky M.,  Dumoulin V.,   Courville A.,  2017, in
 Curran Associates Inc., Red Hook, NY, USA, p. 5769–5779
 
 \bibitem[\protect\citeauthoryear{Guth, Coste, De~Bortoli  \& Mallat}{Guth
-  et~al.}{2022a}]{guth2022wavelet}
-Guth F.,  Coste S.,  De~Bortoli V.,   Mallat S.,  2022a, Advances in neural
-  information processing systems, 35, 478
-
-\bibitem[\protect\citeauthoryear{Guth, Coste, De~Bortoli  \& Mallat}{Guth
-  et~al.}{2022b}]{Guth2022b}
-Guth F.,  Coste S.,  De~Bortoli V.,   Mallat S.,  2022b, Advances in neural
+  et~al.}{2022}]{guth2022wavelet}
+Guth F.,  Coste S.,  De~Bortoli V.,   Mallat S.,  2022, Advances in neural
   information processing systems, 35, 478
 
 \bibitem[\protect\citeauthoryear{Hackstein, Kinakh, Bailer  \&
